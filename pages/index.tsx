@@ -1,11 +1,21 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import { Inter } from 'next/font/google'
-import styles from '@/styles/Home.module.css'
+import Head from "next/head";
+import Image from "next/image";
+import { Inter } from "next/font/google";
+import styles from "@/styles/Home.module.css";
+import Card from "@/components/Card";
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ["latin"] });
+
+const { main, gallery, opus, imgContainer, opusDescription } = styles;
 
 export default function Home() {
+  let tiles: Array<JSX.Element> = [];
+  for (let i = 0; i < 21; i++) {
+    tiles.push(<Card />);
+  }
+
+  console.log(tiles);
+
   return (
     <>
       <Head>
@@ -14,8 +24,25 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className={`${styles.main} ${inter.className}`}>
-        <div className={styles.description}>
+      <main className={main}>
+        <section className={gallery}>
+          {tiles}
+          {/* <div className={opus}>
+            <div className={imgContainer}>
+              <Image
+                alt="francis"
+                fill={true}
+                objectFit="cover"
+                src="/francis-stigmata.jpg"
+              />
+            </div>
+            <div className={opusDescription}>
+              <p>City in the sky</p>
+              <p>330€</p>
+            </div>
+          </div> */}
+        </section>
+        {/* <div className={styles.description}>
           <p>
             Get started by editing&nbsp;
             <code className={styles.code}>pages/index.tsx</code>
@@ -107,8 +134,8 @@ export default function Home() {
               with&nbsp;Vercel.
             </p>
           </a>
-        </div>
+        </div> */}
       </main>
     </>
-  )
+  );
 }
