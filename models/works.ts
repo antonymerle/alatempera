@@ -1,6 +1,7 @@
 import mongoose, { Schema, model } from "mongoose";
 
 export interface IWork {
+  _id: string;
   title: string;
   description: string;
   priceHT: number;
