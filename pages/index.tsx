@@ -1,20 +1,28 @@
 import Head from "next/head";
+import React from "react";
 import Image from "next/image";
 import { Inter } from "next/font/google";
 import styles from "@/styles/Home.module.css";
 import Card from "@/components/Card";
+import dbConnect from "@/models/connection";
+import Work, { IWork } from "@/models/works";
+import { GetStaticProps, GetStaticPaths, GetServerSideProps } from "next";
 
 const inter = Inter({ subsets: ["latin"] });
 
 const { main, gallery, opus, imgContainer, opusDescription } = styles;
 
-export default function Home() {
-  let tiles: Array<JSX.Element> = [];
-  for (let i = 0; i < 21; i++) {
-    tiles.push(<Card />);
-  }
+export const Home: React.FC<{ works: IWork[] }> = ({ works }) => {
+  // let tiles: Array<JSX.Element> = [];
+  // for (let i = 0; i < 21; i++) {
+  //   tiles.push(<Card />);
+  // }
 
-  console.log(tiles);
+  const tiles: Array<JSX.Element> = works.map((work) => {
+    return <Card {...work} />;
+  });
+
+  console.log(works);
 
   return (
     <>
@@ -138,4 +146,20 @@ export default function Home() {
       </main>
     </>
   );
-}
+};
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  await dbConnect();
+
+  const data = await Work.find({});
+
+  const works = JSON.parse(JSON.stringify(data));
+
+  return {
+    props: {
+      works,
+    },
+  };
+};
+
+export default Home;
