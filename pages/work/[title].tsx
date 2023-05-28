@@ -44,9 +44,16 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   console.log({ data });
 
   const work = JSON.parse(JSON.stringify(data))[0];
+
+  if (!work) {
+    return {
+      notFound: true,
+    };
+  }
+
   return {
     props: {
-      work,
+      work: work,
     },
   };
 };
