@@ -1,6 +1,7 @@
 import Image from "next/image";
-import styles from "@/styles/Home.module.css";
 import { IWork } from "@/models/works";
+import styles from "@/styles/Home.module.css";
+
 const { main, gallery, opus, imgContainer, opusDescription } = styles;
 
 export const Card: React.FC<IWork> = ({
