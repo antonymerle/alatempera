@@ -1,0 +1,18 @@
+.container {
+  width: 100%;
+  padding: 2rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.imgContainer {
+  flex: 1;
+  position: relative;
+  background-color: aquamarine;
+  height: 600px;
+}
+
+.detailsContainer {
+  flex: 1;
+  padding: 0rem 0rem 0rem 1rem;
+}
