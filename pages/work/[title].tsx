@@ -47,7 +47,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
   if (!work) {
     return {
-      notFound: true,
+      notFound: true, // redirects to 404 page
     };
   }
 
