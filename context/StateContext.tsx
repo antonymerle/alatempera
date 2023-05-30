@@ -1,10 +1,36 @@
-import { createContext, useContext, useState, useEffect } from "react";
+import {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  Dispatch,
+  SetStateAction,
+} from "react";
 import { toast } from "react-hot-toast";
 // import { computeTTC } from "@/lib/utils";
 import { IWork } from "@/models/works";
 
-const Context = createContext({});
 type children = any;
+
+interface IContextMembers {
+  showCart: boolean;
+  setShowCart: Dispatch<SetStateAction<boolean>>;
+  cartItems: ICartItem[];
+  totalPrice: number;
+  totalQuantities: number;
+  qty: number;
+  setQty: Dispatch<SetStateAction<number>>;
+  incQty: () => void;
+  decQty: () => void;
+  onAdd: (product: ICartItem, quantity: number) => void;
+  toggleCartItemQuantity: (id: string, operation: Operation) => void;
+  onRemove: (product: ICartItem) => void;
+  setCartItems: Dispatch<SetStateAction<ICartItem[]>>;
+  setTotalPrice: Dispatch<SetStateAction<number>>;
+  setTotalQuantities: Dispatch<SetStateAction<number>>;
+}
+
+const Context = createContext({} as IContextMembers);
 
 export interface ICartItem extends IWork {
   cartQty: number;
