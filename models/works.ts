@@ -6,8 +6,9 @@ export interface IWork {
   description: string;
   priceHT: number;
   priceTTC: number;
-  qty: number;
+  inventory: number;
   imgURL: string[];
+  isSoldOut: boolean;
 }
 
 const workSchema = new Schema<IWork>({
@@ -15,8 +16,9 @@ const workSchema = new Schema<IWork>({
   description: { type: String, required: true },
   priceHT: { type: Number, required: true },
   priceTTC: { type: Number, required: true },
-  qty: { type: Number, required: true },
+  inventory: { type: Number, required: true },
   imgURL: { type: [String], required: true },
+  isSoldOut: { type: Boolean, required: true },
 });
 
 const Work = mongoose.models.Work || model<IWork>("Work", workSchema);
