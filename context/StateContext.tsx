@@ -6,27 +6,29 @@ import { IWork } from "@/models/works";
 const Context = createContext({});
 type children = any;
 
+interface ICartItem extends IWork {
+  cartQty: number;
+}
+
+type Operation = "inc" | "dec";
+
 export const StateContext: React.FC<children> = ({ children }) => {
   const [showCart, setShowCart] = useState(false);
-  const [cartItems, setCartItems] = useState(Array<IWork>);
+  const [cartItems, setCartItems] = useState(Array<ICartItem>);
   const [totalPrice, setTotalPrice] = useState(0);
   const [totalQuantities, setTotalQuantities] = useState(0);
   const [qty, setQty] = useState(1);
-  const [userRatings, setUserRatings] = useState([]);
-  const [userFavs, setUserFavs] = useState([]);
-  const [userSession, setUserSession] = useState(null);
 
-  let foundProduct: IWork;
+  let foundProduct: ICartItem;
   let index;
 
-  const onAdd = (product: IWork, quantity: number) => {
+  const onAdd = (product: ICartItem, quantity: number) => {
     const checkProductInCart = cartItems.find(
       (item) => item._id === product._id
     );
 
     setTotalPrice(
-      (prevTotalPrice) =>
-        prevTotalPrice + (product.priceHT + product.priceTTC) * quantity
+      (prevTotalPrice) => prevTotalPrice + product.priceTTC * quantity
     );
     setTotalQuantities((prevTotalQuantities) => prevTotalQuantities + quantity);
 
@@ -35,60 +37,54 @@ export const StateContext: React.FC<children> = ({ children }) => {
         if (cartProduct._id === product._id)
           return {
             ...cartProduct,
-            quantity: cartProduct.quantity + quantity,
+            quantity: cartProduct.cartQty + quantity,
           };
       });
 
-      setCartItems(updatedCartItems);
+      setCartItems(updatedCartItems as Array<ICartItem>); // TODO : remove type hack
     } else {
-      product.quantity = quantity;
+      product.cartQty = quantity;
 
       setCartItems([...cartItems, { ...product }]);
     }
 
-    toast.success(`${qty} ${product.name} ajouté au panier.`);
+    toast.success(`${qty} ${product.title} ajouté au panier.`);
   };
 
-  const onRemove = (product) => {
-    foundProduct = cartItems.find((item) => item._id === product._id);
+  const onRemove = (product: ICartItem) => {
+    foundProduct = cartItems.find((item) => item._id === product._id)!; // TODO : remove type hack
     const newCartItems = cartItems.filter((item) => item._id !== product._id);
 
     setTotalPrice(
       (prevTotalPrice) =>
-        prevTotalPrice -
-        computeTTC(foundProduct.priceHT, foundProduct.tax) *
-          foundProduct.quantity
+        prevTotalPrice - foundProduct.priceTTC * foundProduct.cartQty
     );
     setTotalQuantities(
-      (prevTotalQuantities) => prevTotalQuantities - foundProduct.quantity
+      (prevTotalQuantities) => prevTotalQuantities - foundProduct.cartQty
     );
     setCartItems(newCartItems);
   };
 
-  const toggleCartItemQuantity = (id, value) => {
-    foundProduct = cartItems.find((item) => item._id === id);
+  const toggleCartItemQuantity = (id: string, operation: Operation) => {
+    foundProduct = cartItems.find((item) => item._id === id)!;
     index = cartItems.findIndex((product) => product._id === id);
     const newCartItems = cartItems.filter((item) => item._id !== id);
 
-    if (value === "inc") {
+    if (operation === "inc") {
       setCartItems([
         ...newCartItems,
-        { ...foundProduct, quantity: foundProduct.quantity + 1 },
+        { ...foundProduct, cartQty: foundProduct.cartQty + 1 },
       ]);
-      setTotalPrice(
-        (prevTotalPrice) =>
-          prevTotalPrice + computeTTC(foundProduct.priceHT, foundProduct.tax)
-      );
+      setTotalPrice((prevTotalPrice) => prevTotalPrice + foundProduct.priceTTC);
       setTotalQuantities((prevTotalQuantities) => prevTotalQuantities + 1);
-    } else if (value === "dec") {
-      if (foundProduct.quantity > 1) {
+    } else if (operation === "dec") {
+      if (foundProduct.cartQty > 1) {
         setCartItems([
           ...newCartItems,
-          { ...foundProduct, quantity: foundProduct.quantity - 1 },
+          { ...foundProduct, cartQty: foundProduct.cartQty - 1 },
         ]);
         setTotalPrice(
-          (prevTotalPrice) =>
-            prevTotalPrice - computeTTC(foundProduct.priceHT, foundProduct.tax)
+          (prevTotalPrice) => prevTotalPrice - foundProduct.priceTTC
         );
         setTotalQuantities((prevTotalQuantities) => prevTotalQuantities - 1);
       }
@@ -107,27 +103,6 @@ export const StateContext: React.FC<children> = ({ children }) => {
     });
   };
 
-  const updateUserRatings = (ratedProducts) => {
-    setUserRatings(ratedProducts);
-  };
-
-  const updateUserFavorites = (favoriteProducts) => {
-    const merged = [...userFavs, ...favoriteProducts];
-    setUserFavs(Array.from(new Set(merged)));
-  };
-
-  const addUserFavorite = (productId) => {
-    setUserFavs([...userFavs, productId]);
-  };
-
-  const removeUserFavorite = (productId) => {
-    setUserFavs(userFavs.filter((fav) => fav !== productId));
-  };
-
-  const populateUserSession = (sessionObject) => {
-    setUserSession(sessionObject);
-  };
-
   const contextMembers = {
     showCart,
     setShowCart,
@@ -144,14 +119,6 @@ export const StateContext: React.FC<children> = ({ children }) => {
     setCartItems,
     setTotalPrice,
     setTotalQuantities,
-    updateUserRatings,
-    userFavs,
-    updateUserFavorites,
-    addUserFavorite,
-    removeUserFavorite,
-    userRatings,
-    populateUserSession,
-    userSession,
   };
 
   return <Context.Provider value={contextMembers}>{children}</Context.Provider>;
