@@ -7,6 +7,7 @@ import Card from "@/components/Card";
 import dbConnect from "@/models/connection";
 import Work, { IWork } from "@/models/works";
 import { GetStaticProps, GetStaticPaths, GetServerSideProps } from "next";
+import Link from "next/link";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,7 +20,11 @@ export const Home: React.FC<{ works: IWork[] }> = ({ works }) => {
   // }
 
   const tiles: Array<JSX.Element> = works.map((work) => {
-    return <Card {...work} />;
+    return (
+      <Link href={"/work/" + work.title}>
+        <Card {...work} />;
+      </Link>
+    );
   });
 
   console.log(works);
