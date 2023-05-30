@@ -1,17 +1,24 @@
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { useRouter } from "next/router";
 
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
-import { useStateContext } from "@/context/StateContext";
+import { ICartItem, useStateContext } from "@/context/StateContext";
 import { toast } from "react-hot-toast";
 import styles from "../styles/Cart.module.css";
 
 const { quantityDesc, minus, num, plus, disabled } = styles;
 
+type Context = "cart" | "slug";
+
+interface IQuantityProps {
+  context: Context;
+  cartItem: ICartItem;
+}
+
 // Two different logics wether if the component is in the Cart component or slug page.
 // context parameter is either "cart" or "slug"
 // If context === "cart", cartItem must be provided
-const Quantity = ({ context, cartItem, inventory }) => {
+const Quantity: React.FC<IQuantityProps> = ({ context, cartItem }) => {
   const { qty, setQty, decQty, incQty, toggleCartItemQuantity } =
     useStateContext();
 
@@ -29,12 +36,12 @@ const Quantity = ({ context, cartItem, inventory }) => {
         >
           <AiOutlineMinus />
         </div>
-        <div className={num}>{cartItem.quantity}</div>
+        <div className={num}>{cartItem.cartQty}</div>
         <div
-          className={cartItem.quantity >= inventory ? disabled : plus}
+          className={cartItem.cartQty >= cartItem.inventory ? disabled : plus}
           onClick={() => {
-            console.log(cartItem.quantity, inventory);
-            cartItem.quantity >= inventory
+            console.log(cartItem.cartQty, cartItem.inventory);
+            cartItem.cartQty >= cartItem.inventory
               ? toast.error("Quantité maximale atteinte !")
               : toggleCartItemQuantity(cartItem._id, "inc");
           }}
@@ -51,9 +58,9 @@ const Quantity = ({ context, cartItem, inventory }) => {
         </div>
         <div className={num}>{qty}</div>
         <div
-          className={qty >= inventory ? disabled : plus}
+          className={qty >= cartItem.inventory ? disabled : plus}
           onClick={() =>
-            qty >= inventory
+            qty >= cartItem.inventory
               ? toast.error("Quantité maximale atteinte !")
               : incQty()
           }
