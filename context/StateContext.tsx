@@ -6,7 +6,7 @@ import { IWork } from "@/models/works";
 const Context = createContext({});
 type children = any;
 
-interface ICartItem extends IWork {
+export interface ICartItem extends IWork {
   cartQty: number;
 }
 

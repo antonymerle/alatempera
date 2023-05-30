@@ -1,13 +1,14 @@
 import React from "react";
 import { GetStaticProps, GetStaticPaths, GetServerSideProps } from "next";
-import Work, { IWork } from "@/models/works";
+import Work from "@/models/works";
+import { ICartItem } from "@/context/StateContext";
 import Image from "next/image";
 import dbConnect from "@/models/connection";
 import style from "../../styles/WorkSlug.module.css";
 
 const { container, imgContainer, detailsContainer } = style;
 
-const WorkDetails: React.FC<{ work: IWork }> = ({ work }) => {
+const WorkDetails: React.FC<{ work: ICartItem }> = ({ work }) => {
   console.log({ work });
 
   return (
@@ -47,7 +48,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
   const data = await Work.find({});
 
-  const works: Array<IWork> = JSON.parse(JSON.stringify(data));
+  const works: Array<ICartItem> = JSON.parse(JSON.stringify(data));
 
   const paths = works.map((work) => {
     return {

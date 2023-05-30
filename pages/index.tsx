@@ -5,15 +5,16 @@ import { Inter } from "next/font/google";
 import styles from "@/styles/Home.module.css";
 import Card from "@/components/Card";
 import dbConnect from "@/models/connection";
-import Work, { IWork } from "@/models/works";
+import Work from "@/models/works";
 import { GetStaticProps, GetStaticPaths, GetServerSideProps } from "next";
 import Link from "next/link";
+import { ICartItem } from "@/context/StateContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
 const { main, gallery, opus, imgContainer, opusDescription } = styles;
 
-export const Home: React.FC<{ works: IWork[] }> = ({ works }) => {
+export const Home: React.FC<{ works: ICartItem[] }> = ({ works }) => {
   // let tiles: Array<JSX.Element> = [];
   // for (let i = 0; i < 21; i++) {
   //   tiles.push(<Card />);

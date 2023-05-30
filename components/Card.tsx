@@ -1,15 +1,13 @@
 import Image from "next/image";
-import { IWork } from "@/models/works";
+import { ICartItem } from "@/context/StateContext";
 import styles from "@/styles/Home.module.css";
 
 const { main, gallery, opus, imgContainer, opusDescription } = styles;
 
-export const Card: React.FC<IWork> = ({
-  description,
+export const Card: React.FC<ICartItem> = ({
   imgURL,
   priceHT,
   priceTTC,
-  qty,
   title,
 }) => {
   // const { description, imgURL, priceHT, priceTTC, qty, title } = work;
