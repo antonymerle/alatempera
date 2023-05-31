@@ -5,6 +5,7 @@ import { ICartItem } from "@/context/StateContext";
 import Image from "next/image";
 import dbConnect from "@/models/connection";
 import style from "../../styles/WorkSlug.module.css";
+import Quantity from "@/components/Quantity";
 
 const { container, imgContainer, detailsContainer } = style;
 
@@ -35,6 +36,7 @@ const WorkDetails: React.FC<{ work: ICartItem }> = ({ work }) => {
           rerum, quam, sint ab maxime eos cupiditate non dolores perferendis
           excepturi atque maiores.
         </p>
+        <Quantity context="slug" cartItem={work} />
         <button>Ajouter au panier</button>
       </div>
     </div>
