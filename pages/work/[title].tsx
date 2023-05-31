@@ -1,7 +1,7 @@
 import React from "react";
 import { GetStaticProps, GetStaticPaths, GetServerSideProps } from "next";
 import Work from "@/models/works";
-import { ICartItem } from "@/context/StateContext";
+import { ICartItem, useStateContext } from "@/context/StateContext";
 import Image from "next/image";
 import dbConnect from "@/models/connection";
 import style from "../../styles/WorkSlug.module.css";
@@ -11,6 +11,15 @@ const { container, imgContainer, detailsContainer } = style;
 
 const WorkDetails: React.FC<{ work: ICartItem }> = ({ work }) => {
   console.log({ work });
+  const { onAdd, qty, setShowCart } = useStateContext();
+
+  const handleBuyNow = () => {
+    console.log("click");
+
+    onAdd(work, qty);
+
+    setShowCart(true);
+  };
 
   return (
     <div className={container}>
@@ -37,7 +46,7 @@ const WorkDetails: React.FC<{ work: ICartItem }> = ({ work }) => {
           excepturi atque maiores.
         </p>
         <Quantity context="slug" cartItem={work} />
-        <button>Ajouter au panier</button>
+        <button onClick={handleBuyNow}>Ajouter au panier</button>
       </div>
     </div>
   );
