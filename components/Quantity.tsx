@@ -40,7 +40,7 @@ const Quantity: React.FC<IQuantityProps> = ({ context, cartItem }) => {
         <div
           className={cartItem.cartQty >= cartItem.inventory ? disabled : plus}
           onClick={() => {
-            console.log(cartItem.cartQty, cartItem.inventory);
+            // console.log(cartItem.cartQty, cartItem.inventory);
             cartItem.cartQty >= cartItem.inventory
               ? toast.error("Quantité maximale atteinte !")
               : toggleCartItemQuantity(cartItem._id, "inc");
