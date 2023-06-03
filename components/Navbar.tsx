@@ -1,6 +1,17 @@
+import { useStateContext } from "@/context/StateContext";
+import { AiOutlineShopping } from "react-icons/ai";
 import Image from "next/image";
+import Cart from "./Cart";
+import style from "../styles/Navbar.module.css";
 
-const Navbar = () => {
+const { navbarContainer, logo, cartIcon, navIcons, search, cartItemQty } =
+  style;
+
+const Navbar: React.FC = () => {
+  const { showCart, setShowCart, totalQuantities } = useStateContext();
+
+  // const { setShowCart } = useStateContext();
+
   return (
     <nav>
       <div className="logo">
@@ -12,7 +23,23 @@ const Navbar = () => {
         <li>Originaux</li>
         <li>Impressions</li>
         <li>Contact</li>
+        <li>
+          <button
+            type="button"
+            className={cartIcon}
+            onClick={() => setShowCart(true)}
+          >
+            <AiOutlineShopping size={24} color="grey" />
+
+            <span
+            // className={cartItemQty}
+            >
+              {totalQuantities}
+            </span>
+          </button>
+        </li>
       </ul>
+      {showCart && <Cart />}
     </nav>
   );
 };
