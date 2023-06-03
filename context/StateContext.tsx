@@ -30,7 +30,7 @@ interface IContextMembers {
   setTotalQuantities: Dispatch<SetStateAction<number>>;
 }
 
-const Context = createContext({} as IContextMembers);
+export const Context = createContext({} as IContextMembers);
 
 export interface ICartItem extends IWork {
   cartQty: number;
