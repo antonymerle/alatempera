@@ -14,8 +14,6 @@ const WorkDetails: React.FC<{ work: ICartItem }> = ({ work }) => {
   const { onAdd, qty, setShowCart } = useStateContext();
 
   const handleBuyNow = () => {
-    console.log("click");
-
     onAdd(work, qty);
 
     setShowCart(true);
