@@ -9,6 +9,7 @@ import Link from "next/link";
 import getStripe from "@/utils/getStripe";
 import styles from "../styles/Cart.module.css";
 import Quantity from "./Quantity";
+import { log } from "console";
 
 const {
   cartWrapper,
@@ -55,6 +56,9 @@ const Cart = () => {
     stripe!.redirectToCheckout({ sessionId: data.id });
   };
 
+  // TODO : fix bug : one of cartItems is undefined
+  console.log({ cartItems });
+
   return (
     <div className={cartWrapper} ref={cartRef as any}>
       <div className={cartContainer}>
@@ -92,7 +96,7 @@ const Cart = () => {
                   </div>
                   <div className={`${flex} ${bottom}`}>
                     <div>
-                      <Quantity context="cart" cartItem={item} />
+                      <Quantity context="cart" work={item} />
                     </div>
                     <button
                       type="button"
