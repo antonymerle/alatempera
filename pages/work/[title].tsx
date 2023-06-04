@@ -6,19 +6,20 @@ import Image from "next/image";
 import dbConnect from "@/models/connection";
 import style from "../../styles/WorkSlug.module.css";
 import Quantity from "@/components/Quantity";
+import { getQtyOfSameItemInCart } from "../../components/Quantity";
 
 const { container, imgContainer, detailsContainer } = style;
 
 const WorkDetails: React.FC<{ work: ICartItem }> = ({ work }) => {
   console.log({ work });
-  const { onAdd, qty, setShowCart } = useStateContext();
+  const { onAdd, qty, setQty, setShowCart, cartItems } = useStateContext();
 
   const handleBuyNow = () => {
-    // console.log({ qty });
-    // console.log({ work });
+    console.log({ qty });
+    console.log({ work });
 
     onAdd(work, qty);
-
+    setQty(1);
     // setShowCart(true);
   };
 
@@ -46,8 +47,21 @@ const WorkDetails: React.FC<{ work: ICartItem }> = ({ work }) => {
           rerum, quam, sint ab maxime eos cupiditate non dolores perferendis
           excepturi atque maiores.
         </p>
-        <Quantity context="slug" work={work} />
-        <button onClick={handleBuyNow}>Ajouter au panier</button>
+        {getQtyOfSameItemInCart(cartItems, work) >= work.inventory ? (
+          <p>Quantité maximale atteinte</p>
+        ) : (
+          <>
+            <Quantity context="slug" work={work} />
+            <button
+              onClick={handleBuyNow}
+              disabled={
+                getQtyOfSameItemInCart(cartItems, work) + qty > work.inventory
+              }
+            >
+              Ajouter au panier
+            </button>
+          </>
+        )}
       </div>
     </div>
   );

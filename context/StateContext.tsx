@@ -59,19 +59,27 @@ export const StateContext: React.FC<children> = ({ children }) => {
     setTotalQuantities((prevTotalQuantities) => prevTotalQuantities + quantity);
 
     if (checkProductInCart) {
+      console.log("Product is in cart");
+
       const updatedCartItems = cartItems.map((cartProduct) => {
         if (cartProduct._id === product._id)
           return {
             ...cartProduct,
-            quantity: cartProduct.cartQty + quantity,
+            cartQty: cartProduct.cartQty + quantity,
           };
       });
 
+      console.log({ updatedCartItems });
+
       setCartItems(updatedCartItems as Array<ICartItem>); // TODO : remove type hack
     } else {
+      console.log("Product is not in cart");
       product.cartQty = quantity;
+      const updatedCartItems = [...cartItems, { ...product }];
 
-      setCartItems([...cartItems, { ...product }]);
+      console.log({ updatedCartItems });
+
+      setCartItems(updatedCartItems);
     }
 
     toast.success(`${qty} ${product.title} ajouté au panier.`);

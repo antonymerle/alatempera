@@ -15,14 +15,27 @@ interface IQuantityProps {
   work: ICartItem;
 }
 
+export const getQtyOfSameItemInCart = (
+  cartItems: Array<ICartItem>,
+  work: ICartItem
+) => {
+  const numberOfSameItemAlreadyInCart = cartItems
+    .filter((itemInCart) => itemInCart._id === work._id)
+    .map((itemInCart) => itemInCart.cartQty)
+    .reduce((sum, current) => sum + current, 0);
+  console.log({ numberOfSameItemAlreadyInCart });
+
+  return numberOfSameItemAlreadyInCart;
+};
+
 // Two different logics wether if the component is in the Cart component or slug page.
 // context parameter is either "cart" or "slug"
 // If context === "cart", work must be provided
 const Quantity: React.FC<IQuantityProps> = ({ context, work }) => {
-  // console.log({ work });
-
   const { qty, setQty, decQty, incQty, toggleCartItemQuantity, cartItems } =
     useStateContext();
+  // const [numberOfSameItemAlreadyInCart, setNumberOfSameItemAlreadyInCart] =
+  //   useState(getQtyOfSameItemInCart(cartItems, work));
 
   const { asPath } = useRouter();
   useEffect(() => {
@@ -30,12 +43,10 @@ const Quantity: React.FC<IQuantityProps> = ({ context, work }) => {
   }, [asPath]); // access the router object and reset qty each time the user navigates to another product page.
 
   const onIncrement = () => {
-    const numberOfSameItemAlreadyInCart = cartItems
-      .filter((itemInCart) => itemInCart._id === work._id)
-      .map((itemInCart) => itemInCart.cartQty)
-      .reduce((sum, current) => sum + current, 0);
-    console.log({ numberOfSameItemAlreadyInCart });
-
+    const numberOfSameItemAlreadyInCart = getQtyOfSameItemInCart(
+      cartItems,
+      work
+    );
     if (context === "cart") {
       work.cartQty >= work.inventory
         ? toast.error("Quantité maximale atteinte !")
@@ -73,7 +84,11 @@ const Quantity: React.FC<IQuantityProps> = ({ context, work }) => {
         </div>
         <div className={num}>{qty}</div>
         <div
-          className={qty >= work.inventory ? disabled : plus}
+          className={
+            qty + getQtyOfSameItemInCart(cartItems, work) >= work.inventory
+              ? disabled
+              : plus
+          }
           onClick={onIncrement}
         >
           <AiOutlinePlus />
