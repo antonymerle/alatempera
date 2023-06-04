@@ -12,14 +12,16 @@ type Context = "cart" | "slug";
 
 interface IQuantityProps {
   context: Context;
-  cartItem: ICartItem;
+  work: ICartItem;
 }
 
 // Two different logics wether if the component is in the Cart component or slug page.
 // context parameter is either "cart" or "slug"
-// If context === "cart", cartItem must be provided
-const Quantity: React.FC<IQuantityProps> = ({ context, cartItem }) => {
-  const { qty, setQty, decQty, incQty, toggleCartItemQuantity } =
+// If context === "cart", work must be provided
+const Quantity: React.FC<IQuantityProps> = ({ context, work }) => {
+  // console.log({ work });
+
+  const { qty, setQty, decQty, incQty, toggleCartItemQuantity, cartItems } =
     useStateContext();
 
   const { asPath } = useRouter();
@@ -27,24 +29,37 @@ const Quantity: React.FC<IQuantityProps> = ({ context, cartItem }) => {
     setQty(1);
   }, [asPath]); // access the router object and reset qty each time the user navigates to another product page.
 
-  if (context === "cart" && cartItem) {
+  const onIncrement = () => {
+    const numberOfSameItemAlreadyInCart = cartItems
+      .filter((itemInCart) => itemInCart._id === work._id)
+      .map((itemInCart) => itemInCart.cartQty)
+      .reduce((sum, current) => sum + current, 0);
+    console.log({ numberOfSameItemAlreadyInCart });
+
+    if (context === "cart") {
+      work.cartQty >= work.inventory
+        ? toast.error("Quantité maximale atteinte !")
+        : toggleCartItemQuantity(work._id, "inc");
+    } else if (context === "slug") {
+      qty + numberOfSameItemAlreadyInCart >= work.inventory
+        ? toast.error("Quantité maximale atteinte !")
+        : incQty();
+    }
+  };
+
+  if (context === "cart" && work) {
     return (
       <div className={quantityDesc}>
         <div
           className={minus}
-          onClick={() => toggleCartItemQuantity(cartItem._id, "dec")}
+          onClick={() => toggleCartItemQuantity(work._id, "dec")}
         >
           <AiOutlineMinus />
         </div>
-        <div className={num}>{cartItem.cartQty}</div>
+        <div className={num}>{work.cartQty}</div>
         <div
-          className={cartItem.cartQty >= cartItem.inventory ? disabled : plus}
-          onClick={() => {
-            // console.log(cartItem.cartQty, cartItem.inventory);
-            cartItem.cartQty >= cartItem.inventory
-              ? toast.error("Quantité maximale atteinte !")
-              : toggleCartItemQuantity(cartItem._id, "inc");
-          }}
+          className={work.cartQty >= work.inventory ? disabled : plus}
+          onClick={onIncrement}
         >
           <AiOutlinePlus />
         </div>
@@ -58,12 +73,8 @@ const Quantity: React.FC<IQuantityProps> = ({ context, cartItem }) => {
         </div>
         <div className={num}>{qty}</div>
         <div
-          className={qty >= cartItem.inventory ? disabled : plus}
-          onClick={() =>
-            qty >= cartItem.inventory
-              ? toast.error("Quantité maximale atteinte !")
-              : incQty()
-          }
+          className={qty >= work.inventory ? disabled : plus}
+          onClick={onIncrement}
         >
           <AiOutlinePlus />
         </div>
