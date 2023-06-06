@@ -1,19 +1,24 @@
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 import type { NextApiRequest, NextApiResponse } from "next";
 import { ICartItem } from "@/context/StateContext";
-import Error from "next/error";
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<any>
 ) {
+  console.log("reached stripe endpoint");
+  console.log(req.method);
+
   if (req.method === "POST") {
+    console.log("method is post, proceeding");
+    // console.log(item.imgURL);
+
     try {
       const line_items = req.body.cartItems.map((item: ICartItem) => {
         return {
           price_data: {
             currency: "eur",
-            unit_amount: item.priceTTC,
+            unit_amount: Math.floor(item.priceTTC * 100),
             product_data: {
               name: item.title,
               images: item.imgURL,
@@ -32,7 +37,7 @@ export default async function handler(
         shipping_address_collection: { allowed_countries: ["FR"] },
         shipping_options: [
           { shipping_rate: process.env.STRIPE_FREE_SHIPPING },
-          { shipping_rate: process.env.STRIPE_FAST_SHIPPING },
+          // { shipping_rate: process.env.STRIPE_FAST_SHIPPING },
         ],
         line_items,
         success_url: `${req.headers.origin}/success`,
