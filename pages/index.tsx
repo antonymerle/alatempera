@@ -23,7 +23,7 @@ export const Home: React.FC<{ works: ICartItem[] }> = ({ works }) => {
   const tiles: Array<JSX.Element> = works.map((work, i) => {
     return (
       <Link href={"/work/" + work.title} key={i}>
-        <Card {...work} />;
+        <Card {...work} />
       </Link>
     );
   });
