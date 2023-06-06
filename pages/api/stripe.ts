@@ -1,6 +1,7 @@
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 import type { NextApiRequest, NextApiResponse } from "next";
 import { ICartItem } from "@/context/StateContext";
+import { shipping_options } from "@/utils/getStripe";
 
 export default async function handler(
   req: NextApiRequest,
@@ -13,6 +14,10 @@ export default async function handler(
     console.log("method is post, proceeding");
     // console.log(item.imgURL);
 
+    // console.log(
+    //   process.env.DOMAIN_NAME + "images" + req.body.cartItems[0].imgURL[0]
+    // );
+
     try {
       const line_items = req.body.cartItems.map((item: ICartItem) => {
         return {
@@ -21,7 +26,13 @@ export default async function handler(
             unit_amount: Math.floor(item.priceTTC * 100),
             product_data: {
               name: item.title,
-              images: item.imgURL,
+              images: [
+                process.env.DOMAIN_NAME +
+                  "_next/" +
+                  "image?url=%2F" +
+                  item.imgURL[0] +
+                  "&w=1920&q=75",
+              ],
             },
           },
           adjustable_quantity: { enabled: true, minimum: 1 },
@@ -29,16 +40,15 @@ export default async function handler(
         };
       });
 
+      console.log(line_items[0].price_data.product_data.images[0]);
+
       // Create Checkout Sessions from body params.
       const params = {
         mode: "payment",
         payment_method_types: ["card"],
         billing_address_collection: "auto",
         shipping_address_collection: { allowed_countries: ["FR"] },
-        shipping_options: [
-          { shipping_rate: process.env.STRIPE_FREE_SHIPPING },
-          // { shipping_rate: process.env.STRIPE_FAST_SHIPPING },
-        ],
+        shipping_options,
         line_items,
         success_url: `${req.headers.origin}/success`,
         cancel_url: `${req.headers.origin}/?canceled=true`,
