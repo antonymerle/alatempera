@@ -35,20 +35,25 @@ export default async function handler(req, res) {
       return;
     }
 
+    // for reference, check the event object in Stripe documentation
+    // https://stripe.com/docs/api/events/object
     console.log("✅ Success:", event.id);
 
     switch (event.type) {
       case "checkout.session.completed":
-        const emailFromCheckoutSession = event.data.object.customer_email ?? "";
+        const customerEmailFromCheckoutSession =
+          event.data.object.customer_details.email ?? "";
+        const customerNameFromCheckoutSession =
+          event.data.object.customer_details.name ?? "";
+        const paymentIntentId = event.data.object.payment_intent ?? "";
 
-        console.log({ emailFromCheckoutSession });
-        console.log({ customer });
+        console.log({ customerEmailFromCheckoutSession });
+        console.log({ customerNameFromCheckoutSession });
         // TODO : stocker cet event en DB. les donnes sont dans event.data.
 
         // Then define and call a function to handle the event payment_intent.succeeded
         console.log("Le client a payé sa commande.");
         console.log({ event });
-        const completedCheckoutSessionId = event.id;
         const completedCheckoutSessionTimestamp = event.created * 1000; // stripe timestamp is measured in seconds since the Unix epoch.
         // Retrieve the session. If you require line items in the response, you may include them by expanding line_items.
         const sessionWithLineItems = await stripe.checkout.sessions.retrieve(
@@ -57,13 +62,34 @@ export default async function handler(req, res) {
             expand: ["line_items"],
           }
         );
-        const lineItems = sessionWithLineItems.line_items;
+        console.log("*** line items ***");
+
+        console.log(
+          JSON.stringify(sessionWithLineItems.line_items.data, null, 2)
+        );
+
+        const lineItems = sessionWithLineItems.line_items.data.map(
+          (lineItem) => {
+            return {
+              line_id: lineItem.id,
+              object: lineItem.object,
+              amount_discount: lineItem.amount_discount,
+              amount_subtotal: lineItem.amount_subtotal,
+              amount_tax: lineItem.amount_tax,
+              amount_total: lineItem.amount_total,
+              currency: lineItem.currency,
+              description: lineItem.description,
+              quantity: lineItem.quantity,
+            };
+          }
+        );
 
         // Fulfill the purchase && decrement inventory...
         const response = await fulfillOrder(
-          completedCheckoutSessionId,
+          customerNameFromCheckoutSession,
+          customerEmailFromCheckoutSession,
+          paymentIntentId,
           completedCheckoutSessionTimestamp,
-          emailFromCheckoutSession,
           lineItems
         );
         console.log({ fulfillOrder: response });
@@ -100,54 +126,70 @@ const buffer = (req) => {
 };
 
 const fulfillOrder = async (
-  completedCheckoutSessionId,
+  customerNameFromCheckoutSession,
+  customerEmailFromCheckoutSession,
+  paymentIntentId,
   completedCheckoutSessionTimestamp,
-  emailFromCheckoutSession,
   lineItems
 ) => {
-  // 1. record order in database if user is logged
+  // 1. record order in database
 
-  if (emailFromCheckoutSession) {
-    const newOrder = lineItems.data;
-    await updateUserWithNewOrders(
-      completedCheckoutSessionId,
-      completedCheckoutSessionTimestamp,
-      emailFromCheckoutSession,
-      newOrder
-    );
-  } else {
-    // TODO : record anyway in another table ???
-    console.log("No email from user session, skipping order recording in DB");
-  }
-
-  // 2. decrement inventory
-  console.log("Fulfilling order", lineItems);
-
-  const quantityOrdered = lineItems.data[0].quantity;
-  const productName = lineItems.data[0].description;
-
-  console.log({ quantityOrdered });
-
-  const groqQuery = `*[_type == "product" && name == $productName][0]`;
-
-  const productInDB = await client.fetch(groqQuery, {
-    productName,
+  const newOrder = new OrderModel({
+    customerName: customerNameFromCheckoutSession,
+    customerEmail: customerEmailFromCheckoutSession,
+    paymentIntentId,
+    timestamp: completedCheckoutSessionTimestamp,
+    items: lineItems,
   });
 
-  console.log({ productInDB });
+  newOrder
+    .save()
+    .then(() => {
+      OrderModel.findOne({ paymentIntentId });
+    })
+    .then((data) => console.log(data));
 
-  await client
-    .patch(productInDB._id)
-    .dec({ inventory: quantityOrdered })
-    .commit()
-    .then((updatedProduct) => {
-      console.log("New inventory has been decreased by : ", quantityOrdered);
-      console.log(updatedProduct);
-      return {
-        result: true,
-        inventory: productInDB.inventory - quantityOrdered,
-      };
-    });
+  // if (customerEmailFromCheckoutSession) {
+  //   const newOrder = lineItems.data;
+  //   await updateUserWithNewOrders(
+  //     completedCheckoutSessionId,
+  //     completedCheckoutSessionTimestamp,
+  //     customerEmailFromCheckoutSession,
+  //     newOrder
+  //   );
+  // } else {
+  //   // TODO : record anyway in another table ???
+  //   console.log("No email from user session, skipping order recording in DB");
+  // }
+
+  // 2. decrement inventory
+  //   console.log("Fulfilling order", lineItems);
+
+  //   const quantityOrdered = lineItems.data[0].quantity;
+  //   const productName = lineItems.data[0].description;
+
+  //   console.log({ quantityOrdered });
+
+  //   const groqQuery = `*[_type == "product" && name == $productName][0]`;
+
+  //   const productInDB = await client.fetch(groqQuery, {
+  //     productName,
+  //   });
+
+  //   console.log({ productInDB });
+
+  //   await client
+  //     .patch(productInDB._id)
+  //     .dec({ inventory: quantityOrdered })
+  //     .commit()
+  //     .then((updatedProduct) => {
+  //       console.log("New inventory has been decreased by : ", quantityOrdered);
+  //       console.log(updatedProduct);
+  //       return {
+  //         result: true,
+  //         inventory: productInDB.inventory - quantityOrdered,
+  //       };
+  //     });
 };
 
 // Function to update the user document with new orders
