@@ -13,9 +13,9 @@ interface IOrderItem {
 }
 
 interface IOrder extends Document {
-  customer: string;
+  customerName: string;
   customerEmail: string;
-  command_id: string;
+  paymentIntentId: string;
   timestamp: number;
   items: IOrderItem[];
 }
@@ -34,9 +34,9 @@ const OrderItemSchema = new Schema<IOrderItem>({
 });
 
 const OrderSchema = new Schema<IOrder>({
-  customer: { type: String, required: true },
+  customerName: { type: String, required: true },
   customerEmail: { type: String, required: true },
-  command_id: { type: String, required: true },
+  paymentIntentId: { type: String, required: true },
   timestamp: { type: Number, required: true },
   items: { type: [OrderItemSchema], required: true },
 });
