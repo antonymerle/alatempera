@@ -1,5 +1,6 @@
 import Stripe from "stripe";
 import OrderModel from "@/models/customers";
+import Work from "@/models/works";
 
 const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
 
@@ -149,21 +150,25 @@ const fulfillOrder = async (
     })
     .then((data) => console.log(data));
 
-  // if (customerEmailFromCheckoutSession) {
-  //   const newOrder = lineItems.data;
-  //   await updateUserWithNewOrders(
-  //     completedCheckoutSessionId,
-  //     completedCheckoutSessionTimestamp,
-  //     customerEmailFromCheckoutSession,
-  //     newOrder
-  //   );
-  // } else {
-  //   // TODO : record anyway in another table ???
-  //   console.log("No email from user session, skipping order recording in DB");
-  // }
-
   // 2. decrement inventory
   //   console.log("Fulfilling order", lineItems);
+  console.log("decremeting inventory");
+
+  lineItems.forEach(async (lineItem) => {
+    try {
+      const work = await Work.findOne({ title: lineItem.description });
+      if (work) {
+        work.inventory -= lineItem.quantity;
+
+        await work.save();
+        console.log(`Quantity updated for work with ID ${work._id}`);
+      }
+    } catch (error) {
+      console.error(
+        `Error updating quantity for work with title ${lineItem.description}: ${error}`
+      );
+    }
+  });
 
   //   const quantityOrdered = lineItems.data[0].quantity;
   //   const productName = lineItems.data[0].description;
