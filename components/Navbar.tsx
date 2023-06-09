@@ -48,7 +48,7 @@ const Navbar: React.FC = () => {
               className={cartIcon}
               onClick={() => setShowCart(true)}
             >
-              <AiOutlineShopping size={30} />
+              <AiOutlineShopping size={"2em"} />
               <span>{totalQuantities}</span>
             </button>
           </li>
