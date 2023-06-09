@@ -25,7 +25,7 @@ const Navbar: React.FC = () => {
         <li>A propos</li>
         <li>Originaux</li>
         <li>Impressions</li>
-        <li>Contact</li>
+        <li>Carnet</li>
         <li>
           <button
             type="button"
