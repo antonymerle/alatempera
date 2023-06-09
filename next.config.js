@@ -8,6 +8,7 @@ const nextConfig = {
     STRIPE_WEBHOOK_SECRET: process.env.STRIPE_WEBHOOK_SECRET_TEST,
     STRIPE_FREE_SHIPPING: process.env.STRIPE_FREE_SHIPPING_TEST,
     DOMAIN_NAME: process.env.DOMAIN_NAME,
+    CONTACT_EMAIL: process.env.CONTACT_EMAIL,
   },
 };
 
