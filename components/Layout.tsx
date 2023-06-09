@@ -1,4 +1,5 @@
-import { Archivo } from "next/font/google";
+// import { Archivo } from "next/font/google";
+import { Montserrat } from "next/font/google";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import style from "../styles/Layout.module.css";
@@ -9,7 +10,7 @@ const { layout } = style;
 
 type LayoutProps = { children?: ReactNode };
 
-const font = Archivo({ subsets: ["latin"] });
+const font = Montserrat({ subsets: ["latin"] });
 
 const Layout = ({ children }: LayoutProps) => {
   return (
