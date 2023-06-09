@@ -38,10 +38,10 @@ const Navbar: React.FC = () => {
 
       <div className={menuSide}>
         <ul className={menu}>
-          <li>A propos</li>
           <li>Originaux</li>
           <li>Impressions</li>
           <li>Carnet</li>
+          <li>A propos</li>
           <li>
             <button
               type="button"
