@@ -1,7 +1,8 @@
+import Canceled from "@/components/Canceled";
 import React from "react";
 
 const canceled = () => {
-  return <div>canceled</div>;
+  return <Canceled />;
 };
 
 export default canceled;
