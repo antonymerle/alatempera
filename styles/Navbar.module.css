@@ -1,24 +1,53 @@
 .navbarContainer {
   width: 100%;
   display: flex;
-  height: 50px;
+  height: 10vh;
+  min-height: 80px;
   justify-content: space-between;
   align-items: center;
   margin: 0.5rem 1.5rem;
   position: relative;
 }
 
-.logo {
+.logoContainer {
   color: var(--mainText);
   font-size: 18px;
   font-weight: 600;
+  padding-right: 2em;
+}
+.logo {
+  border-radius: 50%;
 }
 
-.navIcons {
+.logoSide {
+  height: 100%;
+  width: 40%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.menuSide {
+  height: 100%;
+  width: 60%;
   display: flex;
   justify-content: flex-end;
+}
+.menu {
+  display: flex;
+  height: 100%;
   align-items: center;
-  min-width: 260px;
+}
+.menu > li {
+  padding-right: 1em;
+}
+
+.menu > li:hover {
+  color: var(--oldEngland);
+}
+
+.menu > li:last-child {
+  padding-right: 0;
 }
 
 .search {
@@ -35,6 +64,8 @@
 }
 
 .cartIcon {
+  height: 25px;
+  line-height: 100%;
   font-size: 25px;
   color: gray;
   cursor: pointer;
@@ -43,8 +74,15 @@
   border: none;
   background-color: transparent;
 }
+
+.cartIcon span {
+  position: absolute;
+  top: 6px;
+}
+
 .cartIcon:hover {
   transform: scale(1.1, 1.1);
+  color: var(--oldEngland);
 }
 
 .cartItemQty {
@@ -52,7 +90,7 @@
   right: -8px;
   font-size: 12px;
   color: #eee;
-  background-color: var(--mainColor);
+  background-color: var(--mainText);
   width: 18px;
   height: 18px;
   border-radius: 50%;
