@@ -3,10 +3,10 @@ import { GetStaticPropsContext, InferGetStaticPropsType } from "next";
 import { serialize } from "next-mdx-remote/serialize";
 import { MDXRemote } from "next-mdx-remote";
 import Head from "next/head";
-import H1 from "@/components/mdx/H1";
-import H2 from "@/components/mdx/H2";
-import HeroImage from "@/components/mdx/HeroImage";
-import P from "@/components/mdx/P";
+import H1 from "@/components/blog/mdx/H1";
+import H2 from "@/components/blog/mdx/H2";
+import HeroImage from "@/components/blog/mdx/HeroImage";
+import P from "@/components/blog/mdx/P";
 
 export default function PostPage({
   source,
