@@ -21,11 +21,12 @@ const {
   qty,
 } = style;
 
+const isLinkActive = (currentPath: string, path: string) => {
+  return currentPath === path;
+};
+
 const Navbar: React.FC = () => {
-  const isLinkActive = (pathname: string) => {
-    const { pathname: currentPathname } = useRouter();
-    return currentPathname === pathname;
-  };
+  const { pathname: currentPathname } = useRouter();
 
   const { showCart, setShowCart, totalQuantities } = useStateContext();
   return (
@@ -50,13 +51,25 @@ const Navbar: React.FC = () => {
       <div className={menuSide}>
         <ul className={menu}>
           <Link href={"/"}>
-            <li className={isLinkActive("/") ? active : ""}>Originaux</li>
+            <li className={isLinkActive(currentPathname, "/") ? active : ""}>
+              Originaux
+            </li>
           </Link>
-          <li className={isLinkActive("/impressions") ? active : ""}>
+          <li
+            className={
+              isLinkActive(currentPathname, "/impressions") ? active : ""
+            }
+          >
             Impressions
           </li>
-          <li className={isLinkActive("/blog") ? active : ""}>Carnet</li>
-          <li className={isLinkActive("/apropos") ? active : ""}>A propos</li>
+          <li className={isLinkActive(currentPathname, "/blog") ? active : ""}>
+            Carnet
+          </li>
+          <li
+            className={isLinkActive(currentPathname, "/apropos") ? active : ""}
+          >
+            A propos
+          </li>
           <li>
             <button
               type="button"
