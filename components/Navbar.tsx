@@ -21,12 +21,12 @@ const {
   qty,
 } = style;
 
-const isLinkActive = (pathname: string) => {
-  const { pathname: currentPathname } = useRouter();
-  return currentPathname === pathname;
-};
-
 const Navbar: React.FC = () => {
+  const isLinkActive = (pathname: string) => {
+    const { pathname: currentPathname } = useRouter();
+    return currentPathname === pathname;
+  };
+
   const { showCart, setShowCart, totalQuantities } = useStateContext();
   return (
     <nav className={navbarContainer}>
