@@ -41,7 +41,9 @@ const Navbar: React.FC = () => {
             ></Image>
           </div>
         </Link>
-        <h1>A la tempera</h1>
+        <Link href={"/"}>
+          <h1>A la tempera</h1>
+        </Link>
       </div>
 
       <div className={menuSide}>
