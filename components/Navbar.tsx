@@ -18,6 +18,7 @@ const {
   menuSide,
   menuItem,
   active,
+  qty,
 } = style;
 
 const isLinkActive = (pathname: string) => {
@@ -62,8 +63,8 @@ const Navbar: React.FC = () => {
               className={cartIcon}
               onClick={() => setShowCart(true)}
             >
-              <AiOutlineShopping size={"2em"} />
-              <span>{totalQuantities}</span>
+              <AiOutlineShopping size={"2em"} style={{ color: "#373737" }} />
+              <span className={qty}>{totalQuantities}</span>
             </button>
           </li>
         </ul>

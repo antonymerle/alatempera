@@ -102,3 +102,7 @@
   text-align: center;
   font-weight: 600;
 }
+
+.qty {
+  color: var(--mainText);
+}
