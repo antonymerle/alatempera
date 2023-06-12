@@ -43,6 +43,7 @@ footer {
   height: 110px;
   border-top: 1px solid var(--mainText);
   padding: 2rem 0rem;
+  margin-top: 5rem;
 }
 
 h1 {
