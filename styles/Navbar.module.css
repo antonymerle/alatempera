@@ -39,7 +39,7 @@
   height: 100%;
   align-items: center;
 }
-.menu > li {
+.menu li {
   padding-right: 1em;
 }
 
@@ -49,6 +49,11 @@
 
 .menu > li:last-child {
   padding-right: 0;
+}
+
+.active {
+  text-decoration: underline;
+  color: var(--oldEngland);
 }
 
 .search {

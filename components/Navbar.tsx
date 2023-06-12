@@ -4,6 +4,7 @@ import Image from "next/image";
 import Cart from "./Cart";
 import style from "../styles/Navbar.module.css";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 const {
   navbarContainer,
@@ -15,7 +16,14 @@ const {
   menu,
   logoSide,
   menuSide,
+  menuItem,
+  active,
 } = style;
+
+const isLinkActive = (pathname: string) => {
+  const { pathname: currentPathname } = useRouter();
+  return currentPathname === pathname;
+};
 
 const Navbar: React.FC = () => {
   const { showCart, setShowCart, totalQuantities } = useStateContext();
@@ -38,10 +46,14 @@ const Navbar: React.FC = () => {
 
       <div className={menuSide}>
         <ul className={menu}>
-          <li>Originaux</li>
-          <li>Impressions</li>
-          <li>Carnet</li>
-          <li>A propos</li>
+          <Link href={"/"}>
+            <li className={isLinkActive("/") ? active : ""}>Originaux</li>
+          </Link>
+          <li className={isLinkActive("/impressions") ? active : ""}>
+            Impressions
+          </li>
+          <li className={isLinkActive("/blog") ? active : ""}>Carnet</li>
+          <li className={isLinkActive("/apropos") ? active : ""}>A propos</li>
           <li>
             <button
               type="button"
