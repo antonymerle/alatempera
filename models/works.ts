@@ -1,5 +1,7 @@
 import mongoose, { Schema, model } from "mongoose";
 
+type Type = "original" | "print";
+
 export interface IWork {
   _id: string;
   title: string;
@@ -9,6 +11,7 @@ export interface IWork {
   inventory: number;
   imgURL: string[];
   isSoldOut: boolean;
+  type: Type;
 }
 
 const workSchema = new Schema<IWork>({
@@ -19,6 +22,7 @@ const workSchema = new Schema<IWork>({
   inventory: { type: Number, required: true },
   imgURL: { type: [String], required: true },
   isSoldOut: { type: Boolean, required: true },
+  type: { type: String, required: true },
 });
 
 const Work = mongoose.models.Work || model<IWork>("Work", workSchema);
