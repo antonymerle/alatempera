@@ -38,6 +38,13 @@ body {
   color: var(--mainText);
 }
 
+footer {
+  width: 100%;
+  height: 110px;
+  border-top: 1px solid var(--mainText);
+  padding: 2rem 0rem;
+}
+
 h1 {
   font-size: 3em;
   color: var(--oldEngland);
