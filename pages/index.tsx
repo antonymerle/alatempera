@@ -1,23 +1,24 @@
 import Head from "next/head";
 import React from "react";
-import styles from "@/styles/Home.module.css";
 import Card from "@/components/Card";
 import dbConnect from "@/models/connection";
 import Work from "@/models/works";
 import { GetServerSideProps } from "next";
 import Link from "next/link";
 import { ICartItem } from "@/context/StateContext";
+import Cards from "@/components/Cards";
+import styles from "@/styles/Home.module.css";
 
 const { main, gallery } = styles;
 
 export const Home: React.FC<{ works: ICartItem[] }> = ({ works }) => {
-  const tiles: Array<JSX.Element> = works.map((work, i) => {
-    return (
-      <Link href={"/work/" + work.title} key={i}>
-        <Card {...work} />
-      </Link>
-    );
-  });
+  // const tiles: Array<JSX.Element> = works.map((work, i) => {
+  //   return (
+  //     <Link href={"/work/" + work.title} key={i}>
+  //       <Card {...work} />
+  //     </Link>
+  //   );
+  // });
 
   return (
     <>
@@ -28,7 +29,7 @@ export const Home: React.FC<{ works: ICartItem[] }> = ({ works }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={main}>
-        <section className={gallery}>{tiles}</section>
+        <Cards products={works} />
       </main>
     </>
   );
