@@ -62,9 +62,13 @@ const Navbar: React.FC = () => {
               Impressions
             </li>
           </Link>
-          <li className={isLinkActive(currentPathname, "/blog") ? active : ""}>
-            Carnet
-          </li>
+          <Link href={"/blog"}>
+            <li
+              className={isLinkActive(currentPathname, "/blog") ? active : ""}
+            >
+              Carnet
+            </li>
+          </Link>
           <li
             className={isLinkActive(currentPathname, "/apropos") ? active : ""}
           >
