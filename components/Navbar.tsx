@@ -55,13 +55,13 @@ const Navbar: React.FC = () => {
               Originaux
             </li>
           </Link>
-          <li
-            className={
-              isLinkActive(currentPathname, "/impressions") ? active : ""
-            }
-          >
-            Impressions
-          </li>
+          <Link href={"/prints"}>
+            <li
+              className={isLinkActive(currentPathname, "/print") ? active : ""}
+            >
+              Impressions
+            </li>
+          </Link>
           <li className={isLinkActive(currentPathname, "/blog") ? active : ""}>
             Carnet
           </li>
