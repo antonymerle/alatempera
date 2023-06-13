@@ -1,6 +1,7 @@
 import Stripe from "stripe";
-import OrderModel from "@/models/customers";
+import OrderModel from "@/models/orders";
 import Work from "@/models/works";
+import Print from "@/models/print";
 
 const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
 
@@ -63,27 +64,45 @@ export default async function handler(req, res) {
             expand: ["line_items"],
           }
         );
-        console.log("*** line items ***");
 
+        console.log("*** checkout session object ***");
+        console.log(JSON.stringify(sessionWithLineItems, null, 3));
+
+        // cf documentation : line_items : https://stripe.com/docs/api/checkout/sessions/object#checkout_session_object-line_items
+        console.log("*** line items ***");
         console.log(
           JSON.stringify(sessionWithLineItems.line_items.data, null, 2)
         );
 
+        console.log("*** metadata : commandDetails ***");
+
+        const commandDetails = JSON.parse(
+          sessionWithLineItems.metadata.commandDetails
+        );
+        console.log({ commandDetails });
+
         const lineItems = sessionWithLineItems.line_items.data.map(
-          (lineItem) => {
+          (lineItem, i) => {
             return {
+              // custom metadata passed in the line_items object in /api/stripe
+              item_id: commandDetails[i].id,
+              productType: commandDetails[i].type,
+              productTitle: commandDetails[i].title,
+              quantity: commandDetails[i].quantity,
+
+              // stripe regular data
               line_id: lineItem.id,
-              object: lineItem.object,
               amount_discount: lineItem.amount_discount,
               amount_subtotal: lineItem.amount_subtotal,
               amount_tax: lineItem.amount_tax,
               amount_total: lineItem.amount_total,
               currency: lineItem.currency,
-              description: lineItem.description,
-              quantity: lineItem.quantity,
             };
           }
         );
+
+        console.log("*** lineItems ***");
+        console.log({ lineItems });
 
         // Fulfill the purchase && decrement inventory...
         const response = await fulfillOrder(
@@ -156,12 +175,27 @@ const fulfillOrder = async (
 
   lineItems.forEach(async (lineItem) => {
     try {
-      const work = await Work.findOne({ title: lineItem.description });
-      if (work) {
-        work.inventory -= lineItem.quantity;
+      let item;
 
-        await work.save();
-        console.log(`Quantity updated for work with ID ${work._id}`);
+      switch (lineItem.productType) {
+        case "original":
+          item = await Work.findById(lineItem.item_id);
+          break;
+
+        case "print":
+          item = await Print.findById(lineItem.item_id);
+          break;
+
+        default:
+          console.log("Unknown product type : " + lineItem.productType);
+          break;
+      }
+
+      if (item) {
+        item.inventory -= lineItem.quantity;
+
+        await item.save();
+        console.log(`Quantity updated for work with ID ${item._id}`);
       }
     } catch (error) {
       console.error(
