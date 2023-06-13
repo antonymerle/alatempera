@@ -30,7 +30,7 @@ const WorkDetails: React.FC<{ work: ICartItem }> = ({ work }) => {
       </div>
       <div className={detailsContainer}>
         <h2>{work.title}</h2>
-        <h3>{work.priceHT + work.priceTTC}</h3>
+        <h3>{work.priceTTC}€</h3>
         <p>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni
           dignissimos delectus, omnis velit expedita laborum eaque neque quaerat

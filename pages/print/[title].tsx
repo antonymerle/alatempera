@@ -30,7 +30,7 @@ const PrintDetails: React.FC<{ print: ICartItem }> = ({ print }) => {
       </div>
       <div className={detailsContainer}>
         <h2>{print.title}</h2>
-        <h3>{print.priceHT + print.priceTTC}</h3>
+        <h3>{print.priceTTC}€</h3>
         <p>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni
           dignissimos delectus, omnis velit expedita laborum eaque neque quaerat
