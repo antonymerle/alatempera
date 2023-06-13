@@ -19,7 +19,7 @@ export const Card: React.FC<ICartItem> = ({
       </div>
       <div className={opusDescription}>
         <p>{title}</p>
-        <p>{(priceHT + priceTTC).toFixed(2)}€</p>
+        <p>{priceTTC.toFixed(2)}€</p>
       </div>
     </div>
   );
