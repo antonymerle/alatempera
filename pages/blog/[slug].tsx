@@ -3,8 +3,8 @@ import { GetStaticPropsContext, InferGetStaticPropsType } from "next";
 import { serialize } from "next-mdx-remote/serialize";
 import { MDXRemote } from "next-mdx-remote";
 import Head from "next/head";
-import H1 from "@/components/blog/mdx/H1";
 import H2 from "@/components/blog/mdx/H2";
+import H3 from "@/components/blog/mdx/H3";
 import HeroImage from "@/components/blog/mdx/HeroImage";
 import P from "@/components/blog/mdx/P";
 
@@ -20,8 +20,8 @@ export default function PostPage({
         {...source}
         // specifying the custom MDX components
         components={{
-          h1: H1,
-          h2: H2,
+          h1: H2,
+          h2: H3,
           p: P,
           HeroImage,
         }}

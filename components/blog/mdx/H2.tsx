@@ -1,3 +1,5 @@
-export default function H1({ children }: { children?: React.ReactNode }) {
-  return <h1 className="mdx-h1">{children}</h1>;
+import React from "react";
+
+export default function H2({ children }: { children?: React.ReactNode }) {
+  return <h2 className="mdx-h2">{children}</h2>;
 }
