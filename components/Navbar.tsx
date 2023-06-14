@@ -21,8 +21,26 @@ const {
   qty,
 } = style;
 
-const isLinkActive = (currentPath: string, path: string) => {
-  return currentPath === path;
+const isLinkActive = (currentPath: string, navbarPath: string) => {
+  // 1. tokenize path ["", "prints", "blog"]
+  const currentPathTokens: Array<string> = currentPath
+    .split("/")
+    .filter((token) => token !== "");
+
+  if (!currentPathTokens.length && navbarPath === "/") {
+    // we're in the homepage
+    return currentPath === navbarPath;
+  } else if (currentPathTokens[0]?.match(/work/) && navbarPath === "/") {
+    // we're in the work section
+    return true;
+  } else if (currentPathTokens[0]?.match(/print/) && navbarPath === "/print") {
+    return true;
+  } else if (currentPathTokens[0] === "blog" && navbarPath === "/blog") {
+    return true;
+  } else if (currentPathTokens[0] === "about" && navbarPath === "/about") {
+    return true;
+  }
+  return false;
 };
 
 const Navbar: React.FC = () => {
@@ -69,11 +87,13 @@ const Navbar: React.FC = () => {
               Carnet
             </li>
           </Link>
-          <li
-            className={isLinkActive(currentPathname, "/apropos") ? active : ""}
-          >
-            A propos
-          </li>
+          <Link href={"/about"}>
+            <li
+              className={isLinkActive(currentPathname, "/about") ? active : ""}
+            >
+              A propos
+            </li>
+          </Link>
           <li>
             <button
               type="button"
