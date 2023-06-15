@@ -3,9 +3,10 @@
   padding: 2rem;
   display: flex;
   justify-content: space-between;
+  gap: 2rem;
 }
 
-.imgContainer {
+/* .imgContainer {
   flex: 1;
   position: relative;
   background-color: aquamarine;
@@ -15,4 +16,38 @@
 .detailsContainer {
   flex: 1;
   padding: 0rem 0rem 0rem 1rem;
+} */
+
+.imgContainer {
+  width: 50%;
+  height: 600px;
+  display: block;
+  position: relative;
+  background-color: aquamarine;
+}
+
+.detailsContainer {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 0rem 0rem 0rem 1rem;
+}
+
+.detailsContainer > h2,
+.detailsContainer > p {
+  padding-bottom: 1rem;
+}
+
+.detailsContainer > h3 {
+  padding-bottom: 0.5rem;
+  color: var(--oldEngland);
+}
+
+.btns {
+  height: 140px;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
 }
