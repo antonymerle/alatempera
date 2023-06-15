@@ -8,7 +8,7 @@ import style from "../../styles/WorkSlug.module.css";
 import Quantity from "@/components/Quantity";
 import { getQtyOfSameItemInCart } from "../../components/Quantity";
 
-const { container, imgContainer, detailsContainer } = style;
+const { container, imgContainer, detailsContainer, btns } = style;
 
 const WorkDetails: React.FC<{ work: ICartItem }> = ({ work }) => {
   console.log({ work });
@@ -50,7 +50,7 @@ const WorkDetails: React.FC<{ work: ICartItem }> = ({ work }) => {
         {getQtyOfSameItemInCart(cartItems, work) >= work.inventory ? (
           <p>Quantité maximale atteinte</p>
         ) : (
-          <>
+          <div className={btns}>
             <Quantity context="slug" work={work} />
             <button
               onClick={handleBuyNow}
@@ -60,7 +60,7 @@ const WorkDetails: React.FC<{ work: ICartItem }> = ({ work }) => {
             >
               Ajouter au panier
             </button>
-          </>
+          </div>
         )}
       </div>
     </div>
