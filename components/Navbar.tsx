@@ -95,14 +95,10 @@ const Navbar: React.FC = () => {
             </li>
           </Link>
           <li>
-            <button
-              type="button"
-              className={cartIcon}
-              onClick={() => setShowCart(true)}
-            >
+            <div className={cartIcon} onClick={() => setShowCart(true)}>
               <AiOutlineShopping size={"2em"} style={{ color: "#373737" }} />
               <span className={qty}>{totalQuantities}</span>
-            </button>
+            </div>
           </li>
         </ul>
         {showCart && <Cart />}
