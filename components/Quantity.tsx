@@ -72,7 +72,7 @@ const Quantity: React.FC<IQuantityProps> = ({ context, work }) => {
           className={work.cartQty >= work.inventory ? disabled : plus}
           onClick={onIncrement}
         >
-          <AiOutlinePlus />
+          <AiOutlinePlus style={{ color: "#785e21" }} />
         </div>
       </div>
     );
@@ -91,7 +91,7 @@ const Quantity: React.FC<IQuantityProps> = ({ context, work }) => {
           }
           onClick={onIncrement}
         >
-          <AiOutlinePlus />
+          <AiOutlinePlus style={{ color: "#785e21" }} />
         </div>
       </div>
     );
