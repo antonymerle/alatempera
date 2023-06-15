@@ -42,7 +42,7 @@
   padding-right: 1em;
 }
 
-.menu > li:hover {
+.menu li:hover {
   color: var(--oldEngland);
 }
 
@@ -69,30 +69,26 @@
 }
 
 .cartIcon {
-  color: grey;
   cursor: pointer;
   position: relative;
   transition: transform 0.4s ease;
   border: none;
   background-color: transparent;
 }
+.cartIcon:hover {
+  color: var(--mainText);
+}
 
 .cartIcon span {
   position: absolute;
   top: 6px;
   font-size: 1.2rem;
-  font-weight: 100;
-}
-
-.cartIcon:hover {
-  transform: scale(1.1, 1.1);
-  color: var(--oldEngland);
+  font-weight: 600;
 }
 
 .cartItemQty {
   position: absolute;
   right: -8px;
-  font-size: 12px;
   color: #eee;
   background-color: var(--mainText);
   width: 18px;
@@ -100,8 +96,4 @@
   border-radius: 50%;
   text-align: center;
   font-weight: 600;
-}
-
-.qty {
-  color: var(--mainText);
 }
