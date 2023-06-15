@@ -1,0 +1,11 @@
+.container {
+  width: fit-content;
+  display: flex;
+  align-items: center;
+  gap: 1em;
+  cursor: pointer;
+}
+
+.container:hover {
+  color: var(--oldEngland);
+}
