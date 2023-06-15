@@ -1,3 +1,7 @@
+.navContainer {
+  display: block;
+}
+
 .container {
   width: 100%;
   padding: 2rem;
@@ -50,4 +54,8 @@
   display: flex;
   align-items: center;
   gap: 2rem;
+}
+
+.arrowBackContainer {
+  padding-left: 2rem;
 }
