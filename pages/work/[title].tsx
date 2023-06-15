@@ -7,8 +7,16 @@ import dbConnect from "@/models/connection";
 import style from "../../styles/WorkSlug.module.css";
 import Quantity from "@/components/Quantity";
 import { getQtyOfSameItemInCart } from "../../components/Quantity";
+import ArrowBack from "@/components/ArrowBack";
 
-const { container, imgContainer, detailsContainer, btns } = style;
+const {
+  container,
+  imgContainer,
+  detailsContainer,
+  btns,
+  navContainer,
+  arrowBackContainer,
+} = style;
 
 const WorkDetails: React.FC<{ work: ICartItem }> = ({ work }) => {
   console.log({ work });
@@ -24,44 +32,55 @@ const WorkDetails: React.FC<{ work: ICartItem }> = ({ work }) => {
   };
 
   return (
-    <div className={container}>
-      <div className={imgContainer}>
-        <Image alt="test" fill={true} objectFit="cover" src={work.imgURL[0]} />
+    <div className={navContainer}>
+      <div className={arrowBackContainer}>
+        <ArrowBack />
       </div>
-      <div className={detailsContainer}>
-        <h2>{work.title}</h2>
-        <h3>{work.priceTTC}€</h3>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni
-          dignissimos delectus, omnis velit expedita laborum eaque neque quaerat
-          deleniti vero consectetur deserunt tempora corrupti dolorem cumque
-          maxime voluptate dolores et quo quasi ullam labore adipisci! Quidem
-          quo incidunt tempora optio obcaecati nemo, fugit cumque amet quasi
-          aperiam molestiae sint accusantium modi atque rerum quod? Corporis
-          minus aperiam amet eligendi aliquam quae rem cum! Non inventore harum
-          earum architecto iusto quasi, culpa eum magni nisi eos reiciendis,
-          perspiciatis officiis, voluptate sequi ut. Dolore reprehenderit sed
-          praesentium illo delectus qui voluptas aliquam, adipisci blanditiis
-          dolorem aperiam laudantium sint dolorum asperiores porro esse modi
-          debitis, obcaecati odit, enim laboriosam. Exercitationem voluptatem
-          rerum, quam, sint ab maxime eos cupiditate non dolores perferendis
-          excepturi atque maiores.
-        </p>
-        {getQtyOfSameItemInCart(cartItems, work) >= work.inventory ? (
-          <p>Quantité maximale atteinte</p>
-        ) : (
-          <div className={btns}>
-            <Quantity context="slug" work={work} />
-            <button
-              onClick={handleBuyNow}
-              disabled={
-                getQtyOfSameItemInCart(cartItems, work) + qty > work.inventory
-              }
-            >
-              Ajouter au panier
-            </button>
-          </div>
-        )}
+
+      <div className={container}>
+        <div className={imgContainer}>
+          <Image
+            alt="test"
+            fill={true}
+            objectFit="cover"
+            src={work.imgURL[0]}
+          />
+        </div>
+        <div className={detailsContainer}>
+          <h2>{work.title}</h2>
+          <h3>{work.priceTTC}€</h3>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni
+            dignissimos delectus, omnis velit expedita laborum eaque neque
+            quaerat deleniti vero consectetur deserunt tempora corrupti dolorem
+            cumque maxime voluptate dolores et quo quasi ullam labore adipisci!
+            Quidem quo incidunt tempora optio obcaecati nemo, fugit cumque amet
+            quasi aperiam molestiae sint accusantium modi atque rerum quod?
+            Corporis minus aperiam amet eligendi aliquam quae rem cum! Non
+            inventore harum earum architecto iusto quasi, culpa eum magni nisi
+            eos reiciendis, perspiciatis officiis, voluptate sequi ut. Dolore
+            reprehenderit sed praesentium illo delectus qui voluptas aliquam,
+            adipisci blanditiis dolorem aperiam laudantium sint dolorum
+            asperiores porro esse modi debitis, obcaecati odit, enim laboriosam.
+            Exercitationem voluptatem rerum, quam, sint ab maxime eos cupiditate
+            non dolores perferendis excepturi atque maiores.
+          </p>
+          {getQtyOfSameItemInCart(cartItems, work) >= work.inventory ? (
+            <p>Quantité maximale atteinte</p>
+          ) : (
+            <div className={btns}>
+              <Quantity context="slug" work={work} />
+              <button
+                onClick={handleBuyNow}
+                disabled={
+                  getQtyOfSameItemInCart(cartItems, work) + qty > work.inventory
+                }
+              >
+                Ajouter au panier
+              </button>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
