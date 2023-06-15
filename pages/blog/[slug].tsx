@@ -7,6 +7,10 @@ import H2 from "@/components/blog/mdx/H2";
 import H3 from "@/components/blog/mdx/H3";
 import HeroImage from "@/components/blog/mdx/HeroImage";
 import P from "@/components/blog/mdx/P";
+import ArrowBack from "@/components/ArrowBack";
+import style from "../../styles/PostPage.module.css";
+
+const { arrowBackContainer } = style;
 
 export default function PostPage({
   source,
@@ -26,6 +30,9 @@ export default function PostPage({
           HeroImage,
         }}
       />
+      <div className={arrowBackContainer}>
+        <ArrowBack />
+      </div>
     </div>
   );
 }
