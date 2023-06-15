@@ -65,6 +65,24 @@ a {
   color: var(--mainText);
 }
 
+button {
+  border: none;
+  padding: 0 15px;
+  height: 50px;
+  border-radius: 4px;
+  background-color: #000;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition-duration: 0.3s;
+}
+
+button:hover {
+  background-color: var(--oldEngland);
+}
+
 /* ==== BLOG === */
 
 .mdx-h2 {
