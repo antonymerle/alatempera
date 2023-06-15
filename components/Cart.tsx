@@ -27,6 +27,7 @@ const {
   bottom,
   cartBottom,
   total,
+  payBtnContainer,
 } = styles;
 
 const Cart = () => {
@@ -112,7 +113,7 @@ const Cart = () => {
               <h3>Total:</h3>
               <h3>{fmtTotalPrice}€</h3>
             </div>
-            <div className="btn-container">
+            <div className={payBtnContainer}>
               <button type="button" onClick={handleCheckout}>
                 Payer
               </button>

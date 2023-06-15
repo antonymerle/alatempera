@@ -190,6 +190,20 @@
   font-size: 20px;
 }
 
+.payBtnContainer {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 3rem;
+  /* padding: 0 10px; */
+  color: red;
+}
+
+.payBtnContainer > button {
+  padding-left: 45px;
+  padding-right: 45px;
+}
+
 @media screen and (max-width: 768px) {
   .cartContainer {
     height: 100vh;
