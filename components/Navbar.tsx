@@ -96,8 +96,8 @@ const Navbar: React.FC = () => {
           </Link>
           <li>
             <div className={cartIcon} onClick={() => setShowCart(true)}>
-              <AiOutlineShopping size={"2em"} style={{ color: "#373737" }} />
-              <span className={qty}>{totalQuantities}</span>
+              <AiOutlineShopping size={"2em"} />
+              <span>{totalQuantities}</span>
             </div>
           </li>
         </ul>
