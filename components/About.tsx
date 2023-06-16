@@ -11,9 +11,11 @@ const About = () => {
         <Image
           className={aboutImage}
           src={"/art.jpg"}
-          // width={936}
-          // height={1436}
-          fill={true}
+          width={936}
+          height={1436}
+          // layout="fill"
+          // objectFit="cover"
+          // objectPosition="center"
           alt="art"
         />
       </div>

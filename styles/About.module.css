@@ -3,6 +3,7 @@
   height: 100%;
   display: flex;
   gap: 3rem;
+  margin-bottom: 5rem;
 }
 
 .imgContainer {
@@ -19,4 +20,26 @@
 
 .textContainer {
   width: 60%;
+}
+
+@media screen and (max-width: 640px) {
+  .aboutContainer {
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: center;
+  }
+
+  .imgContainer {
+    position: relative;
+    width: 365px;
+  }
+
+  .aboutImage {
+    width: 100%;
+    height: auto;
+  }
+
+  .textContainer {
+    width: 100%;
+  }
 }
