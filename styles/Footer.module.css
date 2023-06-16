@@ -9,3 +9,15 @@
   flex-direction: column;
   align-items: flex-end;
 }
+
+@media screen and (max-width: 640px) {
+  .footerContainer {
+    padding: 0rem 2.5rem;
+  }
+
+  .footerList {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+}
