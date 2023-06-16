@@ -19,6 +19,7 @@ const {
   menuItem,
   active,
   qty,
+  smCartIcon,
 } = style;
 
 const isLinkActive = (currentPath: string, navbarPath: string) => {
@@ -53,8 +54,7 @@ const Navbar: React.FC = () => {
         <Link href={"/"}>
           <div className={logoContainer}>
             <Image
-              width={100}
-              height={100}
+              fill={true}
               src="/logo.jpg"
               alt="logo"
               className={logo}
@@ -64,6 +64,10 @@ const Navbar: React.FC = () => {
         <Link href={"/"}>
           <h1>A la tempera</h1>
         </Link>
+        <div className={smCartIcon} onClick={() => setShowCart(true)}>
+          <AiOutlineShopping />
+          <span>{totalQuantities}</span>
+        </div>
       </div>
 
       <div className={menuSide}>
