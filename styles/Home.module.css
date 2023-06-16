@@ -69,7 +69,7 @@ Sold out overlay
   opacity: 0.2;
 }
 
-@media and and (max-width: 768px) {
+@media screen and (max-width: 768px) {
 }
 
 /* .main {
