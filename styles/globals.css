@@ -97,6 +97,7 @@ button:hover {
   font-size: 2em;
   font-weight: 500;
   color: var(--mainText);
+  margin-bottom: 10px;
 }
 
 .mdx-p {
@@ -108,7 +109,6 @@ button:hover {
 .mdx-hero-image {
   position: relative;
   width: 100%;
-  height: 600px;
   margin: 3rem 0rem;
 
   img {
@@ -116,6 +116,15 @@ button:hover {
     object-fit: cover;
     object-position: center;
   }
+}
+/* handle orientation with separate classes on top of mdx-hero-image */
+.mdx-hero-image-portrait,
+.mdx-hero-image-square {
+  height: 600px;
+}
+
+.mdx-hero-image-landscape {
+  height: 300px;
 }
 
 /* ==== BLOG === */
@@ -137,4 +146,26 @@ button:hover {
     position: absolute;
     bottom: 0;
   }
+
+  /* ==== BLOG === */
+
+  .mdx-h2 {
+    font-size: 2em;
+    font-weight: 600;
+    color: var(--mainText);
+  }
+
+  .mdx-h3 {
+    font-size: 1.5em;
+    font-weight: 500;
+    color: var(--mainText);
+  }
+
+  .mdx-p {
+    font-size: 1.2em;
+    margin-bottom: 1.5em;
+    line-height: 1.6em;
+  }
+
+  /* ==== BLOG === */
 }

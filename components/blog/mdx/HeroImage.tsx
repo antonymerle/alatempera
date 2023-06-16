@@ -1,10 +1,21 @@
 import React from "react";
 import Image from "next/image";
+import { ImageOrientation } from "@/types/types";
 
-const HeroImage = ({ src, alt }: { src: string; alt: string }) => {
+const HeroImage = ({
+  src,
+  alt,
+  orientation,
+}: {
+  src: string;
+  alt: string;
+  orientation: ImageOrientation;
+}) => {
+  console.log({ orientation });
+
   return (
-    <div className={"mdx-hero-image"}>
-      <Image src={src} alt={alt} fill></Image>
+    <div className={`mdx-hero-image mdx-hero-image-${orientation}`}>
+      <Image src={src} alt={alt} fill={true} objectFit="scale-down"></Image>
     </div>
   );
 };
