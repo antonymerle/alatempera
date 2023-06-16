@@ -40,11 +40,14 @@ const WorkDetails: React.FC<{ work: ICartItem }> = ({ work }) => {
       <div className={container}>
         <div className={imgContainer}>
           <Image
-            alt="test"
+            alt={work.title}
+            // width={965}
+            // height={950}
             fill={true}
             objectFit="cover"
             src={work.imgURL[0]}
           />
+          {/* <img src={work.imgURL[0]}></img> */}
         </div>
         <div className={detailsContainer}>
           <h2>{work.title}</h2>

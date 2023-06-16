@@ -30,6 +30,11 @@
   background-color: aquamarine;
 }
 
+.imgContainer > img {
+  position: absolute;
+  object-fit: scale-down;
+}
+
 .detailsContainer {
   width: 50%;
   display: flex;
@@ -58,4 +63,56 @@
 
 .arrowBackContainer {
   padding-left: 2rem;
+}
+
+@media screen and (max-width: 640px) {
+  .container {
+    flex-direction: column;
+    gap: 0;
+    padding: 0;
+  }
+  .imgContainer {
+    width: 100%;
+    height: 420px;
+    /* height: 600px; */
+    display: block;
+    position: relative;
+    margin: 1rem 0rem;
+  }
+
+  .imgContainer > img {
+    /* object-fit: cover; Maintain aspect ratio and fill the container */
+    aspect-ratio: auto;
+    /* object-fit: scale-down; */
+  }
+  .detailsContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    /* flex-direction: column-reverse; */
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 0;
+  }
+
+  .detailsContainer :nth-child(1) {
+    order: 1;
+  }
+
+  .detailsContainer :nth-child(2) {
+    order: 2;
+  }
+
+  .detailsContainer :nth-child(3) {
+    order: 4;
+    margin: 2rem 0rem;
+  }
+
+  .detailsContainer :nth-child(4) {
+    order: 3;
+  }
+
+  .btns {
+    height: 77px;
+  }
 }
