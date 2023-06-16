@@ -118,3 +118,12 @@ button:hover {
 }
 
 /* ==== BLOG === */
+
+@media screen and (max-width: 640px) {
+  h1 {
+    font-size: 1.2em;
+    color: var(--oldEngland);
+    font-weight: 300;
+    letter-spacing: 0.2rem;
+  }
+}

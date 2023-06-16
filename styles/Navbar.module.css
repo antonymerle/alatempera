@@ -10,10 +10,13 @@
 }
 
 .logoContainer {
+  width: 100px;
+  height: 100px;
   color: var(--mainText);
   font-size: 18px;
   font-weight: 600;
   padding-right: 2em;
+  position: relative;
 }
 .logo {
   border-radius: 50%;
@@ -23,8 +26,13 @@
   height: 100%;
   width: 40%;
   display: flex;
-  align-items: center;
   justify-content: flex-start;
+  gap: 1rem;
+  align-items: center;
+}
+
+.smCartIcon {
+  display: none;
 }
 
 .menuSide {
@@ -71,9 +79,6 @@
 .cartIcon {
   cursor: pointer;
   position: relative;
-  transition: transform 0.4s ease;
-  border: none;
-  background-color: transparent;
 }
 .cartIcon:hover {
   color: var(--mainText);
@@ -96,4 +101,55 @@
   border-radius: 50%;
   text-align: center;
   font-weight: 600;
+}
+
+@media screen and (max-width: 640px) {
+  .navbarContainer {
+    flex-wrap: wrap;
+    height: 110px;
+  }
+  .logoContainer {
+    height: 50px;
+    width: 50px;
+    position: relative;
+  }
+
+  .smCartIcon {
+    display: block;
+    cursor: pointer;
+    position: relative;
+    top: 0.2em;
+  }
+
+  .smCartIcon span {
+    position: absolute;
+    font-size: 0.9em;
+    font-weight: 500;
+    color: var(--mainText);
+  }
+
+  .logoSide {
+    width: 100%;
+    height: 50%;
+    justify-content: space-between;
+    padding-right: 2rem;
+
+    /* justify-content: space-between; */
+  }
+
+  .menuSide {
+    height: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .menu {
+    /* display: none; */
+    font-size: 0.8em;
+  }
+
+  .menu > li:last-child {
+    display: none;
+  }
 }
