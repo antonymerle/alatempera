@@ -1,4 +1,5 @@
 import mongoose, { Schema, model } from "mongoose";
+import { ImageOrientation } from "@/types/types";
 
 type Type = "original" | "print";
 
@@ -12,6 +13,7 @@ export interface IWork {
   imgURL: string[];
   isSoldOut: boolean;
   type: Type;
+  format: ImageOrientation;
 }
 
 const workSchema = new Schema<IWork>({
@@ -23,6 +25,7 @@ const workSchema = new Schema<IWork>({
   imgURL: { type: [String], required: true },
   isSoldOut: { type: Boolean, required: true },
   type: { type: String, required: true },
+  format: { type: String, required: false },
 });
 
 const Work = mongoose.models.Work || model<IWork>("Work", workSchema);
