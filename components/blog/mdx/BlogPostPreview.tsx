@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { PostPreview } from "@/types/posts";
+import { PostPreview } from "@/types/types";
 import style from "../../../styles/BlogPostPreview.module.css";
 
 const { postContainer, postContents, postTitle, postDescription, postImage } =
