@@ -16,21 +16,21 @@
 .opus {
   width: 30%;
   min-width: 360px;
-  height: 420px;
-  background-color: var(--orage);
+  height: 480px;
+  background-color: white;
 }
 
 .imgContainer {
   position: relative;
   width: 100%;
-  height: 340px;
-  background-color: aquamarine;
+  height: 400px;
+  background-color: white;
 }
 
 .opusDescription {
   display: flex;
   /* height: 100%; */
-  height: calc(100% - 340px);
+  height: calc(100% - 400px);
   /* padding-top: 10px; */
   flex-direction: column;
   align-items: center;
