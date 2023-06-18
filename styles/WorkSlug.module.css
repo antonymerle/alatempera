@@ -23,25 +23,38 @@
 } */
 
 .imgContainer {
-  width: 50%;
   height: 600px;
   display: block;
   position: relative;
   background-color: aquamarine;
 }
 
+.landscapeImgContainer {
+  width: 62%;
+}
+
 .imgContainer > img {
   position: absolute;
+  top: 0px;
+  left: 0px;
   object-fit: scale-down;
 }
 
 .detailsContainer {
-  width: 50%;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
   padding: 0rem 0rem 0rem 1rem;
+}
+
+.landscapeDetailsContainer {
+  width: 38%;
+}
+
+/* for images format that are square or portrait */
+.classicContainer {
+  width: 50%;
 }
 
 .detailsContainer > h2,
@@ -73,11 +86,18 @@
   }
   .imgContainer {
     width: 100%;
-    height: 420px;
     /* height: 600px; */
     display: block;
     position: relative;
     margin: 1rem 0rem;
+  }
+
+  .landscapeImgContainer {
+    height: 320px;
+  }
+
+  .classicContainer {
+    height: 420px;
   }
 
   .imgContainer > img {
