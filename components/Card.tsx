@@ -15,7 +15,7 @@ export const Card: React.FC<ICartItem> = ({
   return (
     <div className={opus}>
       <div className={`${imgContainer} ${inventory > 0 ? null : soldOut}`}>
-        <Image alt={title} fill={true} objectFit="cover" src={imgURL[0]} />
+        <Image alt={title} fill={true} objectFit="scale-down" src={imgURL[0]} />
       </div>
       <div className={opusDescription}>
         <p>{title}</p>
