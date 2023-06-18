@@ -3,7 +3,7 @@ import { InferGetStaticPropsType } from "next";
 import fs from "fs";
 import { serialize } from "next-mdx-remote/serialize";
 import path from "path";
-import { PostPreview } from "@/types/posts";
+import { PostPreview } from "@/types/types";
 import style from "../styles/blog.module.css";
 import BlogPostPreview from "@/components/blog/mdx/BlogPostPreview";
 
