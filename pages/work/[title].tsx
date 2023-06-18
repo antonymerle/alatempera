@@ -16,6 +16,9 @@ const {
   btns,
   navContainer,
   arrowBackContainer,
+  landscapeImgContainer,
+  landscapeDetailsContainer,
+  classicContainer,
 } = style;
 
 const WorkDetails: React.FC<{ work: ICartItem }> = ({ work }) => {
@@ -38,18 +41,30 @@ const WorkDetails: React.FC<{ work: ICartItem }> = ({ work }) => {
       </div>
 
       <div className={container}>
-        <div className={imgContainer}>
+        <div
+          className={`${imgContainer} ${
+            work.format === "landscape"
+              ? landscapeImgContainer
+              : classicContainer
+          }`}
+        >
           <Image
             alt={work.title}
             // width={965}
             // height={950}
             fill={true}
-            objectFit="cover"
+            objectFit="scale-down"
             src={work.imgURL[0]}
           />
           {/* <img src={work.imgURL[0]}></img> */}
         </div>
-        <div className={detailsContainer}>
+        <div
+          className={`${detailsContainer} ${
+            work.format === "landscape"
+              ? landscapeDetailsContainer
+              : classicContainer
+          }`}
+        >
           <h2>{work.title}</h2>
           <h3>{work.priceTTC}€</h3>
           <p>
