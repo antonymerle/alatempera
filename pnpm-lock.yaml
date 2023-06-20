@@ -1,4 +1,4 @@
-lockfileVersion: '6.1'
+lockfileVersion: '6.0'
 
 settings:
   autoInstallPeers: true
@@ -32,6 +32,12 @@ dependencies:
   next-mdx-remote:
     specifier: ^4.4.1
     version: 4.4.1(react-dom@18.2.0)(react@18.2.0)
+  next-translate:
+    specifier: ^2.3.1
+    version: 2.3.1(next@13.4.3)(react@18.2.0)
+  next-translate-plugin:
+    specifier: ^2.3.0
+    version: 2.3.0(next-translate@2.3.1)
   react:
     specifier: 18.2.0
     version: 18.2.0
@@ -2443,6 +2449,28 @@ packages:
       - supports-color
     dev: false
 
+  /next-translate-plugin@2.3.0(next-translate@2.3.1):
+    resolution: {integrity: sha512-U4nWdWvYZuPDw/eBTXpg7i69pdbnQPcTa1WTJItIjB8VkkD/wET/Smy8OucU85Xlfk+rOZU1HVCOTSUrSMSYxQ==}
+    engines: {node: '>=14.15.0'}
+    requiresBuild: true
+    peerDependencies:
+      next-translate: '>= 2.3.0'
+    dependencies:
+      next-translate: 2.3.1(next@13.4.3)(react@18.2.0)
+      typescript: 4.5.2
+    dev: false
+
+  /next-translate@2.3.1(next@13.4.3)(react@18.2.0):
+    resolution: {integrity: sha512-aD6ayxPStDP7xuwderNWY4JKFGfi5bIFY3eyvAoVIzFIqOHzt27afFjaRLjzbsjOW6xPVqnNx/H8puO/MuYZOw==}
+    engines: {node: '>=16.10.0'}
+    peerDependencies:
+      next: '>= 13.2.5'
+      react: '>= 18.0.0'
+    dependencies:
+      next: 13.4.3(react-dom@18.2.0)(react@18.2.0)
+      react: 18.2.0
+    dev: false
+
   /next@13.4.3(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-FV3pBrAAnAIfOclTvncw9dDohyeuEEXPe5KNcva91anT/rdycWbgtu3IjUj4n5yHnWK8YEPo0vrUecHmnmUNbA==}
     engines: {node: '>=16.8.0'}
@@ -3195,6 +3223,12 @@ packages:
       call-bind: 1.0.2
       for-each: 0.3.3
       is-typed-array: 1.1.10
+    dev: false
+
+  /typescript@4.5.2:
+    resolution: {integrity: sha512-5BlMof9H1yGt0P8/WF+wPNw6GfctgGjXp5hkblpyT+8rkASSmkUKMXrxR0Xg8ThVCi/JnHQiKXeBaEwCeQwMFw==}
+    engines: {node: '>=4.2.0'}
+    hasBin: true
     dev: false
 
   /typescript@5.0.4:
