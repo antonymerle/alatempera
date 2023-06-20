@@ -1,4 +1,6 @@
 /** @type {import('next').NextConfig} */
+const nextTranslate = require("next-translate-plugin");
+
 const nextConfig = {
   reactStrictMode: true,
   images: {
@@ -15,8 +17,6 @@ const nextConfig = {
   },
 };
 
-module.exports = nextConfig;
-
-const nextTranslate = require("next-translate-plugin");
-
-module.exports = nextTranslate();
+// pass custom config to nextTranslate in order to keep it while using nextTranslate
+// module.exports = nextConfig;
+module.exports = nextTranslate(nextConfig);
