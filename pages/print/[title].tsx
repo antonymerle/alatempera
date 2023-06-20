@@ -8,6 +8,7 @@ import style from "../../styles/WorkSlug.module.css";
 import Quantity from "@/components/Quantity";
 import ArrowBack from "@/components/ArrowBack";
 import { getQtyOfSameItemInCart } from "../../components/Quantity";
+import useTranslation from "next-translate/useTranslation";
 
 const {
   container,
@@ -24,6 +25,7 @@ const {
 const PrintDetails: React.FC<{ print: ICartItem }> = ({ print }) => {
   console.log({ print });
   const { onAdd, qty, setQty, setShowCart, cartItems } = useStateContext();
+  const { t, lang } = useTranslation("work");
 
   const handleBuyNow = () => {
     console.log({ qty });
@@ -62,7 +64,7 @@ const PrintDetails: React.FC<{ print: ICartItem }> = ({ print }) => {
           }`}
         >
           <h2>{print.title}</h2>
-          <h3>{print.priceTTC}€</h3>
+          <h3>{print.priceTTC.toFixed(2)}€</h3>
           <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni
             dignissimos delectus, omnis velit expedita laborum eaque neque
@@ -80,7 +82,7 @@ const PrintDetails: React.FC<{ print: ICartItem }> = ({ print }) => {
             non dolores perferendis excepturi atque maiores.
           </p>
           {getQtyOfSameItemInCart(cartItems, print) >= print.inventory ? (
-            <p>Quantité maximale atteinte</p>
+            <p>{t("soldOut")}</p>
           ) : (
             <div className={btns}>
               <Quantity context="slug" work={print} />
@@ -91,7 +93,7 @@ const PrintDetails: React.FC<{ print: ICartItem }> = ({ print }) => {
                   print.inventory
                 }
               >
-                Ajouter au panier
+                {t("addToCart")}
               </button>
             </div>
           )}

@@ -69,7 +69,7 @@ const WorkDetails: React.FC<{ work: ICartItem }> = ({ work }) => {
           }`}
         >
           <h2>{work.title}</h2>
-          <h3>{work.priceTTC}€</h3>
+          <h3>{work.priceTTC.toFixed(2)}€</h3>
           <p>{lang === "en" ? work.description_en : work.description_fr}</p>
           {getQtyOfSameItemInCart(cartItems, work) >= work.inventory ? (
             <p>{t("soldOut")}</p>
