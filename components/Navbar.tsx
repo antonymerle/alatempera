@@ -5,6 +5,7 @@ import Cart from "./Cart";
 import style from "../styles/Navbar.module.css";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import useTranslation from "next-translate/useTranslation";
 
 const {
   navbarContainer,
@@ -46,6 +47,7 @@ const isLinkActive = (currentPath: string, navbarPath: string) => {
 
 const Navbar: React.FC = () => {
   const { pathname: currentPathname } = useRouter();
+  const { t } = useTranslation("navbar");
 
   const { showCart, setShowCart, totalQuantities } = useStateContext();
   return (
@@ -74,28 +76,28 @@ const Navbar: React.FC = () => {
         <ul className={menu}>
           <Link href={"/"}>
             <li className={isLinkActive(currentPathname, "/") ? active : ""}>
-              Originaux
+              {t("originals")}
             </li>
           </Link>
           <Link href={"/prints"}>
             <li
               className={isLinkActive(currentPathname, "/print") ? active : ""}
             >
-              Impressions
+              {t("prints")}
             </li>
           </Link>
           <Link href={"/blog"}>
             <li
               className={isLinkActive(currentPathname, "/blog") ? active : ""}
             >
-              Carnet
+              {t("blog")}
             </li>
           </Link>
           <Link href={"/about"}>
             <li
               className={isLinkActive(currentPathname, "/about") ? active : ""}
             >
-              A propos
+              {t("about")}
             </li>
           </Link>
           <li>
