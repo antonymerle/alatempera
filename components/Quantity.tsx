@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 import { ICartItem, useStateContext } from "@/context/StateContext";
 import { toast } from "react-hot-toast";
+import useTranslation from "next-translate/useTranslation";
 import styles from "../styles/Cart.module.css";
 
 const { quantityDesc, minus, num, plus, disabled } = styles;
@@ -34,6 +35,8 @@ export const getQtyOfSameItemInCart = (
 const Quantity: React.FC<IQuantityProps> = ({ context, work }) => {
   const { qty, setQty, decQty, incQty, toggleCartItemQuantity, cartItems } =
     useStateContext();
+  const { t } = useTranslation("work");
+
   // const [numberOfSameItemAlreadyInCart, setNumberOfSameItemAlreadyInCart] =
   //   useState(getQtyOfSameItemInCart(cartItems, work));
 
@@ -49,7 +52,7 @@ const Quantity: React.FC<IQuantityProps> = ({ context, work }) => {
     );
     if (context === "cart") {
       work.cartQty >= work.inventory
-        ? toast.error("Quantité maximale atteinte !")
+        ? toast.error(t("soldOut"))
         : toggleCartItemQuantity(work._id, "inc");
     } else if (context === "slug") {
       qty + numberOfSameItemAlreadyInCart >= work.inventory
