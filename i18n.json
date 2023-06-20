@@ -1,0 +1,10 @@
+{
+  "locales": ["en", "fr"],
+  "defaultLocale": "en",
+  "pages": {
+    "*": ["home"],
+    "/": ["home", "navbar", "footer"],
+    "/about": ["about"],
+    "/work/[title]": ["work"]
+  }
+}
