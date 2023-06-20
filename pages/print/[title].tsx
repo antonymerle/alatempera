@@ -65,22 +65,7 @@ const PrintDetails: React.FC<{ print: ICartItem }> = ({ print }) => {
         >
           <h2>{print.title}</h2>
           <h3>{print.priceTTC.toFixed(2)}€</h3>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni
-            dignissimos delectus, omnis velit expedita laborum eaque neque
-            quaerat deleniti vero consectetur deserunt tempora corrupti dolorem
-            cumque maxime voluptate dolores et quo quasi ullam labore adipisci!
-            Quidem quo incidunt tempora optio obcaecati nemo, fugit cumque amet
-            quasi aperiam molestiae sint accusantium modi atque rerum quod?
-            Corporis minus aperiam amet eligendi aliquam quae rem cum! Non
-            inventore harum earum architecto iusto quasi, culpa eum magni nisi
-            eos reiciendis, perspiciatis officiis, voluptate sequi ut. Dolore
-            reprehenderit sed praesentium illo delectus qui voluptas aliquam,
-            adipisci blanditiis dolorem aperiam laudantium sint dolorum
-            asperiores porro esse modi debitis, obcaecati odit, enim laboriosam.
-            Exercitationem voluptatem rerum, quam, sint ab maxime eos cupiditate
-            non dolores perferendis excepturi atque maiores.
-          </p>
+          <p>{lang === "en" ? print.description_en : print.description_fr}</p>
           {getQtyOfSameItemInCart(cartItems, print) >= print.inventory ? (
             <p>{t("soldOut")}</p>
           ) : (
