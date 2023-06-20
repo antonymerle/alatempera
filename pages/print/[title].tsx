@@ -16,6 +16,9 @@ const {
   btns,
   navContainer,
   arrowBackContainer,
+  landscapeImgContainer,
+  landscapeDetailsContainer,
+  classicContainer,
 } = style;
 
 const PrintDetails: React.FC<{ print: ICartItem }> = ({ print }) => {
@@ -36,17 +39,28 @@ const PrintDetails: React.FC<{ print: ICartItem }> = ({ print }) => {
       <div className={arrowBackContainer}>
         <ArrowBack />
       </div>
-
       <div className={container}>
-        <div className={imgContainer}>
+        <div
+          className={`${imgContainer} ${
+            print.format === "landscape"
+              ? landscapeImgContainer
+              : classicContainer
+          }`}
+        >
           <Image
             alt="test"
             fill={true}
-            objectFit="cover"
+            objectFit="scale-down"
             src={print.imgURL[0]}
           />
         </div>
-        <div className={detailsContainer}>
+        <div
+          className={`${detailsContainer} ${
+            print.format === "landscape"
+              ? landscapeDetailsContainer
+              : classicContainer
+          }`}
+        >
           <h2>{print.title}</h2>
           <h3>{print.priceTTC}€</h3>
           <p>
