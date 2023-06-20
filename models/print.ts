@@ -3,7 +3,8 @@ import { IWork } from "./works";
 
 const printSchema = new Schema<IWork>({
   title: { type: String, required: true },
-  description: { type: String, required: true },
+  description_fr: { type: String, required: false },
+  description_en: { type: String, required: false },
   priceHT: { type: Number, required: true },
   priceTTC: { type: Number, required: true },
   inventory: { type: Number, required: true },
