@@ -6,6 +6,7 @@
     "/": ["home", "navbar", "footer"],
     "/about": ["about"],
     "/work/[title]": ["work", "navigation"],
-    "/print/[title]": ["work", "navigation"]
+    "/print/[title]": ["work", "navigation"],
+    "/blog/[slug]": ["navigation"]
   }
 }
