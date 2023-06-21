@@ -9,7 +9,7 @@ import Link from "next/link";
 import getStripe from "@/utils/getStripe";
 import styles from "../styles/Cart.module.css";
 import Quantity from "./Quantity";
-import { log } from "console";
+import useTranslation from "next-translate/useTranslation";
 
 const {
   cartWrapper,
@@ -34,6 +34,7 @@ const Cart = () => {
   const cartRef = useRef();
   const { setShowCart, cartItems, totalPrice, totalQuantities, onRemove } =
     useStateContext();
+  const { t } = useTranslation("cart");
 
   const fmtTotalPrice = totalPrice.toFixed(2);
 
@@ -65,18 +66,19 @@ const Cart = () => {
       <div className={cartContainer}>
         <div className={cartHeading} onClick={() => setShowCart(false)}>
           <AiOutlineLeft />
-          <span>Votre panier</span>
+          <span>{t("yourCart")}</span>
           <div className={cartNumItems}>
-            ({totalQuantities} {totalQuantities > 1 ? "articles" : "article"})
+            ({totalQuantities}{" "}
+            {totalQuantities > 1 ? t("itemsInCart") + "s" : t("itemsInCart")})
           </div>
         </div>
         {cartItems.length < 1 && (
           <div className={emptyCart}>
             <AiOutlineShopping size={150} />
-            <h3>Votre panier est vide !</h3>
+            <h3>{t("emptyCart")}</h3>
             <Link href="/">
               <button className="btn" onClick={() => setShowCart(false)}>
-                Poursuivre mes achats
+                {t("continueShopping")}
               </button>
             </Link>
           </div>
@@ -115,7 +117,7 @@ const Cart = () => {
             </div>
             <div className={payBtnContainer}>
               <button type="button" onClick={handleCheckout}>
-                Payer
+                {t("pay")}
               </button>
             </div>
           </div>
