@@ -10,9 +10,9 @@ const About = () => {
 
   const markup = t("mainContent")
     .split("\n")
-    .map((p) => {
+    .map((p, i) => {
       return (
-        <div>
+        <div key={i}>
           <p>
             {p}
             <br></br>
