@@ -22,6 +22,10 @@
   width: 60%;
 }
 
+.textContainer > h2 {
+  margin-bottom: 1rem;
+}
+
 @media screen and (max-width: 640px) {
   .aboutContainer {
     flex-wrap: wrap;
