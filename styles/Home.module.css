@@ -13,8 +13,8 @@
 }
 
 .opus {
-  width: 30%;
-  min-width: 360px;
+  /* width: 33%; */
+  min-width: 394px;
   height: 480px;
   background-color: white;
 }
@@ -68,7 +68,10 @@ Sold out overlay
   opacity: 0.2;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 640px) {
+  .opus {
+    min-width: 360px;
+  }
 }
 
 /* .main {
