@@ -9,7 +9,7 @@ import { ICartItem } from "@/context/StateContext";
 import Cards from "@/components/Cards";
 import styles from "@/styles/Home.module.css";
 
-const { main, gallery } = styles;
+const { galleryContainer, gallery } = styles;
 
 export const Home: React.FC<{ works: ICartItem[] }> = ({ works }) => {
   // const tiles: Array<JSX.Element> = works.map((work, i) => {
@@ -28,9 +28,9 @@ export const Home: React.FC<{ works: ICartItem[] }> = ({ works }) => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      {/* <main className={main}> */}
-      <Cards products={works} />
-      {/* </main> */}
+      <div className={galleryContainer}>
+        <Cards products={works} />
+      </div>
     </>
   );
 };
