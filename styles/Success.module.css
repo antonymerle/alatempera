@@ -4,19 +4,16 @@
   align-items: center;
   justify-content: flex-start;
   width: 100%;
-  background-color: var(--bleuClair);
   padding-top: 6rem;
 }
 
 .icon {
-  color: var(--mainColor);
   padding-bottom: 2rem;
   font-size: 12rem;
 }
 
-.emailMsg {
-  /* font-size: 1.3rem;
-  font-weight: 600; */
+.email {
+  font-weight: 600;
 }
 
 .description {

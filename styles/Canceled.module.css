@@ -4,32 +4,29 @@
   align-items: center;
   justify-content: flex-start;
   width: 100%;
-  background-color: var(--bleuClair);
   padding-top: 6rem;
 }
 
 .icon {
-  color: #777;
   padding-bottom: 2rem;
   font-size: 12rem;
 }
 
-.emailMsg {
-  font-size: 1.3rem;
+.email {
   font-weight: 600;
 }
 
 .description {
-  font-size: 1.3rem;
-  font-weight: 600;
+  /* font-size: 1.3rem;
+  font-weight: 600; */
   margin: 0.5rem;
-  margin-top: 2rem;
+  margin-bottom: 2rem;
 }
 
 .cancel h2 {
   padding-top: 2rem;
   font-weight: 900;
-  font-size: 3rem;
+  font-size: 2rem;
   color: var(--mainText);
   padding: 1rem;
 }
