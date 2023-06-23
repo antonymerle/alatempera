@@ -1,12 +1,12 @@
 import Link from "next/link";
 import { MdRemoveShoppingCart } from "react-icons/md";
-import styles from "../styles/Canceled.module.css";
+import styles from "../styles/Success.module.css";
 
-const { cancelWrapper, cancel, icon, emailMsg, email, description } = styles;
+const { container, icon, emailMsg, email, description } = styles;
 
 const Canceled = () => {
   return (
-    <div className={cancel}>
+    <div className={container}>
       <MdRemoveShoppingCart className={icon} color="#785e21" />
 
       <h2>La commande a échoué...</h2>
