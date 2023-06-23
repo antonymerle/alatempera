@@ -7,7 +7,7 @@ import style from "../styles/Success.module.css";
 import { useSearchParams } from "next/navigation";
 import useTranslation from "next-translate/useTranslation";
 
-const { successWrapper, success, icon, emailMsg, description, email } = style;
+const { container, icon, emailMsg, description, email } = style;
 
 const Success = () => {
   const { setCartItems, setTotalPrice, setTotalQuantities } = useStateContext();
@@ -30,26 +30,22 @@ const Success = () => {
     }
   }, [successCallback]);
 
-  return success ? (
-    <div className={successWrapper}>
-      <div className={success}>
-        <BsBagCheckFill className={icon} color="#785e21" />
+  return (
+    <div className={container}>
+      <BsBagCheckFill className={icon} color="#785e21" />
 
-        <h2>{t("title")}</h2>
-        <p className={emailMsg}>{t("confirmationEmail")}</p>
-        <p className={description}>
-          {t("question")}{" "}
-          <a href={`mailto:${process.env.CONTACT_EMAIL}`} className={email}>
-            {process.env.CONTACT_EMAIL}
-          </a>
-        </p>
-        <Link href="/">
-          <button type="button">{t("btn")}</button>
-        </Link>
-      </div>
+      <h2>{t("title")}</h2>
+      <p className={emailMsg}>{t("confirmationEmail")}</p>
+      <p className={description}>
+        {t("question")}{" "}
+        <a href={`mailto:${process.env.CONTACT_EMAIL}`} className={email}>
+          {process.env.CONTACT_EMAIL}
+        </a>
+      </p>
+      <Link href="/">
+        <button type="button">{t("btn")}</button>
+      </Link>
     </div>
-  ) : (
-    <p>{t("nothing")}</p>
   );
 };
 
