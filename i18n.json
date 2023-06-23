@@ -7,6 +7,8 @@
     "/about": ["about"],
     "/work/[title]": ["work", "navigation"],
     "/print/[title]": ["work", "navigation"],
-    "/blog/[slug]": ["navigation"]
+    "/blog/[slug]": ["navigation"],
+    "/success": ["success"],
+    "/canceled": ["canceled"]
   }
 }
