@@ -5,11 +5,13 @@ import { useStateContext } from "@/context/StateContext";
 import { runFireworks } from "@/utils/lib";
 import style from "../styles/Success.module.css";
 import { useSearchParams } from "next/navigation";
+import useTranslation from "next-translate/useTranslation";
 
 const { successWrapper, success, icon, emailMsg, description, email } = style;
 
 const Success = () => {
   const { setCartItems, setTotalPrice, setTotalQuantities } = useStateContext();
+  const { t } = useTranslation("success");
   const searchParams = useSearchParams();
 
   const successCallback = searchParams.get("success");
@@ -31,23 +33,23 @@ const Success = () => {
   return success ? (
     <div className={successWrapper}>
       <div className={success}>
-        <BsBagCheckFill className={icon} />
+        <BsBagCheckFill className={icon} color="#785e21" />
 
-        <h2>Merci pour votre commande !</h2>
-        <p className={emailMsg}>Un email de confirmation vous a été expédié.</p>
+        <h2>{t("title")}</h2>
+        <p className={emailMsg}>{t("confirmationEmail")}</p>
         <p className={description}>
-          Pour toute question, n'hésitez pas à nous écrire à cette adresse :{" "}
-          <a href={`mailto:${process.env.CONTACT_ORDERS}`} className={email}>
-            {process.env.CONTACT_ORDERS}
+          {t("question")}{" "}
+          <a href={`mailto:${process.env.CONTACT_EMAIL}`} className={email}>
+            {process.env.CONTACT_EMAIL}
           </a>
         </p>
         <Link href="/">
-          <button type="button">Continuer mes achats</button>
+          <button type="button">{t("btn")}</button>
         </Link>
       </div>
     </div>
   ) : (
-    <p>Il n'y a rien à voir ici.</p>
+    <p>{t("nothing")}</p>
   );
 };
 
