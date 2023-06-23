@@ -7,7 +7,7 @@ const { cancelWrapper, cancel, icon, emailMsg, email, description } = styles;
 const Canceled = () => {
   return (
     <div className={cancel}>
-      <MdRemoveShoppingCart className={icon} />
+      <MdRemoveShoppingCart className={icon} color="#785e21" />
 
       <h2>La commande a échoué...</h2>
       <p className={emailMsg}>
