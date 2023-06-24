@@ -71,7 +71,7 @@ export default async function handler(
         shipping_options,
         line_items,
         metadata: { commandDetails: JSON.stringify(commandDetails) },
-        success_url: `${req.headers.origin}/success?session_id={CHECKOUT_SESSION_ID}`,
+        success_url: `${req.headers.origin}/success?session_id={CHECKOUT_SESSION_ID}`, // CHECKOUT_SESSION_ID to get customer details https://stripe.com/docs/payments/checkout/custom-success-page
         cancel_url: `${req.headers.origin}/?canceled=true`,
       };
 
