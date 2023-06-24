@@ -7,7 +7,7 @@ import style from "../styles/Success.module.css";
 import { useSearchParams } from "next/navigation";
 import useTranslation from "next-translate/useTranslation";
 import { useRouter } from "next/router";
-import { CustomerDetails } from "@/types/types";
+import { SessionDetails } from "@/types/types";
 
 const { container, icon, emailMsg, description, email } = style;
 
@@ -17,7 +17,10 @@ const getPreviousPageUrl = () => {
   return previousPageUrl;
 };
 
-const Success: React.FC<CustomerDetails> = ({ customerFirstName }) => {
+const Success: React.FC<SessionDetails> = ({
+  sessionStatus,
+  customerFirstName,
+}) => {
   console.log({ customerFirstName });
   const { setCartItems, setTotalPrice, setTotalQuantities } = useStateContext();
   const { t } = useTranslation("success");
@@ -29,7 +32,7 @@ const Success: React.FC<CustomerDetails> = ({ customerFirstName }) => {
   console.log(successCallback);
 
   useEffect(() => {
-    if (successCallback) {
+    if (sessionStatus === "complete") {
       console.log("useeffect");
       // updateInventory
       localStorage.clear();
@@ -38,9 +41,9 @@ const Success: React.FC<CustomerDetails> = ({ customerFirstName }) => {
       setTotalQuantities(0);
       runFireworks();
     }
-  }, [successCallback]);
+  }, []);
 
-  return (
+  const successMarkup = (
     <div className={container}>
       <BsBagCheckFill className={icon} color="#785e21" />
 
@@ -59,6 +62,12 @@ const Success: React.FC<CustomerDetails> = ({ customerFirstName }) => {
       </Link>
     </div>
   );
+
+  const nothingMarkup = <p>{t("nothing")}</p>;
+
+  const markup = sessionStatus === "complete" ? successMarkup : nothingMarkup;
+
+  return markup;
 };
 
 export default Success;
