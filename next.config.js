@@ -13,6 +13,10 @@ const nextConfig = {
     STRIPE_WEBHOOK_SECRET: process.env.STRIPE_WEBHOOK_SECRET_TEST,
     STRIPE_FREE_SHIPPING: process.env.STRIPE_FREE_SHIPPING_TEST,
     DOMAIN_NAME: process.env.DOMAIN_NAME,
+    BASE_DOMAIN_URL:
+      process.env.NODE_ENV === "production"
+        ? process.env.DOMAIN_NAME
+        : "http://localhost:3000",
     CONTACT_EMAIL: process.env.CONTACT_EMAIL,
   },
 };
