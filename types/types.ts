@@ -6,3 +6,7 @@ export type PostPreview = {
 };
 
 export type ImageOrientation = "portrait" | "landscape" | "square";
+
+export type CustomerDetails = {
+  customerFirstName: string;
+};
