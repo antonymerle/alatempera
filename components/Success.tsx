@@ -6,13 +6,23 @@ import { runFireworks } from "@/utils/lib";
 import style from "../styles/Success.module.css";
 import { useSearchParams } from "next/navigation";
 import useTranslation from "next-translate/useTranslation";
+import { useRouter } from "next/router";
+import { CustomerDetails } from "@/types/types";
 
 const { container, icon, emailMsg, description, email } = style;
 
-const Success = () => {
+const getPreviousPageUrl = () => {
+  const { length } = window.history;
+  const previousPageUrl = length > 2 ? document.referrer : "/";
+  return previousPageUrl;
+};
+
+const Success: React.FC<CustomerDetails> = ({ customerFirstName }) => {
+  console.log({ customerFirstName });
   const { setCartItems, setTotalPrice, setTotalQuantities } = useStateContext();
   const { t } = useTranslation("success");
   const searchParams = useSearchParams();
+  const router = useRouter();
 
   const successCallback = searchParams.get("success");
 
@@ -34,7 +44,9 @@ const Success = () => {
     <div className={container}>
       <BsBagCheckFill className={icon} color="#785e21" />
 
-      <h2>{t("title")}</h2>
+      <h2>
+        {t("title")}, {customerFirstName}!
+      </h2>
       <p className={emailMsg}>{t("confirmationEmail")}</p>
       <p className={description}>
         {t("question")}{" "}
