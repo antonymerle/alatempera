@@ -9,6 +9,14 @@ export default async function handler(
   console.log(req.method);
   console.log(req.body.session_id);
 
+  if (!req.body.session_id) {
+    console.log("Bad request : session ID is missing");
+
+    return res
+      .status(400)
+      .json({ sessionStatus: null, customerFirstName: null });
+  }
+
   if (req.method === "POST") {
     console.log("method is post, proceeding");
 
@@ -18,6 +26,7 @@ export default async function handler(
       );
 
       const customerFirstName = session.customer_details.name.split(" ")[0];
+      const sessionStatus: string = session.status;
 
       console.log({ session });
       console.log({ customerFirstName });
@@ -26,7 +35,7 @@ export default async function handler(
       console.log({ session });
       // console.log({ customer });
 
-      res.status(200).json({ customerFirstName });
+      res.status(200).json({ customerFirstName, sessionStatus });
     } catch (error: any) {
       console.error(error);
       res
