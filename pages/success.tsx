@@ -1,15 +1,15 @@
 import Success from "@/components/Success";
 import { InferGetServerSidePropsType, GetServerSideProps } from "next";
-import { CustomerDetails } from "@/types/types";
+import { SessionDetails } from "@/types/types";
 
 const success = ({
-  customerDetails,
+  sessionDetails,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-  return <Success {...customerDetails} />;
+  return <Success {...sessionDetails} />;
 };
 
 export const getServerSideProps: GetServerSideProps<{
-  customerDetails: CustomerDetails;
+  sessionDetails: SessionDetails;
 }> = async (context) => {
   const stripeSessionID = context.query.session_id;
 
@@ -22,23 +22,13 @@ export const getServerSideProps: GetServerSideProps<{
     body: JSON.stringify({ session_id: stripeSessionID }),
   });
 
-  if (res.status >= 400) {
-    console.log("error, returning null");
-
-    return {
-      props: {
-        customerDetails: null, // Provide a default value for data when an error occurs
-      },
-    };
-  }
-
-  const customerDetails = await res.json();
+  const sessionDetails = await res.json();
 
   console.log("*** api_checkout response ***");
-  console.log({ customerDetails });
+  console.log({ sessionDetails });
 
   return {
-    props: { customerDetails },
+    props: { sessionDetails },
   };
 };
 
