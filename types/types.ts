@@ -7,6 +7,7 @@ export type PostPreview = {
 
 export type ImageOrientation = "portrait" | "landscape" | "square";
 
-export type CustomerDetails = {
-  customerFirstName: string;
+export type SessionDetails = {
+  sessionStatus?: string;
+  customerFirstName?: string;
 };
