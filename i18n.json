@@ -5,8 +5,8 @@
     "*": ["home", "navbar", "footer", "cart"],
     "/": ["home", "navbar", "footer"],
     "/about": ["about"],
-    "/work/[title]": ["work", "navigation"],
-    "/print/[title]": ["work", "navigation"],
+    "/work/[title]": ["work", "navigation", "context"],
+    "/print/[title]": ["work", "navigation", "context"],
     "/blog/[slug]": ["navigation"],
     "/success": ["success"],
     "/canceled": ["canceled"]
