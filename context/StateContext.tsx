@@ -9,6 +9,7 @@ import {
 import { toast } from "react-hot-toast";
 // import { computeTTC } from "@/lib/utils";
 import { IWork } from "@/models/works";
+import useTranslation from "next-translate/useTranslation";
 
 type children = any;
 
@@ -45,8 +46,18 @@ export const StateContext: React.FC<children> = ({ children }) => {
   const [totalQuantities, setTotalQuantities] = useState(0);
   const [qty, setQty] = useState(1);
 
+  const { t } = useTranslation("context");
+
   let foundProduct: ICartItem;
   let index;
+
+  const getNotificationStr = (qty: number, productTitle: string) => {
+    return `${qty} ${productTitle} ${
+      qty > 1
+        ? t("notificationAddedToCartPlural")
+        : t("notificationAddedToCart")
+    }`;
+  };
 
   const onAdd = (product: ICartItem, quantity: number) => {
     const checkProductInCart = cartItems.find(
@@ -82,7 +93,7 @@ export const StateContext: React.FC<children> = ({ children }) => {
       setCartItems(updatedCartItems);
     }
 
-    toast.success(`${qty} ${product.title} ajouté au panier.`);
+    toast.success(getNotificationStr(qty, product.title));
   };
 
   const onRemove = (product: ICartItem) => {
