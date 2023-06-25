@@ -3,5 +3,6 @@
   "itemsInCart": "item",
   "emptyCart": "Your cart is empty !",
   "continueShopping": "Continue Shopping",
-  "pay": "Pay"
+  "pay": "Pay",
+  "notificationRedirect": "Redirecting..."
 }
