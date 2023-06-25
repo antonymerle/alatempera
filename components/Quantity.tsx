@@ -52,11 +52,11 @@ const Quantity: React.FC<IQuantityProps> = ({ context, work }) => {
     );
     if (context === "cart") {
       work.cartQty >= work.inventory
-        ? toast.error(t("soldOut"))
+        ? toast.error(t("notificationSoldOut"))
         : toggleCartItemQuantity(work._id, "inc");
     } else if (context === "slug") {
       qty + numberOfSameItemAlreadyInCart >= work.inventory
-        ? toast.error("Quantité maximale atteinte !")
+        ? toast.error(t("notificationSoldOut"))
         : incQty();
     }
   };
