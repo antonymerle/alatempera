@@ -44,9 +44,8 @@ const Success: React.FC<SessionDetails> = ({
   }, []);
 
   const successMarkup = (
-    <div className={container}>
+    <>
       <BsBagCheckFill className={icon} color="#785e21" />
-
       <h2>
         {t("title")}, {customerFirstName}!
       </h2>
@@ -60,14 +59,12 @@ const Success: React.FC<SessionDetails> = ({
       <Link href="/">
         <button type="button">{t("btn")}</button>
       </Link>
-    </div>
+    </>
   );
-
   const nothingMarkup = <p>{t("nothing")}</p>;
-
   const markup = sessionStatus === "complete" ? successMarkup : nothingMarkup;
 
-  return markup;
+  return <div className={container}>{markup}</div>;
 };
 
 export default Success;
