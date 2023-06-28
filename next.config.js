@@ -4,7 +4,7 @@ const nextTranslate = require("next-translate-plugin");
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ["source.unsplash.com"],
+    domains: ["source.unsplash.com", "images.unsplash.com"],
   },
   env: {
     DB_CONNECTION_STRING: process.env.DB_CONNECTION_STRING,
