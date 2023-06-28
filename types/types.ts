@@ -11,3 +11,8 @@ export type SessionDetails = {
   sessionStatus?: string;
   customerFirstName?: string;
 };
+
+export type ISOCodes = {
+  europeNoFR: string[];
+  northAmerica: string[];
+};
