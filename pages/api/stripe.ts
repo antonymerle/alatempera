@@ -1,7 +1,17 @@
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 import type { NextApiRequest, NextApiResponse } from "next";
 import { ICartItem } from "@/context/StateContext";
-import { shipping_options } from "@/utils/getStripe";
+import {
+  fallback_shipping,
+  france_shipping,
+  europe_shipping,
+  uk_shipping,
+  north_america_shipping,
+  countryISOCodes,
+} from "@/utils/getStripe";
+import geoip from "geoip-lite";
+const requestIp = require("request-ip");
+import type { ISOCodes } from "@/types/types";
 
 export default async function handler(
   req: NextApiRequest,
@@ -62,12 +72,52 @@ export default async function handler(
 
       console.log({ commandDetails });
 
+      console.log("**** GEOLOCATION *****");
+      // geolocation to make dynamic shipping fees.
+
+      const ip = requestIp.getClientIp(req);
+      // const ip = req.headers["x-forwarded-for"] || req.socket.remoteAddress;
+      // const ipv4 = ip?.split(",").pop()?.trim(); // Extract the last IP address in the list
+      console.log(ip);
+
+      const geo = geoip.lookup(ip as string);
+
+      let shipping_options = fallback_shipping; // default
+
+      if (geo) {
+        const country = geo.country;
+        console.log("Country:", country);
+
+        if (geo.country === "FR") {
+          shipping_options = france_shipping;
+        } else if (countryISOCodes.europeNoFR.includes(geo.country)) {
+          shipping_options = europe_shipping;
+        } else if (countryISOCodes.northAmerica.includes(geo.country)) {
+          shipping_options = north_america_shipping;
+        } else if (geo.country === "GB") {
+          shipping_options = uk_shipping;
+        }
+      } else {
+        console.log(
+          "Country information not available, defaulting to fallback shipping"
+        );
+      }
+
+      const allowed_countries = [
+        "FR",
+        "GB",
+        ...countryISOCodes.europeNoFR,
+        ...countryISOCodes.northAmerica,
+      ];
+
+      console.log(allowed_countries);
+
       // Create Checkout Sessions from body params.
       const params = {
         mode: "payment",
         payment_method_types: ["card"],
         billing_address_collection: "auto",
-        shipping_address_collection: { allowed_countries: ["FR"] },
+        shipping_address_collection: { allowed_countries },
         shipping_options,
         line_items,
         metadata: { commandDetails: JSON.stringify(commandDetails) },
