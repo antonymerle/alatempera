@@ -21,7 +21,12 @@ const Footer = () => {
               <FaInstagramSquare size={30} />
             </li>
           </a>
-          <li>Contact</li>
+          <li>
+            <Link href={"/contact"}>Contact</Link>
+          </li>
+          <li>
+            <Link href={"terms"}>Conditions générales</Link>
+          </li>
         </ul>
       </div>
     </div>
