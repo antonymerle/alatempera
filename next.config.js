@@ -18,6 +18,8 @@ const nextConfig = {
         ? process.env.DOMAIN_NAME
         : "http://localhost:3000",
     CONTACT_EMAIL: process.env.CONTACT_EMAIL,
+    GMAIL_APP_PASSWORD: process.env.GMAIL_APP_PASSWORD,
+    GMAIL_USER: process.env.GMAIL_USER,
   },
 };
 
