@@ -1,0 +1,33 @@
+.contactContainer {
+  width: 50vw;
+  margin: auto;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.input {
+  height: 60px;
+  width: 100%;
+  padding: 0 20px;
+  margin-bottom: 30px;
+  border: 1px solid var(--greyish);
+  line-height: 1.33;
+  font-family: inherit;
+  font-size: inherit;
+}
+
+.textarea {
+  width: 100%;
+  height: 300px;
+  padding: 20px;
+  margin-bottom: 30px;
+  border: 1px solid var(--greyish);
+  line-height: 1.33;
+  font-family: inherit;
+  font-size: inherit;
+}
