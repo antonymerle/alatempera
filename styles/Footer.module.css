@@ -10,6 +10,10 @@
   align-items: flex-end;
 }
 
+.footerList li {
+  margin-bottom: 0.7rem;
+}
+
 @media screen and (max-width: 640px) {
   .footerContainer {
     padding: 0rem 2.5rem;
