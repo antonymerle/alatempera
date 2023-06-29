@@ -3,11 +3,16 @@
   margin: auto;
 }
 
+.contactContainer p {
+  margin: 1rem 0rem;
+}
+
 .form {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
+  margin-top: 4rem;
 }
 
 .input {
@@ -30,4 +35,8 @@
   line-height: 1.33;
   font-family: inherit;
   font-size: inherit;
+}
+
+.phoneClass {
+  display: none;
 }
