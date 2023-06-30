@@ -9,6 +9,7 @@
     "/print/[title]": ["work", "navigation", "context"],
     "/blog/[slug]": ["navigation"],
     "/success": ["success"],
-    "/canceled": ["canceled"]
+    "/canceled": ["canceled"],
+    "/privacy": ["privacy"]
   }
 }
