@@ -9,8 +9,8 @@ const Privacy = () => {
   const { t } = useTranslation("privacy");
   const content = t("body")
     .split("\n")
-    .map((p) => {
-      return <p>{p}</p>;
+    .map((p, i) => {
+      return <p key={i}>{p}</p>;
     });
 
   return (
