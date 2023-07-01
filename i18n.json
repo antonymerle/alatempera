@@ -10,6 +10,7 @@
     "/blog/[slug]": ["navigation"],
     "/success": ["success"],
     "/canceled": ["canceled"],
-    "/privacy": ["privacy"]
+    "/privacy": ["privacy"],
+    "/legal": ["legal"]
   }
 }
