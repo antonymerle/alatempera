@@ -33,6 +33,9 @@ const Footer = () => {
           <li>
             <Link href={"/shipping"}>Livraison</Link>
           </li>
+          <li>
+            <Link href={"/legal"}>Mentions légales</Link>
+          </li>
         </ul>
       </div>
     </div>
