@@ -1,0 +1,26 @@
+.container {
+  width: 50vw;
+  margin: auto;
+}
+
+.container h2 {
+  margin-bottom: 2rem;
+}
+
+.container h3 {
+  margin: 1.5rem 0rem;
+}
+
+.container h4 {
+  margin: 1rem 0rem;
+}
+
+.container p {
+  margin-bottom: 1rem;
+}
+
+@media screen and (max-width: 640px) {
+  .container {
+    width: 95vw;
+  }
+}
