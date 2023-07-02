@@ -9,6 +9,9 @@
   flex-direction: column;
   align-items: flex-end;
 }
+.footerList li {
+  text-align: end;
+}
 
 .footerList li {
   margin-bottom: 0.7rem;
