@@ -45,9 +45,9 @@ footer {
   border-top: 1px solid var(--mainText);
   padding: 2rem 2rem 2rem 0rem;
   margin-top: 5rem;
-  position: absolute;
+  /* position: absolute;
   left: 0;
-  bottom: 0;
+  bottom: 0; */
   /* margin-bottom: 3rem; */
 }
 
@@ -140,12 +140,12 @@ button:hover {
 
   footer {
     width: 100%;
-    height: 110px;
+    /* height: 110px; */
     border-top: 1px solid var(--mainText);
     padding: 2rem 0rem;
-    margin-top: 5rem;
-    position: absolute;
-    bottom: 0;
+    /* margin-top: 5rem; */
+    /* position: absolute;
+    bottom: 0; */
   }
 
   /* ==== BLOG === */
