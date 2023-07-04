@@ -31,6 +31,7 @@
     "react-dom": "18.2.0",
     "react-hot-toast": "^2.4.1",
     "react-icons": "^4.9.0",
+    "react-simple-image-viewer": "^1.2.2",
     "request-ip": "^3.3.0",
     "stripe": "^12.8.0",
     "typescript": "5.0.4"
