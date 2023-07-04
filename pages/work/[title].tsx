@@ -1,4 +1,5 @@
-import React from "react";
+import { useState, useCallback } from "react";
+import ImageViewer from "react-simple-image-viewer";
 import { GetStaticProps, GetStaticPaths, GetServerSideProps } from "next";
 import Work from "@/models/works";
 import { ICartItem, useStateContext } from "@/context/StateContext";
@@ -24,6 +25,8 @@ const {
 
 const WorkDetails: React.FC<{ work: ICartItem }> = ({ work }) => {
   console.log({ work });
+  const [isViewerOpen, setIsViewerOpen] = useState(false);
+
   const { onAdd, qty, setQty, setShowCart, cartItems } = useStateContext();
   const { t, lang } = useTranslation("work");
   console.log({ lang });
@@ -37,6 +40,11 @@ const WorkDetails: React.FC<{ work: ICartItem }> = ({ work }) => {
     // setShowCart(true);
   };
 
+  const openImageViewer = useCallback(() => {
+    // setCurrentImage(index);
+    setIsViewerOpen(true);
+  }, []);
+
   return (
     <div className={navContainer}>
       <div className={arrowBackContainer}>
@@ -44,6 +52,7 @@ const WorkDetails: React.FC<{ work: ICartItem }> = ({ work }) => {
       </div>
 
       <div className={container}>
+        {/* adapt the format of container for better use of screen real estate */}
         <div
           className={`${imgContainer} ${
             work.format === "landscape"
@@ -58,7 +67,17 @@ const WorkDetails: React.FC<{ work: ICartItem }> = ({ work }) => {
             fill={true}
             objectFit="scale-down"
             src={work.imgURL[0]}
+            onClick={() => openImageViewer()}
           />
+          {isViewerOpen && (
+            <ImageViewer
+              src={[work.imgURL[1] ?? work.imgURL[0]]}
+              // currentIndex={ currentImage }
+              disableScroll={false}
+              closeOnClickOutside={true}
+              onClose={() => setIsViewerOpen(false)}
+            />
+          )}
           {/* <img src={work.imgURL[0]}></img> */}
         </div>
         <div
