@@ -27,6 +27,7 @@
   display: block;
   position: relative;
   background-color: aquamarine;
+  cursor: pointer;
 }
 
 .landscapeImgContainer {
