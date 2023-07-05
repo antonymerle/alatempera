@@ -7,7 +7,7 @@ import Quantity from "@/components/Quantity";
 import { getQtyOfSameItemInCart } from "./Quantity";
 import ArrowBack from "@/components/ArrowBack";
 import useTranslation from "next-translate/useTranslation";
-import style from "../styles/WorkSlug.module.css";
+import style from "../styles/Product.module.css";
 
 const {
   container,
