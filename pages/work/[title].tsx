@@ -9,20 +9,7 @@ import Quantity from "@/components/Quantity";
 import { getQtyOfSameItemInCart } from "../../components/Quantity";
 import ArrowBack from "@/components/ArrowBack";
 import useTranslation from "next-translate/useTranslation";
-import style from "../../styles/WorkSlug.module.css";
 import Product from "@/components/Product";
-
-const {
-  container,
-  imgContainer,
-  detailsContainer,
-  btns,
-  navContainer,
-  arrowBackContainer,
-  landscapeImgContainer,
-  landscapeDetailsContainer,
-  classicContainer,
-} = style;
 
 const WorkDetails: React.FC<{ work: ICartItem }> = ({ work }) => {
   return <Product product={work} />;
