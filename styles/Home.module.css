@@ -27,8 +27,15 @@
 }
 
 .opus:hover {
-  opacity: 0.9;
-  transition: 0.3s ease-in-out;
+  /* opacity: 0.8;
+  transition: 0.3s ease; */
+
+  .image {
+    -webkit-filter: sepia(100%);
+    filter: sepia(100%);
+    -webkit-transition: 0.3s ease-in-out;
+    transition: 0.3s ease-in-out;
+  }
 
   .opusDescription {
     color: var(--oldEngland);
