@@ -17,6 +17,15 @@
   margin-bottom: 0.7rem;
 }
 
+.footerList a:hover {
+  color: var(--oldEngland);
+}
+
+.active {
+  text-decoration: underline;
+  color: var(--oldEngland);
+}
+
 @media screen and (max-width: 640px) {
   .footerContainer {
     padding: 0rem 2.5rem;
