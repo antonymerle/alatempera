@@ -16,14 +16,14 @@ export const fallback_shipping = [
     shipping_rate_data: {
       type: "fixed_amount",
       fixed_amount: {
-        amount: 3000,
+        amount: 1200,
         currency: "eur",
       },
       display_name: "International Shipping",
       delivery_estimate: {
         minimum: {
           unit: "business_day",
-          value: 3,
+          value: 10,
         },
         maximum: {
           unit: "business_day",
@@ -50,7 +50,7 @@ export const france_shipping = [
         },
         maximum: {
           unit: "business_day",
-          value: 7,
+          value: 5,
         },
       },
     },
@@ -62,18 +62,18 @@ export const europe_shipping = [
     shipping_rate_data: {
       type: "fixed_amount",
       fixed_amount: {
-        amount: 1000,
+        amount: 900,
         currency: "eur",
       },
       display_name: "Europe shipping",
       delivery_estimate: {
         minimum: {
           unit: "business_day",
-          value: 3,
+          value: 5,
         },
         maximum: {
           unit: "business_day",
-          value: 7,
+          value: 10,
         },
       },
     },
@@ -85,18 +85,18 @@ export const uk_shipping = [
     shipping_rate_data: {
       type: "fixed_amount",
       fixed_amount: {
-        amount: 1500,
+        amount: 1000,
         currency: "eur",
       },
       display_name: "Next day air",
       delivery_estimate: {
         minimum: {
           unit: "business_day",
-          value: 3,
+          value: 5,
         },
         maximum: {
           unit: "business_day",
-          value: 7,
+          value: 10,
         },
       },
     },
@@ -108,7 +108,7 @@ export const north_america_shipping = [
     shipping_rate_data: {
       type: "fixed_amount",
       fixed_amount: {
-        amount: 2000,
+        amount: 1000,
         currency: "eur",
       },
       display_name: "North America Shipping",
