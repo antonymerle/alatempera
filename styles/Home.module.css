@@ -26,6 +26,16 @@
   background-color: white;
 }
 
+.opus:hover {
+  opacity: 0.9;
+  transition: 0.3s ease-in-out;
+
+  .opusDescription {
+    color: var(--oldEngland);
+    opacity: 1;
+  }
+}
+
 .opusDescription {
   display: flex;
   /* height: 100%; */
