@@ -2,7 +2,8 @@ import Image from "next/image";
 import { ICartItem } from "@/context/StateContext";
 import styles from "@/styles/Home.module.css";
 
-const { main, gallery, opus, imgContainer, opusDescription, soldOut } = styles;
+const { main, gallery, opus, imgContainer, image, opusDescription, soldOut } =
+  styles;
 
 export const Card: React.FC<ICartItem> = ({
   imgURL,
@@ -15,7 +16,13 @@ export const Card: React.FC<ICartItem> = ({
   return (
     <div className={opus}>
       <div className={`${imgContainer} ${inventory > 0 ? null : soldOut}`}>
-        <Image alt={title} fill={true} objectFit="scale-down" src={imgURL[0]} />
+        <Image
+          alt={title}
+          fill={true}
+          objectFit="scale-down"
+          src={imgURL[0]}
+          className={image}
+        />
       </div>
       <div className={opusDescription}>
         <p>{title}</p>
