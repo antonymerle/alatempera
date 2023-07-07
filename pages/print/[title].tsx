@@ -4,24 +4,11 @@ import Print from "@/models/print";
 import { ICartItem, useStateContext } from "@/context/StateContext";
 import Image from "next/image";
 import dbConnect from "@/models/connection";
-import style from "../../styles/WorkSlug.module.css";
 import Quantity from "@/components/Quantity";
 import ArrowBack from "@/components/ArrowBack";
 import { getQtyOfSameItemInCart } from "../../components/Quantity";
 import useTranslation from "next-translate/useTranslation";
 import Product from "@/components/Product";
-
-const {
-  container,
-  imgContainer,
-  detailsContainer,
-  btns,
-  navContainer,
-  arrowBackContainer,
-  landscapeImgContainer,
-  landscapeDetailsContainer,
-  classicContainer,
-} = style;
 
 const PrintDetails: React.FC<{ print: ICartItem }> = ({ print }) => {
   return <Product product={print} />;
