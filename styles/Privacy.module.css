@@ -18,3 +18,9 @@
 .container a:hover {
   color: var(--oldEngland);
 }
+
+@media screen and (max-width: 640px) {
+  .container {
+    width: 90vw;
+  }
+}
