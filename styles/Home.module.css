@@ -31,8 +31,10 @@
   transition: 0.3s ease; */
 
   .image {
-    -webkit-filter: sepia(60%);
-    filter: sepia(60%);
+    /* -webkit-filter: sepia(60%);
+    filter: sepia(60%); */
+    -webkit-filter: brightness(70%);
+    filter: brightness(70%);
     -webkit-transition: 0.2s ease-in-out;
     transition: 0.2s ease-in-out;
   }
