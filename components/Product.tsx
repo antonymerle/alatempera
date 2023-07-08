@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useEffect, useCallback } from "react";
 import ImageViewer from "react-simple-image-viewer";
 import Work from "@/models/works";
 import { ICartItem, useStateContext } from "@/context/StateContext";
@@ -29,6 +29,28 @@ const Product: React.FC<{ product: ICartItem }> = ({ product }) => {
   const { onAdd, qty, setQty, setShowCart, cartItems } = useStateContext();
   const { t, lang } = useTranslation("work");
   console.log({ lang });
+
+  useEffect(() => {
+    const image: HTMLImageElement = document.querySelector(".mainImage")!;
+    const topImagePosition = image.getBoundingClientRect().top;
+    console.log({ topImagePosition });
+
+    image?.addEventListener("load", () => {
+      const imgHeight = image.clientHeight;
+      const imgWidth = image.clientWidth;
+
+      const containerHeight = image.parentElement!.offsetHeight;
+
+      // const translateY = (containerHeight - imgHeight) / 2;
+      const translateY = -96;
+      console.log({ imgHeight });
+      console.log({ imgWidth });
+      console.log({ containerHeight });
+      console.log({ translateY });
+
+      image.style.transform = `translateY(${translateY}px)`;
+    });
+  }, []);
 
   const handleBuyNow = () => {
     console.log({ qty });
@@ -71,6 +93,7 @@ const Product: React.FC<{ product: ICartItem }> = ({ product }) => {
             objectFit="scale-down"
             src={product.imgURL[0]}
             onClick={() => openImageViewer()}
+            className="mainImage"
           />
           {isViewerOpen && (
             <ImageViewer
