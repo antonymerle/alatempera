@@ -27,12 +27,13 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const paths = works.map((work) => {
     return {
       params: {
-        title: work.title,
+        title: work.title_fr,
+        // id: work._id,
       },
     };
   });
 
-  console.log({ pathsExample: paths[0].params.title });
+  // console.log({ pathsExample: paths[0].params.title });
 
   return {
     paths,
@@ -45,7 +46,9 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
   await dbConnect();
 
-  const data = await Work.find({ title: params!.title });
+  console.log("*** getStaticProps ****");
+
+  const data = await Work.find({ title_fr: params!.title });
   console.log({ data });
 
   const work = JSON.parse(JSON.stringify(data))[0];
