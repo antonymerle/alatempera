@@ -1,17 +1,24 @@
 import Image from "next/image";
 import { ICartItem } from "@/context/StateContext";
+import useTranslation from "next-translate/useTranslation";
+
 import styles from "@/styles/Home.module.css";
 
 const { main, gallery, opus, imgContainer, image, opusDescription, soldOut } =
   styles;
 
 export const Card: React.FC<ICartItem> = ({
-  imgURL,
+  pictures,
   priceHT,
   priceTTC,
-  title,
+  title_fr,
+  title_en,
   inventory,
 }) => {
+  const { lang } = useTranslation();
+  const title = lang === "en" ? title_en : title_fr;
+  // console.log({ pictures, priceHT, priceTTC, title_fr, title_en, inventory });
+
   // const { description, imgURL, priceHT, priceTTC, qty, title } = work;
   return (
     <div className={opus}>
@@ -20,7 +27,7 @@ export const Card: React.FC<ICartItem> = ({
           alt={title}
           fill={true}
           // objectFit="scale-down"
-          src={imgURL[0]}
+          src={pictures[0].src}
           className={image}
         />
       </div>
