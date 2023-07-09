@@ -27,8 +27,12 @@ const Product: React.FC<{ product: ICartItem }> = ({ product }) => {
   const [isViewerOpen, setIsViewerOpen] = useState(false);
 
   const { onAdd, qty, setQty, setShowCart, cartItems } = useStateContext();
-  const { t, lang } = useTranslation("work");
+  const { t, lang } = useTranslation();
   console.log({ lang });
+
+  const title = lang === "en" ? product.title_en : product.title_fr;
+  const alt =
+    lang === "en" ? product.pictures[0].alt_en : product.pictures[0].alt_fr;
 
   // useEffect(() => {
   //   const image: HTMLImageElement = document.querySelector(".mainImage")!;
@@ -63,9 +67,9 @@ const Product: React.FC<{ product: ICartItem }> = ({ product }) => {
 
   const openImageViewer = useCallback(() => {
     // setCurrentImage(index);
-    console.log("click");
+    // console.log("click");
 
-    console.log("images", product.imgURL);
+    // console.log("images", product.imgURL);
 
     setIsViewerOpen(true);
   }, []);
@@ -86,24 +90,23 @@ const Product: React.FC<{ product: ICartItem }> = ({ product }) => {
           }`}
         >
           <Image
-            alt={product.title}
+            alt={alt}
             // width={965}
             // height={950}
             fill={true}
             // objectFit="scale-down"
-            src={product.imgURL[0]}
+            src={product.pictures[0].src}
             onClick={() => openImageViewer()}
           />
           {isViewerOpen && (
             <ImageViewer
-              src={[product.imgURL[1] ?? product.imgURL[0]]}
+              src={[product.pictures[1].src ?? product.pictures[0].src]}
               // currentIndex={ currentImage }
               disableScroll={false}
               closeOnClickOutside={true}
               onClose={() => setIsViewerOpen(false)}
             />
           )}
-          {/* <img src={work.imgURL[0]}></img> */}
         </div>
         <div
           className={`${detailsContainer} ${
@@ -112,7 +115,7 @@ const Product: React.FC<{ product: ICartItem }> = ({ product }) => {
               : classicContainer
           }`}
         >
-          <h2>{product.title}</h2>
+          <h2>{title}</h2>
           <h3>{product.priceTTC.toFixed(2)}€</h3>
           <p>
             {lang === "en" ? product.description_en : product.description_fr}
