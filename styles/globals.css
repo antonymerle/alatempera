@@ -111,12 +111,11 @@ button:hover {
   position: relative;
   width: 100%;
   margin: 3rem 0rem;
-
-  img {
-    border-radius: 10px;
-    object-fit: cover;
-    object-position: center;
-  }
+}
+.mdx-hero-image > img {
+  border-radius: 10px;
+  object-fit: scale-down;
+  object-position: center;
 }
 /* handle orientation with separate classes on top of mdx-hero-image */
 .mdx-hero-image-portrait,

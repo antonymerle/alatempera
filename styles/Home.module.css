@@ -26,6 +26,10 @@
   background-color: white;
 }
 
+.image {
+  object-fit: scale-down;
+}
+
 .opus:hover {
   /* opacity: 0.8;
   transition: 0.3s ease; */
