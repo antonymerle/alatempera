@@ -39,7 +39,7 @@
   left: 0px;
   object-fit: fill;
   cursor: pointer;
-  z-index: -10;
+  object-position: left top;
 }
 
 .imgContainer > img:hover {
