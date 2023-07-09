@@ -5,31 +5,50 @@ type Type = "original" | "print";
 
 export interface IWork {
   _id: string;
-  title: string;
+  title_fr: string;
+  title_en: string;
   description_fr: string;
   description_en: string;
   priceHT: number;
   priceTTC: number;
   inventory: number;
-  imgURL: string[];
   isSoldOut: boolean;
+  pictures: IPicture[];
   type: Type;
   format: ImageOrientation;
 }
 
-const workSchema = new Schema<IWork>({
-  title: { type: String, required: true },
+export interface IPicture {
+  src: string;
+  width: number;
+  height: number;
+  alt_fr: string;
+  alt_en: string;
+}
+
+// Sous document inclus dans OrderSchema
+const PictureSchema = new Schema<IPicture>({
+  src: { type: String, required: true },
+  width: { type: Number, required: true },
+  height: { type: Number, required: true },
+  alt_fr: { type: String, required: true },
+  alt_en: { type: String, required: true },
+});
+
+const WorkSchema = new Schema<IWork>({
+  title_fr: { type: String, required: true },
+  title_en: { type: String, required: true },
   description_fr: { type: String, required: false },
   description_en: { type: String, required: false },
   priceHT: { type: Number, required: true },
   priceTTC: { type: Number, required: true },
   inventory: { type: Number, required: true },
-  imgURL: { type: [String], required: true },
+  pictures: { type: [PictureSchema], required: true },
   isSoldOut: { type: Boolean, required: true },
   type: { type: String, required: true },
   format: { type: String, required: false },
 });
 
-const Work = mongoose.models.Work || model<IWork>("Work", workSchema);
+const Work = mongoose.models.Work || model<IWork>("Work", WorkSchema);
 
 export default Work;
