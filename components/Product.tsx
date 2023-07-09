@@ -90,10 +90,9 @@ const Product: React.FC<{ product: ICartItem }> = ({ product }) => {
             // width={965}
             // height={950}
             fill={true}
-            objectFit="scale-down"
+            // objectFit="scale-down"
             src={product.imgURL[0]}
             onClick={() => openImageViewer()}
-            className="mainImage"
           />
           {isViewerOpen && (
             <ImageViewer

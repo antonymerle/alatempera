@@ -19,7 +19,7 @@ export const Card: React.FC<ICartItem> = ({
         <Image
           alt={title}
           fill={true}
-          objectFit="scale-down"
+          // objectFit="scale-down"
           src={imgURL[0]}
           className={image}
         />
