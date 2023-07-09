@@ -27,7 +27,7 @@ export interface IPicture {
 }
 
 // Sous document inclus dans OrderSchema
-const PictureSchema = new Schema<IPicture>({
+export const PictureSchema = new Schema<IPicture>({
   src: { type: String, required: true },
   width: { type: Number, required: true },
   height: { type: Number, required: true },
