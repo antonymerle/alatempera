@@ -38,19 +38,19 @@ export default async function handler(
             currency: "eur",
             unit_amount: Math.floor(item.priceTTC * 100),
             product_data: {
-              name: item.title,
+              name: item.title, // TODO : get lang to choose title
               description: item.type,
               images: [
                 process.env.DOMAIN_NAME +
                   "_next/" +
                   "image?url=%2F" +
-                  item.imgURL[0] +
+                  item.pictures[0].src +
                   "&w=1920&q=75",
               ],
               metadata: {
                 id: item._id,
                 type: item.type,
-                title: item.title,
+                title: item.title, // TODO : get lang to choose title
                 quantity: item.cartQty,
               },
             },
