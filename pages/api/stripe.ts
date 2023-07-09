@@ -22,6 +22,9 @@ export default async function handler(
 
   if (req.method === "POST") {
     console.log("method is post, proceeding");
+    console.log(req.headers["accept-language"]);
+    const lang = req.headers["accept-language"];
+
     // console.log(item.imgURL);
 
     // console.log(
@@ -38,7 +41,7 @@ export default async function handler(
             currency: "eur",
             unit_amount: Math.floor(item.priceTTC * 100),
             product_data: {
-              name: item.title, // TODO : get lang to choose title
+              name: lang === "fr" ? item.title_fr : item.title_en,
               description: item.type,
               images: [
                 process.env.DOMAIN_NAME +
@@ -50,7 +53,7 @@ export default async function handler(
               metadata: {
                 id: item._id,
                 type: item.type,
-                title: item.title, // TODO : get lang to choose title
+                title: lang === "fr" ? item.title_fr : item.title_en,
                 quantity: item.cartQty,
               },
             },
