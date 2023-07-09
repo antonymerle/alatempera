@@ -34,7 +34,7 @@ const Cart = () => {
   const cartRef = useRef();
   const { setShowCart, cartItems, totalPrice, totalQuantities, onRemove } =
     useStateContext();
-  const { t } = useTranslation("cart");
+  const { t, lang } = useTranslation("cart");
 
   const fmtTotalPrice = totalPrice.toFixed(2);
 
@@ -87,10 +87,10 @@ const Cart = () => {
           {cartItems.length >= 1 &&
             cartItems.map((item) => (
               <div className={productClass} key={item._id}>
-                <img src={item.imgURL[0]} className={cartProductImage} />
+                <img src={item.pictures[0].src} className={cartProductImage} />
                 <div className={itemDesc}>
                   <div className={`${flex} ${top}`}>
-                    <h5>{item.title}</h5>
+                    <h5>{lang === "en" ? item.title_en : item.title_fr}</h5>
                     <h4>{(item.priceTTC * item.cartQty).toFixed(2)}€</h4>
                   </div>
                   <div className={`${flex} ${bottom}`}>
