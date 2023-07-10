@@ -27,7 +27,7 @@ const Product: React.FC<{ product: ICartItem }> = ({ product }) => {
   const [isViewerOpen, setIsViewerOpen] = useState(false);
 
   const { onAdd, qty, setQty, setShowCart, cartItems } = useStateContext();
-  const { t, lang } = useTranslation();
+  const { t, lang } = useTranslation("work");
   console.log({ lang });
 
   const title = lang === "fr" ? product.title_fr : product.title_en;
