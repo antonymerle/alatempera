@@ -46,7 +46,7 @@ export const StateContext: React.FC<children> = ({ children }) => {
   const [totalQuantities, setTotalQuantities] = useState(0);
   const [qty, setQty] = useState(1);
 
-  const { t } = useTranslation("context");
+  const { t, lang } = useTranslation("context");
 
   let foundProduct: ICartItem;
   let index;
@@ -93,7 +93,9 @@ export const StateContext: React.FC<children> = ({ children }) => {
       setCartItems(updatedCartItems);
     }
 
-    toast.success(getNotificationStr(qty, product.title));
+    const productTitle = lang === "fr" ? product.title_fr : product.title_en;
+
+    toast.success(getNotificationStr(qty, `\"${productTitle}\"`));
   };
 
   const onRemove = (product: ICartItem) => {
