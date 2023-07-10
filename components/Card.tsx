@@ -10,6 +10,11 @@ const { main, gallery, opus, imgContainer, image, opusDescription, soldOut } =
 export const Card: React.FC<{ product: ICartItem }> = ({ product }) => {
   const { lang } = useTranslation();
   const title = lang === "fr" ? product.title_fr : product.title_en;
+  const alt =
+    lang === "fr" ? product.pictures[0].alt_fr : product.pictures[0].alt_en;
+  const width = product.pictures[0].width;
+  const height = product.pictures[0].height;
+
   // console.log({ pictures, priceHT, priceTTC, title_fr, title_en, inventory });
 
   return (
@@ -18,8 +23,11 @@ export const Card: React.FC<{ product: ICartItem }> = ({ product }) => {
         className={`${imgContainer} ${product.inventory > 0 ? null : soldOut}`}
       >
         <Image
-          alt={title}
+          alt={alt}
           fill={true}
+          sizes={`(max-width: ${width}px), (max-height: ${height}px) (min-width: 394px)`}
+          // width={width}
+          // height={height}
           // objectFit="scale-down"
           src={product.pictures[0].src}
           className={image}

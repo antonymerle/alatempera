@@ -34,6 +34,9 @@ const Product: React.FC<{ product: ICartItem }> = ({ product }) => {
   const alt =
     lang === "fr" ? product.pictures[0].alt_fr : product.pictures[0].alt_en;
 
+  const width = product.pictures[0].width;
+  const height = product.pictures[0].height;
+
   // useEffect(() => {
   //   const image: HTMLImageElement = document.querySelector(".mainImage")!;
   //   const topImagePosition = image.getBoundingClientRect().top;
@@ -91,9 +94,10 @@ const Product: React.FC<{ product: ICartItem }> = ({ product }) => {
         >
           <Image
             alt={alt}
-            // width={965}
-            // height={950}
+            // width={width}
+            // height={height}
             fill={true}
+            sizes={`(max-width: ${width}px), (max-height: ${height}px) (min-width: 394px)`}
             // objectFit="scale-down"
             src={product.pictures[0].src}
             onClick={() => openImageViewer()}
