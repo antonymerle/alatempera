@@ -12,69 +12,6 @@ import Product from "@/components/Product";
 
 const PrintDetails: React.FC<{ print: ICartItem }> = ({ print }) => {
   return <Product product={print} />;
-  // console.log({ print });
-  // const { onAdd, qty, setQty, setShowCart, cartItems } = useStateContext();
-  // const { t, lang } = useTranslation("work");
-
-  // const handleBuyNow = () => {
-  //   console.log({ qty });
-  //   console.log({ print });
-
-  //   onAdd(print, qty);
-  //   setQty(1);
-  //   // setShowCart(true);
-  // };
-
-  // return (
-  //   <div className={navContainer}>
-  //     <div className={arrowBackContainer}>
-  //       <ArrowBack />
-  //     </div>
-  //     <div className={container}>
-  //       <div
-  //         className={`${imgContainer} ${
-  //           print.format === "landscape"
-  //             ? landscapeImgContainer
-  //             : classicContainer
-  //         }`}
-  //       >
-  //         <Image
-  //           alt="test"
-  //           fill={true}
-  //           objectFit="scale-down"
-  //           src={print.imgURL[0]}
-  //         />
-  //       </div>
-  //       <div
-  //         className={`${detailsContainer} ${
-  //           print.format === "landscape"
-  //             ? landscapeDetailsContainer
-  //             : classicContainer
-  //         }`}
-  //       >
-  //         <h2>{print.title}</h2>
-  //         <h3>{print.priceTTC.toFixed(2)}€</h3>
-  //         <p>{lang === "en" ? print.description_en : print.description_fr}</p>
-  //         {getQtyOfSameItemInCart(cartItems, print) >= print.inventory ? (
-  //           <p>{t("soldOut")}</p>
-  //         ) : (
-  //           <div className={btns}>
-  //             <Quantity context="slug" work={print} />
-  //             <button
-  //               onClick={handleBuyNow}
-  //               disabled={
-  //                 getQtyOfSameItemInCart(cartItems, print) + qty >
-  //                 print.inventory
-  //               }
-  //             >
-  //               {t("addToCart")}
-  //             </button>
-  //           </div>
-  //         )}
-  //       </div>
-  //     </div>
-  //   </div>
-  // );
 };
 
 export default PrintDetails;
@@ -89,7 +26,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const paths = prints.map((print) => {
     return {
       params: {
-        title: print.title,
+        title: print.title_fr, // TODO : language switch
       },
     };
   });
@@ -107,7 +44,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
   await dbConnect();
 
-  const data = await Print.find({ title: params!.title });
+  const data = await Print.find({ title_fr: params!.title });
   console.log({ data });
 
   const print = JSON.parse(JSON.stringify(data))[0];
