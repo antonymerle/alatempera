@@ -29,6 +29,11 @@ export const Card: React.FC<{ product: ICartItem }> = ({ product }) => {
           // width={width}
           // height={height}
           // objectFit="scale-down"
+          priority={
+            product.pictures[0].src === "/la-brouette-d'abondance.jpg"
+              ? true
+              : false
+          }
           src={product.pictures[0].src}
           className={image}
         />
