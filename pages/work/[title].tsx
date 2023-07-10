@@ -33,8 +33,6 @@ export const getStaticPaths: GetStaticPaths = async () => {
     };
   });
 
-  // console.log({ pathsExample: paths[0].params.title });
-
   return {
     paths,
     fallback: "blocking",
