@@ -91,7 +91,7 @@ const Cart = () => {
                 <img src={item.pictures[0].src} className={cartProductImage} />
                 <div className={itemDesc}>
                   <div className={`${flex} ${top}`}>
-                    <h5>{lang === "en" ? item.title_en : item.title_fr}</h5>
+                    <h5>{lang === "fr" ? item.title_fr : item.title_en}</h5>
                     <h4>{(item.priceTTC * item.cartQty).toFixed(2)}€</h4>
                   </div>
                   <div className={`${flex} ${bottom}`}>

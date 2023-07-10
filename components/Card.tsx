@@ -16,7 +16,7 @@ export const Card: React.FC<ICartItem> = ({
   inventory,
 }) => {
   const { lang } = useTranslation();
-  const title = lang === "en" ? title_en : title_fr;
+  const title = lang === "fr" ? title_fr : title_en;
   // console.log({ pictures, priceHT, priceTTC, title_fr, title_en, inventory });
 
   return (

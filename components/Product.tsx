@@ -30,9 +30,9 @@ const Product: React.FC<{ product: ICartItem }> = ({ product }) => {
   const { t, lang } = useTranslation();
   console.log({ lang });
 
-  const title = lang === "en" ? product.title_en : product.title_fr;
+  const title = lang === "fr" ? product.title_fr : product.title_en;
   const alt =
-    lang === "en" ? product.pictures[0].alt_en : product.pictures[0].alt_fr;
+    lang === "fr" ? product.pictures[0].alt_fr : product.pictures[0].alt_en;
 
   // useEffect(() => {
   //   const image: HTMLImageElement = document.querySelector(".mainImage")!;
@@ -118,7 +118,7 @@ const Product: React.FC<{ product: ICartItem }> = ({ product }) => {
           <h2>{title}</h2>
           <h3>{product.priceTTC.toFixed(2)}€</h3>
           <p>
-            {lang === "en" ? product.description_en : product.description_fr}
+            {lang === "fr" ? product.description_fr : product.description_en}
           </p>
           {getQtyOfSameItemInCart(cartItems, product) >= product.inventory ? (
             <p>{t("soldOut")}</p>
