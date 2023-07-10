@@ -34,7 +34,7 @@ const Footer = () => {
 
   return (
     <div className={footerContainer}>
-      <p>{new Date().getFullYear()} &copy; Alatempera</p>
+      <p>{new Date().getFullYear()} &copy; A la tempera</p>
       <div>
         <ul className={footerList}>
           <a
