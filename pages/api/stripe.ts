@@ -25,12 +25,6 @@ export default async function handler(
     console.log(req.headers["accept-language"]);
     const lang = req.headers["accept-language"];
 
-    // console.log(item.imgURL);
-
-    // console.log(
-    //   process.env.DOMAIN_NAME + "images" + req.body.cartItems[0].imgURL[0]
-    // );
-
     // cf documentation : line_items : https://stripe.com/docs/api/checkout/sessions/object#checkout_session_object-line_items
     try {
       const line_items = req.body.cartItems.map((item: ICartItem) => {

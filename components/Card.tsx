@@ -19,7 +19,6 @@ export const Card: React.FC<ICartItem> = ({
   const title = lang === "en" ? title_en : title_fr;
   // console.log({ pictures, priceHT, priceTTC, title_fr, title_en, inventory });
 
-  // const { description, imgURL, priceHT, priceTTC, qty, title } = work;
   return (
     <div className={opus}>
       <div className={`${imgContainer} ${inventory > 0 ? null : soldOut}`}>
