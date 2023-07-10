@@ -30,7 +30,8 @@ export const Card: React.FC<{ product: ICartItem }> = ({ product }) => {
           // height={height}
           // objectFit="scale-down"
           priority={
-            product.pictures[0].src === "/la-brouette-d'abondance.jpg"
+            product.pictures[0].src === "/la-brouette-d'abondance.jpg" ||
+            product.pictures[0].src === "/sous-le-tilleul.jpg"
               ? true
               : false
           }
