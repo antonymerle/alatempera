@@ -57,8 +57,11 @@ const Navbar: React.FC = () => {
           <div className={logoContainer}>
             <Image
               fill={true}
-              src="/logo.png"
-              alt="logo"
+              // width={100}
+              // height={100}
+              sizes="(max-width: 100px), (max-height: 100px) (min-width: 50px), (min-heigth: 50px)"
+              src="/logo.jpg"
+              alt="logo A la tempera"
               className={logo}
             ></Image>
           </div>
