@@ -7,32 +7,27 @@ import styles from "@/styles/Home.module.css";
 const { main, gallery, opus, imgContainer, image, opusDescription, soldOut } =
   styles;
 
-export const Card: React.FC<ICartItem> = ({
-  pictures,
-  priceHT,
-  priceTTC,
-  title_fr,
-  title_en,
-  inventory,
-}) => {
+export const Card: React.FC<{ product: ICartItem }> = ({ product }) => {
   const { lang } = useTranslation();
-  const title = lang === "fr" ? title_fr : title_en;
+  const title = lang === "fr" ? product.title_fr : product.title_en;
   // console.log({ pictures, priceHT, priceTTC, title_fr, title_en, inventory });
 
   return (
     <div className={opus}>
-      <div className={`${imgContainer} ${inventory > 0 ? null : soldOut}`}>
+      <div
+        className={`${imgContainer} ${product.inventory > 0 ? null : soldOut}`}
+      >
         <Image
           alt={title}
           fill={true}
           // objectFit="scale-down"
-          src={pictures[0].src}
+          src={product.pictures[0].src}
           className={image}
         />
       </div>
       <div className={opusDescription}>
         <p>{title}</p>
-        <p>{priceTTC.toFixed(2)}€</p>
+        <p>{product.priceTTC.toFixed(2)}€</p>
       </div>
     </div>
   );

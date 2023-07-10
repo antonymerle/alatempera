@@ -19,7 +19,7 @@ const Cards: React.FC<{ products: ICartItem[] }> = ({ products }) => {
         }
         key={i}
       >
-        <Card {...product} />
+        <Card product={product} />
       </Link>
     );
   });
