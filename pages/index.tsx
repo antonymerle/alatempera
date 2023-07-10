@@ -12,14 +12,6 @@ import styles from "@/styles/Home.module.css";
 const { galleryContainer, gallery } = styles;
 
 export const Home: React.FC<{ works: ICartItem[] }> = ({ works }) => {
-  // const tiles: Array<JSX.Element> = works.map((work, i) => {
-  //   return (
-  //     <Link href={"/work/" + work.title} key={i}>
-  //       <Card {...work} />
-  //     </Link>
-  //   );
-  // });
-
   return (
     <>
       <Head>
