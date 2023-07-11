@@ -95,6 +95,9 @@ Sold out overlay
   .opus {
     min-width: 360px;
   }
+  .image {
+    object-position: center bottom;
+  }
 }
 
 /* .main {
