@@ -39,7 +39,7 @@
   left: 0px;
   object-fit: fill;
   cursor: pointer;
-  object-position: left top;
+  object-position: center top;
   object-fit: scale-down;
 }
 
