@@ -2,6 +2,7 @@ export type PostPreview = {
   title: string;
   description: string;
   previewImage: string;
+  timestamp: number;
   slug: string;
 };
 
