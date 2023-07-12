@@ -6,15 +6,23 @@
   /* background-attachment: fixed; */
   background-position: center;
   /* padding: 1rem 0rem; */
-  margin-bottom: 4rem;
+  margin-bottom: 6rem;
   /* border-radius: 4px; */
 
   position: relative;
 }
 
 .postContainer:hover {
-  box-shadow: 10px 10px var(--orage);
+  box-shadow: 10px 10px var(--mainText);
   transition: 0.2s ease;
+
+  .postTitle > span,
+  .postDescription > span {
+    background-color: #fff;
+    color: var(--mainText);
+    padding: 3px 5px;
+    transition: 0.2s ease;
+  }
 }
 
 .postContents {
