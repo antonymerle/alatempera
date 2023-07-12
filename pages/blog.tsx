@@ -16,13 +16,15 @@ const blog = ({
     <div>
       <h2 className={title}>Blog</h2>
       <div className={postPreviewsContainer}>
-        {postPreviews.map((postPreview, i) => {
-          return (
-            <div key={i}>
-              <BlogPostPreview postPreview={postPreview} />
-            </div>
-          );
-        })}
+        {postPreviews
+          .sort((a, b) => b.timestamp - a.timestamp)
+          .map((postPreview, i) => {
+            return (
+              <div key={i}>
+                <BlogPostPreview postPreview={postPreview} />
+              </div>
+            );
+          })}
       </div>
     </div>
   );
