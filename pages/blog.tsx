@@ -17,7 +17,7 @@ const blog = ({
       <h2 className={title}>Blog</h2>
       <div className={postPreviewsContainer}>
         {postPreviews
-          // .sort((a, b) => b.timestamp - a.timestamp)
+          .sort((a, b) => b.timestamp - a.timestamp)
           .map((postPreview, i) => {
             return (
               <div key={i}>
