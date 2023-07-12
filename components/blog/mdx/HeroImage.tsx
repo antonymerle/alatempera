@@ -15,7 +15,7 @@ const HeroImage = ({
 
   return (
     <div className={`mdx-hero-image mdx-hero-image-${orientation}`}>
-      <Image src={src} alt={alt} fill={true}></Image>
+      <Image src={src} alt={alt} fill={true} priority={true}></Image>
     </div>
   );
 };
