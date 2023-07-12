@@ -9,18 +9,19 @@ const { postContainer, postContents, postTitle, postDescription, postImage } =
 
 const BlogPostPreview = ({ postPreview }: { postPreview: PostPreview }) => {
   return (
-    <div
-      className={postContainer}
-      style={{ backgroundImage: `url(${postPreview.previewImage})` }}
-    >
-      {/* <Image
+    <Link href={postPreview.slug}>
+      <div
+        className={postContainer}
+        style={{ backgroundImage: `url(${postPreview.previewImage})` }}
+      >
+        {/* <Image
         src={postPreview.previewImage}
         fill={true}
         objectFit="cover"
         className={postImage}
         alt={postPreview.title}
       /> */}
-      <Link href={postPreview.slug}>
+
         <div className={postContents}>
           <h2 className={postTitle}>
             <span>{postPreview.title}</span>
@@ -29,8 +30,8 @@ const BlogPostPreview = ({ postPreview }: { postPreview: PostPreview }) => {
             <span>{postPreview.description}</span>
           </p>
         </div>
-      </Link>
-    </div>
+      </div>
+    </Link>
   );
 };
 
