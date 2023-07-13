@@ -52,7 +52,7 @@ export const getStaticProps: GetStaticProps = async () => {
     });
 
     postPreviews.push({
-      ...serializedPost.frontmatter,
+      ...serializedPost?.frontmatter,
       // add the slug to the frontmatter data
       slug: `/blog/${postFilePath.replace(".mdx", "")}`,
     } as PostPreview);
