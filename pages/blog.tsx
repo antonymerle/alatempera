@@ -1,5 +1,7 @@
 import React from "react";
 import { InferGetStaticPropsType } from "next";
+import { GetStaticProps } from "next";
+
 import fs from "fs";
 import { serialize } from "next-mdx-remote/serialize";
 import path from "path";
@@ -9,9 +11,7 @@ import BlogPostPreview from "@/components/blog/mdx/BlogPostPreview";
 
 const { title, postPreviewsContainer } = style;
 
-const blog = ({
-  postPreviews,
-}: InferGetStaticPropsType<typeof getStaticProps>) => {
+const blog: React.FC<{ postPreviews: PostPreview[] }> = ({ postPreviews }) => {
   return (
     <div>
       <h2 className={title}>Blog</h2>
@@ -30,9 +30,7 @@ const blog = ({
   );
 };
 
-export default blog;
-
-export async function getServerSideProps() {
+export const getStaticProps: GetStaticProps = async () => {
   // get all MDX files
   const postFilePaths = fs
     .readdirSync("_posts")
@@ -65,6 +63,8 @@ export async function getServerSideProps() {
       postPreviews,
     },
     // enable ISR
-    // revalidate: 60,
+    revalidate: 60,
   };
-}
+};
+
+export default blog;
