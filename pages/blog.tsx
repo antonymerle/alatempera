@@ -32,7 +32,7 @@ const blog = ({
 
 export default blog;
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   // get all MDX files
   const postFilePaths = fs
     .readdirSync("_posts")
@@ -65,6 +65,6 @@ export async function getStaticProps() {
       postPreviews,
     },
     // enable ISR
-    revalidate: 60,
+    // revalidate: 60,
   };
 }
