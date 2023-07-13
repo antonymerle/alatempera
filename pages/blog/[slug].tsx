@@ -39,7 +39,7 @@ export default function PostPage({
   );
 }
 export const getStaticPaths: GetStaticPaths = async () => {
-  const paths = fs
+  const pathsEn = fs
     .readdirSync("_posts")
     .filter(
       (postFilePath) => path.extname(postFilePath).toLowerCase() === ".mdx"
@@ -49,11 +49,28 @@ export const getStaticPaths: GetStaticPaths = async () => {
         params: {
           slug: `${p.replace(".mdx", "")}`,
         },
+        locale: "en",
       };
     });
 
+  const pathsFr = fs
+    .readdirSync("_posts")
+    .filter(
+      (postFilePath) => path.extname(postFilePath).toLowerCase() === ".mdx"
+    )
+    .map((p) => {
+      return {
+        params: {
+          slug: `${p.replace(".mdx", "")}`,
+        },
+        locale: "fr",
+      };
+    });
+
+  const paths = [...pathsEn, ...pathsFr];
+
   // console.log({ paths });
-  console.log(JSON.stringify(paths, null, 2));
+  // console.log(JSON.stringify(paths, null, 2));
 
   return { paths, fallback: "blocking" };
   //slug: `/blog/${postFilePath.replace(".mdx", "")}`,
