@@ -1,7 +1,8 @@
 import { useState } from "react";
-import style from "../styles/Contact.module.css";
 import { ContactMessage, ResMailer } from "@/types/types";
 import { toast } from "react-hot-toast";
+import useTranslation from "next-translate/useTranslation";
+import style from "../styles/Contact.module.css";
 
 // import { Formik, Form, Field, ErrorMessage } from "formik";
 
@@ -15,6 +16,8 @@ const Contact = () => {
   const [subject, setSubject] = useState("");
   const [message, setMessage] = useState("");
   const [sent, setSent] = useState(false);
+
+  const { t } = useTranslation("contact");
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -71,19 +74,15 @@ const Contact = () => {
       <h2>Contact</h2>
 
       {sent ? (
-        <h3>Merci pour votre message ! Je vous répondrai dès que possible.</h3>
+        <h3>{t("sentNotification")}</h3>
       ) : (
         <>
-          <p>
-            N'hésitez pas à me contacter pour toute question, remarque ou
-            proposition. Je serai heureuse de discuter avec vous et de vous
-            apporter mon aide.
-          </p>
+          <p>{t("intro")}</p>
           <form className={form} onSubmit={(e) => handleSubmit(e)}>
             <input
               type="text"
               name="name"
-              placeholder="name"
+              placeholder={t("labelName")}
               required
               className={input}
               onChange={(e) => setName(e.target.value)}
@@ -107,19 +106,19 @@ const Contact = () => {
             <input
               type="text"
               name="subject"
-              placeholder="subject"
+              placeholder={t("labelSubject")}
               required
               className={input}
               onChange={(e) => setSubject(e.target.value)}
             />
             <textarea
               name="message"
-              placeholder="Type your message here"
+              placeholder={t("labelMessage")}
               required
               className={textarea}
               onChange={(e) => setMessage(e.target.value)}
             />
-            <button type="submit">Send</button>
+            <button type="submit">{t("sendButton")}</button>
           </form>
         </>
       )}

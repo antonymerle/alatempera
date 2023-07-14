@@ -5,6 +5,7 @@
     "*": ["home", "navbar", "footer", "cart"],
     "/": ["home", "navbar", "footer"],
     "/about": ["about"],
+    "/contact": ["contact"],
     "/work/[title]": ["work", "navigation", "context"],
     "/print/[title]": ["work", "navigation", "context"],
     "/blog/[slug]": ["navigation"],
