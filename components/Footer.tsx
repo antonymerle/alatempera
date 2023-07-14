@@ -2,6 +2,7 @@ import React from "react";
 import { FaInstagramSquare } from "react-icons/fa";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import useTranslation from "next-translate/useTranslation";
 import style from "../styles/Footer.module.css";
 
 const { footerContainer, footerList, active } = style;
@@ -31,6 +32,7 @@ const isLinkActive = (currentPath: string, navbarPath: string) => {
 
 const Footer = () => {
   const { pathname: currentPathname } = useRouter();
+  const { t } = useTranslation("footer");
 
   return (
     <div className={footerContainer}>
@@ -53,20 +55,20 @@ const Footer = () => {
             <Link href={"/contact"}>Contact</Link>
           </li>
           <li className={isLinkActive(currentPathname, "/terms") ? active : ""}>
-            <Link href={"/terms"}>Conditions générales</Link>
+            <Link href={"/terms"}>{t("terms")}</Link>
           </li>
           <li
             className={isLinkActive(currentPathname, "/privacy") ? active : ""}
           >
-            <Link href={"/privacy"}>Politique de confidentialité</Link>
+            <Link href={"/privacy"}>{t("privacy")}</Link>
           </li>
           <li
             className={isLinkActive(currentPathname, "/shipping") ? active : ""}
           >
-            <Link href={"/shipping"}>Livraison</Link>
+            <Link href={"/shipping"}>{t("shipping")}</Link>
           </li>
           <li className={isLinkActive(currentPathname, "/legal") ? active : ""}>
-            <Link href={"/legal"}>Mentions légales</Link>
+            <Link href={"/legal"}>{t("legal")}</Link>
           </li>
         </ul>
       </div>
