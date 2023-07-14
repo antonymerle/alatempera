@@ -5,10 +5,10 @@ import fs from "fs";
 import { serialize } from "next-mdx-remote/serialize";
 import path from "path";
 import { PostPreview } from "@/types/types";
-import Blog from "@/components/blog/Blog";
+import LandingBlog from "@/components/blog/LandingBlog";
 
 const blog: React.FC<{ postPreviews: PostPreview[] }> = ({ postPreviews }) => {
-  return <Blog postPreviews={postPreviews} />;
+  return <LandingBlog postPreviews={postPreviews} />;
 };
 
 export const getStaticProps: GetStaticProps = async () => {
