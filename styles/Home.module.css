@@ -10,6 +10,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 2rem;
+  justify-content: center;
 }
 
 .opus {
@@ -97,6 +98,15 @@ Sold out overlay
   }
   .image {
     object-position: center bottom;
+  }
+}
+
+@media screen and (max-width: 820px) {
+  .gallery {
+    gap: 1rem;
+  }
+  .opus {
+    min-width: 360px;
   }
 }
 
