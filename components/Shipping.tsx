@@ -20,8 +20,8 @@ const shippingFeesFr = [
 
 const feesMarkupList = (lang: string) => {
   const fees = lang === "fr" ? shippingFeesFr : shippingFeesEn;
-  return fees.map((li) => {
-    return <li>{li}</li>;
+  return fees.map((li, i) => {
+    return <li key={i}>{li}</li>;
   });
 };
 
