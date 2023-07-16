@@ -1,7 +1,7 @@
-import React from "react";
+import Shipping from "@/components/Shipping";
 
 const shipping = () => {
-  return <div>shipping</div>;
+  return <Shipping />;
 };
 
 export default shipping;
