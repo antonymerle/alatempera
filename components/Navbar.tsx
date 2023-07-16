@@ -63,7 +63,7 @@ const Navbar: React.FC = () => {
               src="/logo.jpg"
               alt="logo A la tempera"
               className={logo}
-            ></Image>
+            />
           </div>
         </Link>
         <Link href={"/"}>
