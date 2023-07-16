@@ -12,6 +12,7 @@
     "/success": ["success"],
     "/canceled": ["canceled"],
     "/privacy": ["privacy"],
-    "/legal": ["legal"]
+    "/legal": ["legal"],
+    "/shipping": ["shipping"]
   }
 }
