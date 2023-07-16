@@ -6,15 +6,12 @@ import style from "../styles/ArrowBack.module.css";
 
 const { container } = style;
 
-const ArrowBack = ({ previousLocation }: { previousLocation?: string }) => {
+const ArrowBack = () => {
   const router = useRouter();
   const { t } = useTranslation("navigation");
 
-  const handleGoBack = () => {
-    router.back();
-  };
   return (
-    <div className={container} onClick={handleGoBack}>
+    <div className={container} onClick={() => router.back()}>
       <MdKeyboardBackspace /> <span>{t("goBack")}</span>
     </div>
   );
