@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import useTranslation from "next-translate/useTranslation";
 import style from "../styles/Footer.module.css";
 
-const { footerContainer, footerList, active } = style;
+const { footerContainer, creditContainer, footerList, active } = style;
 
 const isLinkActive = (currentPath: string, navbarPath: string) => {
   // 1. tokenize path ["", "prints", "blog"]
@@ -36,7 +36,16 @@ const Footer = () => {
 
   return (
     <div className={footerContainer}>
-      <p>{new Date().getFullYear()} &copy; A la tempera</p>
+      <div className={creditContainer}>
+        <p>{new Date().getFullYear()} &copy; A la tempera</p>
+        <p>
+          {t("credit")}
+          <a href="https://antonymerle.dev/" target="_blank">
+            Antony Merle
+          </a>
+        </p>
+      </div>
+
       <div>
         <ul className={footerList}>
           <a
