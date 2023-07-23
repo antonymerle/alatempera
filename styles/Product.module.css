@@ -69,12 +69,16 @@
 
 .detailsContainer > h2,
 .detailsContainer > p {
-  padding-bottom: 1rem;
+  padding-bottom: 0.5rem;
 }
 
 .detailsContainer > h3 {
   padding-bottom: 0.5rem;
   color: var(--oldEngland);
+}
+
+.detailsContainer > i {
+  padding-bottom: 1rem;
 }
 
 .btns {
