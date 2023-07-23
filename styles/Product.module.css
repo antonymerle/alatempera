@@ -73,11 +73,11 @@
 }
 
 .detailsContainer > h3 {
-  padding-bottom: 0.5rem;
+  padding-bottom: 1.3rem;
   color: var(--oldEngland);
 }
 
-.detailsContainer > i {
+.detailsContainer > em {
   padding-bottom: 1rem;
 }
 
@@ -129,21 +129,30 @@
     padding: 1rem 2rem;
   }
 
+  /* titre */
   .detailsContainer :nth-child(1) {
     order: 1;
   }
 
+  /* medium */
   .detailsContainer :nth-child(2) {
     order: 2;
   }
 
+  /* prix */
   .detailsContainer :nth-child(3) {
-    order: 4;
-    margin: 2rem 0rem;
+    order: 3;
   }
 
+  /* boutons */
+  .detailsContainer :nth-child(5) {
+    order: 4;
+  }
+
+  /* description */
   .detailsContainer :nth-child(4) {
-    order: 3;
+    order: 5;
+    margin: 2rem 0rem;
   }
 
   .btns {
