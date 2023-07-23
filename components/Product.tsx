@@ -19,6 +19,7 @@ const {
   landscapeImgContainer,
   landscapeDetailsContainer,
   classicContainer,
+  smImgContainer,
 } = style;
 
 const Product: React.FC<{ product: ICartItem }> = ({ product }) => {
@@ -86,7 +87,9 @@ const Product: React.FC<{ product: ICartItem }> = ({ product }) => {
       <div className={container}>
         {/* adapt the format of container for better use of screen real estate */}
         <div
-          className={`${imgContainer} ${
+          className={`${
+            product.format === "landscape" ? smImgContainer : imgContainer
+          } ${
             product.format === "landscape"
               ? landscapeImgContainer
               : classicContainer
