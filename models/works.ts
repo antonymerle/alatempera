@@ -7,6 +7,10 @@ export interface IWork {
   _id: string;
   title_fr: string;
   title_en: string;
+  medium_fr: string;
+  medium_en: string;
+  mediumWidth: number;
+  mediumHeight: number;
   description_fr: string;
   description_en: string;
   priceHT: number;
@@ -38,6 +42,10 @@ export const PictureSchema = new Schema<IPicture>({
 const WorkSchema = new Schema<IWork>({
   title_fr: { type: String, required: true },
   title_en: { type: String, required: true },
+  medium_fr: { type: String, required: true },
+  medium_en: { type: String, required: true },
+  mediumWidth: { type: Number, required: true },
+  mediumHeight: { type: Number, required: true },
   description_fr: { type: String, required: false },
   description_en: { type: String, required: false },
   priceHT: { type: Number, required: true },
