@@ -120,9 +120,9 @@ const Product: React.FC<{ product: ICartItem }> = ({ product }) => {
           }`}
         >
           <h2>{title}</h2>
-          <i>{`${lang === "fr" ? product.medium_fr : product.medium_en}, ${
-            product.mediumWidth
-          }cm x ${product.mediumHeight}cm`}</i>
+          <i className="">{`${
+            lang === "fr" ? product.medium_fr : product.medium_en
+          }, ${product.mediumWidth}cm x ${product.mediumHeight}cm`}</i>
           <h3>{product.priceTTC.toFixed(2)}€</h3>
           <p>
             {lang === "fr" ? product.description_fr : product.description_en}
