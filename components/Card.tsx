@@ -1,13 +1,27 @@
 import Image from "next/image";
 import { ICartItem } from "@/context/StateContext";
 import useTranslation from "next-translate/useTranslation";
+import { ViewportSz } from "@/types/types";
 
 import styles from "@/styles/Home.module.css";
 
-const { main, gallery, opus, imgContainer, image, opusDescription, soldOut } =
-  styles;
+const {
+  main,
+  gallery,
+  opusPortrait,
+  opusLandscape,
+  imgContainerPortrait,
+  imgContainerLandscape,
+  imgContainerForSmScreens,
+  image,
+  opusDescription,
+  soldOut,
+} = styles;
 
-export const Card: React.FC<{ product: ICartItem }> = ({ product }) => {
+export const Card: React.FC<{ product: ICartItem }> = ({
+  product,
+  viewPort,
+}) => {
   const { lang } = useTranslation();
   const title = lang === "fr" ? product.title_fr : product.title_en;
   const alt =
@@ -16,6 +30,12 @@ export const Card: React.FC<{ product: ICartItem }> = ({ product }) => {
   const height = product.pictures[0].height;
 
   // console.log({ pictures, priceHT, priceTTC, title_fr, title_en, inventory });
+  const opus = product.format === "landscape" ? opusLandscape : opusPortrait;
+
+  const imgContainer =
+    product.format === "landscape"
+      ? imgContainerLandscape
+      : imgContainerPortrait;
 
   return (
     <div className={opus}>

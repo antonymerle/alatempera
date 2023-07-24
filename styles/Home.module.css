@@ -13,14 +13,41 @@
   justify-content: center;
 }
 
-.opus {
+.opusPortrait {
   /* width: 33%; */
   min-width: 394px;
   height: 480px;
   background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  margin-bottom: 2rem;
+  /* object-position: center bottom; */
 }
 
-.imgContainer {
+.opusLandscape {
+  /* width: 33%; */
+  min-width: 394px;
+  height: 400px;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  margin-bottom: 2rem;
+
+  /* object-position: center bottom; */
+}
+
+.imgContainerLandscape {
+  position: relative;
+  width: 100%;
+  height: 350px;
+  background-color: white;
+}
+
+.imgContainerPortrait {
   position: relative;
   width: 100%;
   height: 400px;
@@ -29,9 +56,11 @@
 
 .image {
   object-fit: scale-down;
+  object-position: center bottom;
 }
 
-.opus:hover {
+.opusPortrait:hover,
+.opusLandscape:hover {
   /* opacity: 0.8;
   transition: 0.3s ease; */
 
@@ -53,11 +82,13 @@
 .opusDescription {
   display: flex;
   /* height: 100%; */
-  height: calc(100% - 400px);
+  /* height: calc(100% - 500px); */
+  height: 80px;
   /* padding-top: 10px; */
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  z-index: 1000;
 }
 
 /*
@@ -93,11 +124,14 @@ Sold out overlay
 }
 
 @media screen and (max-width: 640px) {
-  .opus {
+  .opusLandscape,
+  .opusPortrait {
     min-width: 360px;
+    margin-bottom: 0rem;
   }
-  .image {
-    object-position: center bottom;
+
+  .imgContainerLandscape {
+    height: 300px;
   }
 }
 
@@ -105,8 +139,10 @@ Sold out overlay
   .gallery {
     gap: 1rem;
   }
-  .opus {
+  .opusLandscape,
+  .opusPortrait {
     min-width: 360px;
+    margin-bottom: 1rem;
   }
 }
 
