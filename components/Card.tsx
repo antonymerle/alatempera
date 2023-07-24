@@ -1,7 +1,6 @@
 import Image from "next/image";
 import { ICartItem } from "@/context/StateContext";
 import useTranslation from "next-translate/useTranslation";
-import { ViewportSz } from "@/types/types";
 
 import styles from "@/styles/Home.module.css";
 
@@ -18,10 +17,7 @@ const {
   soldOut,
 } = styles;
 
-export const Card: React.FC<{ product: ICartItem }> = ({
-  product,
-  viewPort,
-}) => {
+export const Card: React.FC<{ product: ICartItem }> = ({ product }) => {
   const { lang } = useTranslation();
   const title = lang === "fr" ? product.title_fr : product.title_en;
   const alt =
