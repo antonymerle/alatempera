@@ -67,6 +67,14 @@
   filter: brightness(70%);
 }
 
+.soldOut:hover {
+  -webkit-filter: brightness(100%);
+  filter: brightness(100%);
+  opacity: 90%;
+  -webkit-transition: 0.2s ease-in-out;
+  transition: 0.2s ease-in-out;
+}
+
 .opusPortrait:hover,
 .opusLandscape:hover {
   /* opacity: 0.8;
@@ -111,7 +119,7 @@ Sold out overlay
   width: 100%;
   height: 100%;
   position: absolute;
-  z-index: 999;
+  z-index: 1;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
