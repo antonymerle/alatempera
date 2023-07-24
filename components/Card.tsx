@@ -13,6 +13,7 @@ const {
   imgContainerLandscape,
   imgContainerForSmScreens,
   image,
+  soldOutImage,
   opusDescription,
   soldOut,
 } = styles;
@@ -33,11 +34,14 @@ export const Card: React.FC<{ product: ICartItem }> = ({ product }) => {
       ? imgContainerLandscape
       : imgContainerPortrait;
 
+  const containerStyle = `${imgContainer} ${
+    product.inventory > 0 ? null : soldOut
+  }`;
+  const imgStyle = product.inventory > 0 ? image : `${soldOutImage}`;
+
   return (
     <div className={opus}>
-      <div
-        className={`${imgContainer} ${product.inventory > 0 ? null : soldOut}`}
-      >
+      <div className={containerStyle}>
         <Image
           alt={alt}
           fill={true}
@@ -52,7 +56,7 @@ export const Card: React.FC<{ product: ICartItem }> = ({ product }) => {
               : false
           }
           src={product.pictures[0].src}
-          className={image}
+          className={imgStyle}
         />
       </div>
       <div className={opusDescription}>

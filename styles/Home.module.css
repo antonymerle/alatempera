@@ -57,6 +57,14 @@
 .image {
   object-fit: scale-down;
   object-position: center bottom;
+  /* -webkit-filter: brightness(70%);
+  filter: brightness(70%); */
+}
+.soldOutImage {
+  object-fit: scale-down;
+  object-position: center bottom;
+  -webkit-filter: brightness(70%);
+  filter: brightness(70%);
 }
 
 .opusPortrait:hover,
@@ -111,16 +119,6 @@ Sold out overlay
   align-content: center;
   justify-content: center;
   align-items: center;
-}
-.soldOut:after {
-  content: "Vendu";
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  background: #000;
-  opacity: 0.2;
 }
 
 @media screen and (max-width: 640px) {
