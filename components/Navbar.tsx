@@ -12,19 +12,16 @@ const {
   logoContainer,
   logo,
   cartIcon,
-  search,
-  cartItemQty,
   menu,
   logoSide,
   menuSide,
-  menuItem,
   active,
-  qty,
   smCartIcon,
 } = style;
 
+// detect current path to underline the right link
 const isLinkActive = (currentPath: string, navbarPath: string) => {
-  // 1. tokenize path ["", "prints", "blog"]
+  // tokenize path ["", "prints", "blog"]
   const currentPathTokens: Array<string> = currentPath
     .split("/")
     .filter((token) => token !== "");
@@ -57,8 +54,6 @@ const Navbar: React.FC = () => {
           <div className={logoContainer}>
             <Image
               fill={true}
-              // width={100}
-              // height={100}
               sizes="(max-width: 100px), (max-height: 100px) (min-width: 50px), (min-heigth: 50px)"
               src="/logo.jpg"
               alt="logo A la tempera"
