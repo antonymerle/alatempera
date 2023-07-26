@@ -7,6 +7,7 @@ import style from "../styles/Footer.module.css";
 
 const { footerContainer, creditContainer, footerList, active } = style;
 
+// detect current path to underline the right link
 const isLinkActive = (currentPath: string, navbarPath: string) => {
   // 1. tokenize path ["", "prints", "blog"]
   const currentPathTokens: Array<string> = currentPath
