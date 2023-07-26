@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { useRouter } from "next/router";
-
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 import { ICartItem, useStateContext } from "@/context/StateContext";
 import { toast } from "react-hot-toast";
@@ -36,10 +35,6 @@ const Quantity: React.FC<IQuantityProps> = ({ context, work }) => {
   const { qty, setQty, decQty, incQty, toggleCartItemQuantity, cartItems } =
     useStateContext();
   const { t } = useTranslation("work");
-
-  // const [numberOfSameItemAlreadyInCart, setNumberOfSameItemAlreadyInCart] =
-  //   useState(getQtyOfSameItemInCart(cartItems, work));
-
   const { asPath } = useRouter();
   useEffect(() => {
     setQty(1);

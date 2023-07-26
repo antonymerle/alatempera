@@ -1,13 +1,8 @@
 import React from "react";
-import { GetStaticProps, GetStaticPaths, GetServerSideProps } from "next";
+import { GetStaticProps, GetStaticPaths } from "next";
 import Print from "@/models/print";
-import { ICartItem, useStateContext } from "@/context/StateContext";
-import Image from "next/image";
+import { ICartItem } from "@/context/StateContext";
 import dbConnect from "@/models/connection";
-import Quantity from "@/components/Quantity";
-import ArrowBack from "@/components/ArrowBack";
-import { getQtyOfSameItemInCart } from "../../components/Quantity";
-import useTranslation from "next-translate/useTranslation";
 import Product from "@/components/Product";
 
 const PrintDetails: React.FC<{ print: ICartItem }> = ({ print }) => {

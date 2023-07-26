@@ -1,40 +1,24 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Link from "next/link";
 import { BsBagCheckFill } from "react-icons/bs";
 import { useStateContext } from "@/context/StateContext";
 import { runFireworks } from "@/utils/lib";
 import style from "../styles/Success.module.css";
-import { useSearchParams } from "next/navigation";
 import useTranslation from "next-translate/useTranslation";
-import { useRouter } from "next/router";
 import { SessionDetails } from "@/types/types";
 
 const { container, icon, emailMsg, description, email } = style;
-
-const getPreviousPageUrl = () => {
-  const { length } = window.history;
-  const previousPageUrl = length > 2 ? document.referrer : "/";
-  return previousPageUrl;
-};
 
 const Success: React.FC<SessionDetails> = ({
   sessionStatus,
   customerFirstName,
 }) => {
-  console.log({ customerFirstName });
   const { setCartItems, setTotalPrice, setTotalQuantities } = useStateContext();
   const { t } = useTranslation("success");
-  const searchParams = useSearchParams();
-  const router = useRouter();
-
-  const successCallback = searchParams.get("success");
-
-  console.log(successCallback);
 
   useEffect(() => {
     if (sessionStatus === "complete") {
       console.log("useeffect");
-      // updateInventory
       localStorage.clear();
       setCartItems([]);
       setTotalPrice(0);

@@ -103,13 +103,6 @@
   background: transparent;
   border: none;
 }
-/* .cartBottom {
-  position: absolute;
-  bottom: 12px;
-  right: 5px;
-  width: 100%;
-  padding: 30px 65px;
-} */
 
 .item-desc .flex {
   width: 200px;
@@ -195,7 +188,6 @@
   display: flex;
   justify-content: flex-start;
   margin-top: 3rem;
-  /* padding: 0 10px; */
   color: red;
 }
 

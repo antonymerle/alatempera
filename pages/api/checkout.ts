@@ -30,10 +30,7 @@ export default async function handler(
 
       console.log({ session });
       console.log({ customerFirstName });
-
-      // const customer = await stripe.customers.retrieve(session.customer);
       console.log({ session });
-      // console.log({ customer });
 
       res.status(200).json({ customerFirstName, sessionStatus });
     } catch (error: any) {

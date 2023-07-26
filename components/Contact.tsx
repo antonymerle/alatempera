@@ -4,8 +4,6 @@ import { toast } from "react-hot-toast";
 import useTranslation from "next-translate/useTranslation";
 import style from "../styles/Contact.module.css";
 
-// import { Formik, Form, Field, ErrorMessage } from "formik";
-
 const { contactContainer, form, input, textarea, phoneClass } = style;
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 

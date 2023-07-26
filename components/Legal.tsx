@@ -1,6 +1,4 @@
 import useTranslation from "next-translate/useTranslation";
-import Link from "next/link";
-import style from "../styles/Privacy.module.css";
 
 const Legal = () => {
   const { t } = useTranslation("legal");

@@ -113,7 +113,6 @@ export default async function handler(req, res) {
           lineItems
         );
         console.log({ fulfillOrder: response });
-        // return res.status(200).json(response);
 
         break;
       // ... handle other event types
@@ -153,7 +152,6 @@ const fulfillOrder = async (
   lineItems
 ) => {
   // 1. record order in database
-
   const newOrder = new OrderModel({
     customerName: customerNameFromCheckoutSession,
     customerEmail: customerEmailFromCheckoutSession,
@@ -170,7 +168,6 @@ const fulfillOrder = async (
     .then((data) => console.log(data));
 
   // 2. decrement inventory
-  //   console.log("Fulfilling order", lineItems);
   console.log("decremeting inventory");
 
   lineItems.forEach(async (lineItem) => {
@@ -203,35 +200,10 @@ const fulfillOrder = async (
       );
     }
   });
-
-  //   const quantityOrdered = lineItems.data[0].quantity;
-  //   const productName = lineItems.data[0].description;
-
-  //   console.log({ quantityOrdered });
-
-  //   const groqQuery = `*[_type == "product" && name == $productName][0]`;
-
-  //   const productInDB = await client.fetch(groqQuery, {
-  //     productName,
-  //   });
-
-  //   console.log({ productInDB });
-
-  //   await client
-  //     .patch(productInDB._id)
-  //     .dec({ inventory: quantityOrdered })
-  //     .commit()
-  //     .then((updatedProduct) => {
-  //       console.log("New inventory has been decreased by : ", quantityOrdered);
-  //       console.log(updatedProduct);
-  //       return {
-  //         result: true,
-  //         inventory: productInDB.inventory - quantityOrdered,
-  //       };
-  //     });
 };
 
 // Function to update the user document with new orders
+// TODO : rewire or not updateUserWithNewOrders
 const updateUserWithNewOrders = async (
   completedCheckoutSessionId,
   completedCheckoutSessionTimestamp,
@@ -256,7 +228,7 @@ const updateUserWithNewOrders = async (
         amount_total: order.amount_total,
         currency: order.currency,
         description: order.description,
-        // price: newOrder.price,         // TODO : map the price object to schema
+
         quantity: order.quantity,
       };
     });
@@ -270,23 +242,6 @@ const updateUserWithNewOrders = async (
       timestamp: completedCheckoutSessionTimestamp,
       items: lines,
     };
-
-    // Append the new orders to the existing orders array
-    // let updatedOrders = [];
-    // if (existingUser.orders?.length > 0) {
-    //   updatedOrders = [...existingUser.orders, ...filteredNewOrders];
-    // } else {
-    //   updatedOrders = [...filteredNewOrders];
-    // }
-
-    // console.log({ updatedOrders });
-
-    // Update the user document with the new orders
-    // await client
-    //   .patch(existingUser._id)
-    //   .setIfMissing({ orders: [] })
-    //   .set({ orders: updatedOrders })
-    //   .commit({ autoGenerateArrayKeys: true });
 
     await client.create(newOrderDocument);
 

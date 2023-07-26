@@ -1,15 +1,13 @@
 import Head from "next/head";
 import React from "react";
-import Card from "@/components/Card";
 import dbConnect from "@/models/connection";
 import Print from "@/models/print";
 import { GetServerSideProps } from "next";
-import Link from "next/link";
 import { ICartItem } from "@/context/StateContext";
 import Cards from "@/components/Cards";
 import styles from "@/styles/Home.module.css";
 
-const { galleryContainer, gallery } = styles;
+const { galleryContainer } = styles;
 
 const prints: React.FC<{ prints: ICartItem[] }> = ({ prints }) => {
   return (

@@ -11,7 +11,6 @@ import {
 } from "@/utils/getStripe";
 import geoip from "geoip-lite";
 const requestIp = require("request-ip");
-import type { ISOCodes } from "@/types/types";
 
 export default async function handler(
   req: NextApiRequest,
@@ -29,8 +28,6 @@ export default async function handler(
     try {
       const line_items = req.body.cartItems.map((item: ICartItem) => {
         return {
-          // price_data : https://stripe.com/docs/api/subscriptions/update#update_subscription-items-price_data
-          // description: item.type,
           price_data: {
             currency: "eur",
             unit_amount: Math.floor(item.priceTTC * 100),
@@ -54,9 +51,6 @@ export default async function handler(
           },
           adjustable_quantity: { enabled: true, minimum: 1 },
           quantity: item.cartQty,
-          // price: {
-
-          // },
           //taxes : https://stripe.com/docs/api/checkout/sessions/object#checkout_session_object-line_items-data-taxes
         };
       });
@@ -73,8 +67,6 @@ export default async function handler(
       // geolocation to make dynamic shipping fees.
 
       const ip = requestIp.getClientIp(req);
-      // const ip = req.headers["x-forwarded-for"] || req.socket.remoteAddress;
-      // const ipv4 = ip?.split(",").pop()?.trim(); // Extract the last IP address in the list
       console.log(ip);
 
       const geo = geoip.lookup(ip as string);

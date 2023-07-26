@@ -1,6 +1,5 @@
 import { useState, useCallback } from "react";
 import ImageViewer from "react-simple-image-viewer";
-import Work from "@/models/works";
 import { ICartItem, useStateContext } from "@/context/StateContext";
 import Image from "next/image";
 import Quantity from "@/components/Quantity";
@@ -23,7 +22,6 @@ const {
 } = style;
 
 const Product: React.FC<{ product: ICartItem }> = ({ product }) => {
-  // const WorkDetails: React.FC<{ work: ICartItem }> = ({ work }) => {
   console.log({ product });
   const [isViewerOpen, setIsViewerOpen] = useState(false);
 
@@ -38,43 +36,15 @@ const Product: React.FC<{ product: ICartItem }> = ({ product }) => {
   const width = product.pictures[0].width;
   const height = product.pictures[0].height;
 
-  // useEffect(() => {
-  //   const image: HTMLImageElement = document.querySelector(".mainImage")!;
-  //   const topImagePosition = image.getBoundingClientRect().top;
-  //   console.log({ topImagePosition });
-
-  //   image?.addEventListener("load", () => {
-  //     const imgHeight = image.clientHeight;
-  //     const imgWidth = image.clientWidth;
-
-  //     const containerHeight = image.parentElement!.offsetHeight;
-
-  //     // const translateY = (containerHeight - imgHeight) / 2;
-  //     const translateY = -96;
-  //     console.log({ imgHeight });
-  //     console.log({ imgWidth });
-  //     console.log({ containerHeight });
-  //     console.log({ translateY });
-
-  //     image.style.transform = `translateY(${translateY}px)`;
-  //   });
-  // }, []);
-
   const handleBuyNow = () => {
     console.log({ qty });
     console.log({ product });
 
     onAdd(product, qty);
     setQty(1);
-    // setShowCart(true);
   };
 
   const openImageViewer = useCallback(() => {
-    // setCurrentImage(index);
-    // console.log("click");
-
-    // console.log("images", product.imgURL);
-
     setIsViewerOpen(true);
   }, []);
 
@@ -97,18 +67,14 @@ const Product: React.FC<{ product: ICartItem }> = ({ product }) => {
         >
           <Image
             alt={alt}
-            // width={width}
-            // height={height}
             fill={true}
             sizes={`(max-width: ${width}px), (max-height: ${height}px) (min-width: 394px)`}
-            // objectFit="scale-down"
             src={product.pictures[0].src}
             onClick={() => openImageViewer()}
           />
           {isViewerOpen && (
             <ImageViewer
               src={[product.pictures[1].src ?? product.pictures[0].src]}
-              // currentIndex={ currentImage }
               disableScroll={false}
               closeOnClickOutside={true}
               onClose={() => setIsViewerOpen(false)}
@@ -153,7 +119,5 @@ const Product: React.FC<{ product: ICartItem }> = ({ product }) => {
     </div>
   );
 };
-
-// }
 
 export default Product;

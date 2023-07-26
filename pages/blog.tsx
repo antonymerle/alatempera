@@ -1,5 +1,3 @@
-import { useState } from "react";
-import { InferGetStaticPropsType } from "next";
 import { GetStaticProps } from "next";
 import fs from "fs";
 import { serialize } from "next-mdx-remote/serialize";
@@ -22,7 +20,6 @@ export const getStaticProps: GetStaticProps = async () => {
   let postPreviews: PostPreview[] = [];
 
   // read frontmatter for each blog post
-
   for (const postFilePath of postFilePaths) {
     const postFile = fs.readFileSync(`_posts/${postFilePath}`, "utf-8");
 

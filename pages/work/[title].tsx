@@ -1,14 +1,7 @@
-import { GetStaticProps, GetStaticPaths, GetServerSideProps } from "next";
+import { GetStaticProps, GetStaticPaths } from "next";
 import dbConnect from "@/models/connection";
-import { useState, useCallback } from "react";
-import ImageViewer from "react-simple-image-viewer";
 import Work from "@/models/works";
-import { ICartItem, useStateContext } from "@/context/StateContext";
-import Image from "next/image";
-import Quantity from "@/components/Quantity";
-import { getQtyOfSameItemInCart } from "../../components/Quantity";
-import ArrowBack from "@/components/ArrowBack";
-import useTranslation from "next-translate/useTranslation";
+import { ICartItem } from "@/context/StateContext";
 import Product from "@/components/Product";
 
 const WorkDetails: React.FC<{ work: ICartItem }> = ({ work }) => {
@@ -28,7 +21,6 @@ export const getStaticPaths: GetStaticPaths = async () => {
     return {
       params: {
         title: work.title_fr,
-        // id: work._id,
       },
     };
   });

@@ -2,12 +2,10 @@ import {
   createContext,
   useContext,
   useState,
-  useEffect,
   Dispatch,
   SetStateAction,
 } from "react";
 import { toast } from "react-hot-toast";
-// import { computeTTC } from "@/lib/utils";
 import { IWork } from "@/models/works";
 import useTranslation from "next-translate/useTranslation";
 
@@ -82,7 +80,7 @@ export const StateContext: React.FC<children> = ({ children }) => {
 
       console.log({ updatedCartItems });
 
-      setCartItems(updatedCartItems as Array<ICartItem>); // TODO : remove type hack
+      setCartItems(updatedCartItems as Array<ICartItem>);
     } else {
       console.log("Product is not in cart");
       product.cartQty = quantity;
@@ -99,7 +97,7 @@ export const StateContext: React.FC<children> = ({ children }) => {
   };
 
   const onRemove = (product: ICartItem) => {
-    foundProduct = cartItems.find((item) => item._id === product._id)!; // TODO : remove type hack
+    foundProduct = cartItems.find((item) => item._id === product._id)!;
     const newCartItems = cartItems.filter((item) => item._id !== product._id);
 
     setTotalPrice(
@@ -151,8 +149,8 @@ export const StateContext: React.FC<children> = ({ children }) => {
   };
 
   const contextMembers = {
-    showCart,
     setShowCart,
+    showCart,
     cartItems,
     totalPrice,
     totalQuantities,

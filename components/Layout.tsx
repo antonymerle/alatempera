@@ -1,4 +1,3 @@
-// import { Archivo } from "next/font/google";
 import { Montserrat } from "next/font/google";
 import Navbar from "./Navbar";
 import Footer from "./Footer";

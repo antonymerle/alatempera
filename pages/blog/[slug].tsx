@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
-import { GetStaticPropsContext, InferGetStaticPropsType } from "next";
-import { GetStaticProps, GetStaticPaths, GetServerSideProps } from "next";
+import { InferGetStaticPropsType } from "next";
+import { GetStaticProps, GetStaticPaths } from "next";
 import { serialize } from "next-mdx-remote/serialize";
 import { MDXRemote } from "next-mdx-remote";
 import Head from "next/head";
@@ -69,17 +69,10 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
   const paths = [...pathsEn, ...pathsFr];
 
-  // console.log({ paths });
-  // console.log(JSON.stringify(paths, null, 2));
-
   return { paths, fallback: "blocking" };
-  //slug: `/blog/${postFilePath.replace(".mdx", "")}`,
-  //
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  // const { slug } = ctx.params!;
-
   // retrieve the MDX blog post file associated
   // with the specified slug parameter
   const postFile = fs.readFileSync(`_posts/${params!.slug}.mdx`);

@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { PostPreview } from "@/types/types";
 import BlogPostPreview from "@/components/blog/mdx/BlogPostPreview";
-// import style from "../../styles/Blog.module.css";
 import style from "@/styles/LandingBlog.module.css";
 
 const {

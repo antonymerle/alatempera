@@ -5,13 +5,10 @@ import useTranslation from "next-translate/useTranslation";
 import styles from "@/styles/Home.module.css";
 
 const {
-  main,
-  gallery,
   opusPortrait,
   opusLandscape,
   imgContainerPortrait,
   imgContainerLandscape,
-  imgContainerForSmScreens,
   image,
   soldOutImage,
   opusDescription,
@@ -26,7 +23,6 @@ export const Card: React.FC<{ product: ICartItem }> = ({ product }) => {
   const width = product.pictures[0].width;
   const height = product.pictures[0].height;
 
-  // console.log({ pictures, priceHT, priceTTC, title_fr, title_en, inventory });
   const opus = product.format === "landscape" ? opusLandscape : opusPortrait;
 
   const imgContainer =
@@ -46,9 +42,6 @@ export const Card: React.FC<{ product: ICartItem }> = ({ product }) => {
           alt={alt}
           fill={true}
           sizes={`(max-width: ${width}px), (max-height: ${height}px) (min-width: 394px)`}
-          // width={width}
-          // height={height}
-          // objectFit="scale-down"
           priority={
             product.pictures[0].src === "/la-brouette-d'abondance.jpg" ||
             product.pictures[0].src === "/sous-le-tilleul.jpg"
