@@ -30,3 +30,13 @@ export type ResMailer = {
   data: ContactMessage | null;
   error: string | null;
 };
+
+export interface IPicture {
+  src: string;
+  width: number;
+  height: number;
+  alt_fr: string;
+  alt_en: string;
+}
+
+export type WorkType = "original" | "print";

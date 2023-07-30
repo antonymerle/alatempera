@@ -1,7 +1,5 @@
 import mongoose, { Schema, model } from "mongoose";
-import { ImageOrientation } from "@/types/types";
-
-type Type = "original" | "print";
+import { ImageOrientation, IPicture, WorkType } from "@/types/types";
 
 export interface IWork {
   _id: string;
@@ -18,16 +16,8 @@ export interface IWork {
   inventory: number;
   isSoldOut: boolean;
   pictures: IPicture[];
-  type: Type;
+  type: WorkType;
   format: ImageOrientation;
-}
-
-export interface IPicture {
-  src: string;
-  width: number;
-  height: number;
-  alt_fr: string;
-  alt_en: string;
 }
 
 // Sous document inclus dans OrderSchema
