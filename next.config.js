@@ -20,6 +20,9 @@ const nextConfig = {
     CONTACT_EMAIL: process.env.CONTACT_EMAIL,
     GMAIL_APP_PASSWORD: process.env.GMAIL_APP_PASSWORD,
     GMAIL_USER: process.env.GMAIL_USER,
+    GOOGLE_ID: process.env.GOOGLE_ID,
+    GOOGLE_SECRET: process.env.GOOGLE_SECRET,
+    NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET,
   },
 };
 
