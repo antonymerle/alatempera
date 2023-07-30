@@ -39,4 +39,6 @@ export interface IPicture {
   alt_en: string;
 }
 
+export type PrivilegeLevel = "user" | "admin";
+
 export type WorkType = "original" | "print";
