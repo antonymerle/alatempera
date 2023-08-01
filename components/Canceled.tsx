@@ -15,10 +15,11 @@ const Canceled = () => {
         sauvegardés.
       </p>
       <p className={description}>
-        Pour toute question, n'hésitez pas à nous écrire à cette adresse :{" "}
-        <a href={`mailto:${process.env.CONTACT_EMAIL}`} className={email}>
-          {process.env.CONTACT_EMAIL}
-        </a>
+        Pour toute question, n'hésitez pas à nous{" "}
+        <Link href={"/contact"} className={email}>
+          écrire
+        </Link>
+        .
       </p>
       <Link href="/">
         <button type="button" className="btn">
