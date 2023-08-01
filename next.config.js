@@ -19,6 +19,8 @@ const nextConfig = {
         : "http://localhost:3000",
     CONTACT_EMAIL: process.env.CONTACT_EMAIL,
     GMAIL_APP_PASSWORD: process.env.GMAIL_APP_PASSWORD,
+    ADMIN_EMAIL_1: process.env.ADMIN_EMAIL_1,
+    ADMIN_EMAIL_2: process.env.ADMIN_EMAIL_2,
     GMAIL_USER: process.env.GMAIL_USER,
     GOOGLE_ID: process.env.GOOGLE_ID,
     GOOGLE_SECRET: process.env.GOOGLE_SECRET,
