@@ -36,9 +36,9 @@ const Success: React.FC<SessionDetails> = ({
       <p className={emailMsg}>{t("confirmationEmail")}</p>
       <p className={description}>
         {t("question")}{" "}
-        <a href={`mailto:${process.env.CONTACT_EMAIL}`} className={email}>
-          {process.env.CONTACT_EMAIL}
-        </a>
+        <Link href="/contact" className={email}>
+          contact
+        </Link>
       </p>
       <Link href="/">
         <button type="button">{t("btn")}</button>
