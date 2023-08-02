@@ -13,6 +13,7 @@
     "@emotion/styled": "^11.11.0",
     "@mui/icons-material": "^5.14.1",
     "@mui/material": "^5.14.2",
+    "@mui/x-data-grid": "^6.10.2",
     "@stripe/stripe-js": "^1.54.0",
     "@types/canvas-confetti": "^1.6.0",
     "@types/geoip-lite": "^1.4.1",
