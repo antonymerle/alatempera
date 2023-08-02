@@ -10,7 +10,7 @@ const columns: GridColDef[] = [
 
 const AdminPostsTable: React.FC<{ posts: PostPreview[] }> = ({ posts }) => {
   const rows = posts.map((p, i) => {
-    return { ...p, id: i };
+    return { ...p, timestamp: new Date().toLocaleDateString(), id: i };
   });
   return (
     <div style={{ height: 400, width: "100%" }}>
