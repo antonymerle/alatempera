@@ -8,7 +8,7 @@ const columns: GridColDef[] = [
   { field: "actions", headerName: "Actions", width: 130 },
 ];
 
-const AdminPostsTable: React.FC<{ posts: PostPreview[] }> = ({ posts }) => {
+const DashboardPostsTable: React.FC<{ posts: PostPreview[] }> = ({ posts }) => {
   const rows = posts.map((p, i) => {
     return { ...p, timestamp: new Date().toLocaleDateString(), id: i };
   });
@@ -29,4 +29,4 @@ const AdminPostsTable: React.FC<{ posts: PostPreview[] }> = ({ posts }) => {
   );
 };
 
-export default AdminPostsTable;
+export default DashboardPostsTable;
