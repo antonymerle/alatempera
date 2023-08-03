@@ -17,7 +17,7 @@ export default function Signin() {
       session?.user?.email === process.env.ADMIN_EMAIL_2
     ) {
       toast.success("success - redirecting");
-      router.push("/admin");
+      router.push("/admin/dashboard");
     }
     // handle non admin user signin-in with google OAuth
     else if (
