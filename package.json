@@ -27,6 +27,7 @@
     "eslint": "8.41.0",
     "eslint-config-next": "13.4.3",
     "geoip-lite": "^1.4.7",
+    "gray-matter": "^4.0.3",
     "mongoose": "^7.2.1",
     "next": "13.4.3",
     "next-auth": "^4.22.3",
