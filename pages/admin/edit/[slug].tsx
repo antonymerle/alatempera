@@ -6,7 +6,7 @@ import path from "node:path";
 import { GetStaticPaths, GetStaticProps } from "next";
 import { InferGetStaticPropsType } from "next";
 
-const editor = ({
+const EditorPage = ({
   postContent,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const { pathname: currentPathname } = useRouter();
@@ -71,4 +71,4 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     revalidate: 60,
   };
 };
-export default editor;
+export default EditorPage;
