@@ -17,6 +17,8 @@ export default async function handler(
     //     "This is protected content. You can access this content because you are signed in.",
     // });
   } else {
-    res.redirect("/");
+    res
+      .status(401)
+      .json({ error: "You need to be authenticated to access this resource." });
   }
 }

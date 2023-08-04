@@ -1,6 +1,7 @@
-import React from "react";
+import { useEffect } from "react";
 import Editor from "@/components/Editor";
-import { useRouter } from "next/router";
+import Router, { useRouter } from "next/router";
+import { useSession } from "next-auth/react";
 import fs from "node:fs";
 import path from "node:path";
 import { GetStaticPaths, GetStaticProps } from "next";
@@ -9,13 +10,31 @@ import { InferGetStaticPropsType } from "next";
 const EditorPage = ({
   postContent,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
+  const { data: session } = useSession();
   const { pathname: currentPathname } = useRouter();
-  return (
-    <div>
-      {currentPathname}
-      <textarea>{postContent}</textarea>
-    </div>
-  );
+
+  useEffect(() => {
+    if (!session)
+      setTimeout(() => {
+        Router.push("/");
+      }, 2000);
+  });
+
+  if (session)
+    return (
+      <div>
+        {currentPathname}
+        <textarea>{postContent}</textarea>
+      </div>
+    );
+  else {
+    return (
+      <div>
+        <h2>Unauthorized</h2>
+        <p>Redirecting...</p>
+      </div>
+    );
+  }
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {

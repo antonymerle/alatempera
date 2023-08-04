@@ -3,21 +3,34 @@ import { useSession, signIn, signOut } from "next-auth/react";
 import { PostPreview } from "@/types/types";
 import Link from "next/link";
 import DashboardPostsTable from "./DashboardPostsTable";
+import Router from "next/router";
 
 const Dashboard = () => {
   const { data: session } = useSession();
   const [blogPosts, setBlogPosts] = useState(Array<PostPreview>);
 
   useEffect(() => {
-    fetch("/api/dashboard")
-      .then((res) => res.json())
-      .then((data) => setBlogPosts(data));
+    if (session)
+      fetch("/api/dashboard")
+        .then((res) => res.json())
+        .then((data) => setBlogPosts(data));
+    else {
+      setTimeout(() => {
+        Router.push("/");
+      }, 2000);
+    }
   }, []);
 
   return (
     <div>
-      {/* <ul>{posts}</ul> */}
-      <DashboardPostsTable posts={blogPosts} />
+      {session ? (
+        <DashboardPostsTable posts={blogPosts} />
+      ) : (
+        <div>
+          <h2>Unauthorized</h2>
+          <p>Redirecting...</p>
+        </div>
+      )}
     </div>
   );
 };
