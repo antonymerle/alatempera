@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import Editor from "@/components/Editor";
+import ImageDropzone from "@/components/ImageDropzone";
 import Router, { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
 import fs from "node:fs";
@@ -8,6 +8,7 @@ import matter from "gray-matter";
 import { GetStaticPaths, GetStaticProps } from "next";
 import { InferGetStaticPropsType } from "next";
 import style from "../../../styles/Editorpage.module.css";
+import { url } from "node:inspector";
 
 const { container, editor } = style;
 
@@ -27,6 +28,7 @@ const EditorPage = ({
   console.log(content);
 
   const [metadata, setMetadata] = useState(data);
+  const [imageUrl, setImageUrl] = useState(null);
 
   const [values, setValues] = useState<EditBlogPostFormProps>({
     title: data.title,
@@ -45,6 +47,10 @@ const EditorPage = ({
         Router.push("/");
       }, 2000);
   });
+
+  const handleFileUpload = (url: any) => {
+    setImageUrl(url);
+  };
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -103,15 +109,22 @@ const EditorPage = ({
               required
             />
           </div>
+          <div>Upload image</div>
+          <ImageDropzone onFileUpload={handleFileUpload} />
+          {imageUrl && (
+            <img src={imageUrl} alt="Uploaded" style={{ width: "300px" }} />
+          )}
+
           <div>
             <label htmlFor="timestamp">Timestamp</label>
             <input
-              type="number"
+              type="text"
               id="timestamp"
               name="timestamp"
-              value={values.timestamp}
+              value={new Date(values.timestamp).toLocaleDateString()}
               onChange={handleChange}
               required
+              disabled={true}
             />
           </div>
           <div>
@@ -176,9 +189,6 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const postFile = fs.readFileSync(`_posts/${params!.slug}.mdx`);
   const { data, content } = matter(postFile);
-
-  console.log({ data });
-  console.log({ content });
 
   return {
     props: {
