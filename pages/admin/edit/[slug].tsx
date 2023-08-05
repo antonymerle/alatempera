@@ -24,8 +24,8 @@ const EditorPage = ({
   data,
   content,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
-  console.log(data);
-  console.log(content);
+  // console.log(data);
+  // console.log(content);
 
   const [metadata, setMetadata] = useState(data);
   const [imageUrl, setImageUrl] = useState(null);
@@ -47,6 +47,23 @@ const EditorPage = ({
         Router.push("/");
       }, 2000);
   });
+
+  // live edit the content w/ new image source
+  useEffect(() => {
+    if (imageUrl) {
+      const lines = values.content.split("\n");
+
+      let newContent: string = lines
+        .map((line) =>
+          line.includes(`src="${values.previewImage}"`)
+            ? `  src="${imageUrl}"` // include two spaces for indentation
+            : line
+        )
+        .join("\n");
+
+      setValues({ ...values, previewImage: imageUrl, content: newContent });
+    }
+  }, [imageUrl]);
 
   const handleFileUpload = (url: any) => {
     setImageUrl(url);
@@ -107,6 +124,7 @@ const EditorPage = ({
               value={values.previewImage}
               onChange={handleChange}
               required
+              disabled={true}
             />
           </div>
           <div>Upload image</div>
