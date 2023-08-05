@@ -41,6 +41,8 @@ const EditorPage = ({
   const { data: session } = useSession();
   const { pathname: currentPathname } = useRouter();
 
+  // ================= effects ====================
+
   useEffect(() => {
     if (!session)
       setTimeout(() => {
@@ -65,6 +67,7 @@ const EditorPage = ({
     }
   }, [imageUrl]);
 
+  // ================= handles ====================
   const handleFileUpload = (url: any) => {
     setImageUrl(url);
   };
