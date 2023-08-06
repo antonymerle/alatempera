@@ -21,11 +21,12 @@ type EditBlogPostFormProps = {
 };
 
 const EditorPage = ({
+  postPath,
   data,
   content,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   // console.log(data);
-  // console.log(content);
+  console.log(postPath);
 
   const [metadata, setMetadata] = useState(data);
   const [imageUrl, setImageUrl] = useState(null);
@@ -84,7 +85,7 @@ const EditorPage = ({
       const response = await fetch("/api/admin/edit", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ values }),
+        body: JSON.stringify({ postPath, values }),
       });
     } catch (error) {
       console.log(error);
@@ -208,12 +209,13 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const postFile = fs.readFileSync(`_posts/${params!.slug}.mdx`);
+  const postPath = `_posts/${params!.slug}.mdx`;
+  const postFile = fs.readFileSync(postPath);
   const { data, content } = matter(postFile);
 
   return {
     props: {
-      // postContent: postFile.toString("utf-8"),
+      postPath,
       data,
       content,
     },
