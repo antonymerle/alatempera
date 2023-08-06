@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import ImageDropzone from "@/components/ImageDropzone";
+import Image from "next/image";
 import Router, { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
 import fs from "node:fs";
@@ -10,7 +11,7 @@ import { InferGetStaticPropsType } from "next";
 import { toast } from "react-hot-toast";
 import style from "../../../styles/Editorpage.module.css";
 
-const { container, editor } = style;
+const { container, editor, preview } = style;
 
 type EditBlogPostFormProps = {
   title: string;
@@ -132,7 +133,7 @@ const EditorPage = ({
               required
             />
           </div>
-          <div>
+          <div className={preview}>
             <label htmlFor="previewImage">Image</label>
             <input
               type="text"
@@ -143,11 +144,25 @@ const EditorPage = ({
               required
               disabled={true}
             />
+            <div
+              style={{ width: "300px", height: "300px", position: "relative" }}
+            >
+              <Image
+                src={values.previewImage}
+                alt={"aperçu"}
+                fill={true}
+                style={{ objectFit: "contain" }}
+              />
+            </div>
           </div>
-          <div>Upload image</div>
+          <div>Remplacer image</div>
           <ImageDropzone onFileUpload={handleFileUpload} />
           {imageUrl && (
-            <img src={imageUrl} alt="Uploaded" style={{ width: "300px" }} />
+            <img
+              src={imageUrl}
+              alt="Uploaded"
+              // style={{ width: "300px", height: "300px" }}
+            />
           )}
 
           <div>
