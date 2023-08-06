@@ -7,8 +7,8 @@ import path from "node:path";
 import matter from "gray-matter";
 import { GetStaticPaths, GetStaticProps } from "next";
 import { InferGetStaticPropsType } from "next";
+import { toast } from "react-hot-toast";
 import style from "../../../styles/Editorpage.module.css";
-import { url } from "node:inspector";
 
 const { container, editor } = style;
 
@@ -30,6 +30,7 @@ const EditorPage = ({
 
   const [metadata, setMetadata] = useState(data);
   const [imageUrl, setImageUrl] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const [values, setValues] = useState<EditBlogPostFormProps>({
     title: data.title,
@@ -80,15 +81,27 @@ const EditorPage = ({
     setValues((prevValues) => ({ ...prevValues, [name]: value }));
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setLoading(true);
+    //toast.loading("updating...");
+    console.log("loading");
+
     try {
       const response = await fetch("/api/admin/edit", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ postPath, values }),
       });
+      const data = await response.json();
+      console.log({ data });
+      toast.success(data.msg);
     } catch (error) {
       console.log(error);
+      toast.error(data.msg);
+    } finally {
+      setLoading(false);
+      console.log("finished loading");
     }
   };
 
@@ -159,7 +172,9 @@ const EditorPage = ({
               required
             />
           </div>
-          <button type="submit">Sauvegarder</button>
+          <button type="submit" disabled={loading}>
+            Sauvegarder
+          </button>
         </form>
       </div>
     );
