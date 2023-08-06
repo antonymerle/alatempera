@@ -45,7 +45,10 @@ const ImageDropzone = ({ onFileUpload }: any) => {
       style={{ border: "1px dashed black", padding: "1rem", cursor: "pointer" }}
     >
       <input {...getInputProps()} />
-      <p>Drag 'n' drop some image files here, or click to select files</p>
+      <p>
+        Glisser/déposer une image ou cliquer pour sélectionner un fichier jpg ou
+        png
+      </p>
     </div>
   );
 };
