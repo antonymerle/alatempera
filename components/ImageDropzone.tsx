@@ -8,7 +8,7 @@ const ImageDropzone = ({ onFileUpload }: any) => {
       const reader = new FileReader();
       reader.onload = () => {
         // Assuming you have an API endpoint to handle file upload
-        fetch("/api/upload-image", {
+        fetch("/api/admin/upload-image", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
