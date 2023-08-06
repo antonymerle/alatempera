@@ -11,7 +11,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     if (session)
-      fetch("/api/dashboard")
+      fetch("/api/admin/dashboard")
         .then((res) => res.json())
         .then((data) => setBlogPosts(data));
     else {
