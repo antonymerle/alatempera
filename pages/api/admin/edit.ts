@@ -20,8 +20,12 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
         encoding: "utf-8",
         flag: "w",
       });
+      res
+        .status(200)
+        .json({ success: true, msg: `${values.title} successfully edited.` });
     } catch (error) {
       console.log(error);
+      res.status(500).json({ success: false, msg: error });
     }
   }
 }
