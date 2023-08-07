@@ -7,7 +7,7 @@ import type { NextApiRequest, NextApiResponse } from "next";
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === "POST") {
-    const { postPath, values } = req.body;
+    const { postPath, values, previousImgPath } = req.body;
     const newPostContent = matter.stringify(values.content, {
       title: values.title,
       description: values.description,
@@ -17,6 +17,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
 
     try {
       const filename = values.previewImage.split("/blogPictures/")[1];
+      const oldfilename = previousImgPath.split("/blogPictures/")[1];
       console.log({ filename });
       const publicFolderPath = path.join(process.cwd(), "public");
       const imageFolderPath = path.join(publicFolderPath, "blogPictures");
@@ -27,7 +28,10 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
       );
       const tmpImagePath = path.join(tmpImageFolderPath, filename);
       const imagePath = path.join(imageFolderPath, filename);
+      const oldImagePath = path.join(imageFolderPath, oldfilename);
 
+      // remove previous blog post image (if it exists) before saving the new one
+      if (previousImgPath) fs.unlinkSync(oldImagePath);
       fs.renameSync(tmpImagePath, imagePath);
 
       fs.writeFileSync(postPath, newPostContent, {
