@@ -10,6 +10,7 @@ import { GetStaticPaths, GetStaticProps } from "next";
 import { InferGetStaticPropsType } from "next";
 import { toast } from "react-hot-toast";
 import style from "../../../styles/Editorpage.module.css";
+import { type } from "node:os";
 
 const { container, editor, preview } = style;
 
@@ -30,7 +31,7 @@ const EditorPage = ({
   console.log(postPath);
 
   const [metadata, setMetadata] = useState(data);
-  const [imageUrl, setImageUrl] = useState(null);
+  const [imageUrl, setImageUrl] = useState("");
   const [loading, setLoading] = useState(false);
 
   const [values, setValues] = useState<EditBlogPostFormProps>({
@@ -55,18 +56,24 @@ const EditorPage = ({
 
   // live edit the content w/ new image source
   useEffect(() => {
+    console.log(typeof imageUrl);
+
     if (imageUrl) {
       const lines = values.content.split("\n");
 
       let newContent: string = lines
         .map((line) =>
           line.includes(`src="${values.previewImage}"`)
-            ? `  src="${imageUrl}"` // include two spaces for indentation
+            ? `  src="${imageUrl.replace("/tmp", "")}"` // include two spaces for indentation
             : line
         )
         .join("\n");
 
-      setValues({ ...values, previewImage: imageUrl, content: newContent });
+      setValues({
+        ...values,
+        previewImage: imageUrl.replace("/tmp", ""),
+        content: newContent,
+      });
     }
   }, [imageUrl]);
 
@@ -147,12 +154,14 @@ const EditorPage = ({
             <div
               style={{ width: "300px", height: "300px", position: "relative" }}
             >
-              <Image
-                src={values.previewImage}
-                alt={"aperçu"}
-                fill={true}
-                style={{ objectFit: "contain" }}
-              />
+              {values.previewImage && (
+                <Image
+                  src={values.previewImage}
+                  alt={"aperçu"}
+                  fill={true}
+                  style={{ objectFit: "contain" }}
+                />
+              )}
             </div>
           </div>
           <div>Remplacer image</div>
