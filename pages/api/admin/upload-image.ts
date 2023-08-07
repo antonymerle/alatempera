@@ -8,7 +8,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === "POST") {
     const { filename, dataUrl } = req.body;
     const publicFolderPath = path.join(process.cwd(), "public");
-    const imageFolderPath = path.join(publicFolderPath, "blogPictures");
+    const imageFolderPath = path.join(publicFolderPath, "blogPictures", "tmp");
     const imagePath = path.join(imageFolderPath, filename);
 
     // Create the 'blogPictures' folder if it doesn't exist
@@ -23,8 +23,9 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
       "base64"
     );
 
-    // Respond with the public URL of the uploaded image
-    const publicUrl = `/blogPictures/${filename}`;
+    // save image to tmp folder until form is validated
+    const publicUrl = `/blogPictures/tmp/${filename}`;
+    // const publicUrl = imagePath;
     res.status(200).json({ publicUrl });
   } else {
     res.status(405).json({ message: "Method not allowed" });
