@@ -16,6 +16,20 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     });
 
     try {
+      const filename = values.previewImage.split("/blogPictures/")[1];
+      console.log({ filename });
+      const publicFolderPath = path.join(process.cwd(), "public");
+      const imageFolderPath = path.join(publicFolderPath, "blogPictures");
+      const tmpImageFolderPath = path.join(
+        publicFolderPath,
+        "blogPictures",
+        "tmp"
+      );
+      const tmpImagePath = path.join(tmpImageFolderPath, filename);
+      const imagePath = path.join(imageFolderPath, filename);
+
+      fs.renameSync(tmpImagePath, imagePath);
+
       fs.writeFileSync(postPath, newPostContent, {
         encoding: "utf-8",
         flag: "w",
