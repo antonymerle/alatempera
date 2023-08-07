@@ -33,6 +33,7 @@ const EditorPage = ({
   const [metadata, setMetadata] = useState(data);
   const [imageUrl, setImageUrl] = useState("");
   const [loading, setLoading] = useState(false);
+  const [previousImgPath, setPreviousImgPath] = useState("");
 
   const [values, setValues] = useState<EditBlogPostFormProps>({
     title: data.title,
@@ -69,6 +70,7 @@ const EditorPage = ({
         )
         .join("\n");
 
+      setPreviousImgPath(values.previewImage);
       setValues({
         ...values,
         previewImage: imageUrl.replace("/tmp", ""),
@@ -99,7 +101,7 @@ const EditorPage = ({
       const response = await fetch("/api/admin/edit", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ postPath, values }),
+        body: JSON.stringify({ postPath, values, previousImgPath }),
       });
       const data = await response.json();
       console.log({ data });
