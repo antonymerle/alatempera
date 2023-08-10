@@ -51,8 +51,7 @@ export const getBlogPostPreviews = async (): Promise<PostPreview[]> => {
   for (const postFilePath of postFilePaths) {
     const postFile = fs.readFileSync(`_posts/${postFilePath}`, "utf-8");
 
-    // serialize the MDX content into JSX
-    // and parse the frontmatter
+    // serialize the MDX content into JSX and parse the frontmatter
     const serializedPost = await serialize(postFile, {
       parseFrontmatter: true,
     });
