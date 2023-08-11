@@ -1,6 +1,8 @@
 import { useCallback } from "react";
 import { useDropzone } from "react-dropzone";
 
+const MB_IN_BYTES = 1000000;
+
 const ImageDropzone = ({ onFileUpload }: any) => {
   const onDrop = useCallback((acceptedFiles: any) => {
     // Do something with the accepted files, e.g., copy them to the public folder
@@ -37,6 +39,8 @@ const ImageDropzone = ({ onFileUpload }: any) => {
       "image/jpeg": [],
       "image/png": [],
     },
+    maxSize: MB_IN_BYTES * 4, // 4MB max file size
+    maxFiles: 1,
   });
 
   return (
