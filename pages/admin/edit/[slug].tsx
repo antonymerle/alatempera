@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import ImageDropzone from "@/components/ImageDropzone";
-import Image from "next/image";
 import Router, { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
 import fs from "node:fs";
@@ -11,7 +10,7 @@ import { InferGetStaticPropsType } from "next";
 import { toast } from "react-hot-toast";
 import style from "../../../styles/Editorpage.module.css";
 
-const { container, editor, preview, uploadedImg } = style;
+const { container, editor, uploadedImg } = style;
 
 type EditBlogPostFormProps = {
   title: string;
@@ -57,6 +56,7 @@ const EditorPage = ({
   // live edit the content w/ new image source
   useEffect(() => {
     console.log(typeof imageUrl);
+    console.log(imageUrl.length);
 
     if (imageUrl) {
       const lines = values.content.split("\n");
@@ -141,7 +141,7 @@ const EditorPage = ({
               required
             />
           </div>
-          <div className={preview}>
+          <div>
             <label htmlFor="previewImage">Image</label>
             <input
               type="text"
@@ -152,30 +152,18 @@ const EditorPage = ({
               required
               disabled={true}
             />
-            <div
-              style={{ width: "300px", height: "300px", position: "relative" }}
-            >
-              {values.previewImage && (
-                <Image
-                  src={values.previewImage}
-                  alt={"aperçu"}
-                  fill={true}
-                  style={{ objectFit: "contain" }}
-                />
-              )}
-            </div>
+            {values.previewImage && (
+              <img
+                src={imageUrl === "" ? values.previewImage : imageUrl}
+                alt={"aperçu"}
+                className={uploadedImg}
+              />
+            )}
           </div>
-          <div>Remplacer image</div>
-          <ImageDropzone onFileUpload={handleFileUpload} />
-          {imageUrl && (
-            <img
-              className={uploadedImg}
-              src={imageUrl}
-              alt="Uploaded"
-              // style={{ width: "300px", height: "300px" }}
-            />
-          )}
-
+          <label>Remplacer image</label>
+          <div>
+            <ImageDropzone onFileUpload={handleFileUpload} />
+          </div>
           <div>
             <label htmlFor="timestamp">Timestamp</label>
             <input
