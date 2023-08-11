@@ -31,3 +31,11 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     res.status(405).json({ message: "Method not allowed" });
   }
 }
+
+export const config = {
+  api: {
+    bodyParser: {
+      sizeLimit: "4mb", // https://nextjs.org/docs/pages/building-your-application/routing/api-routes#custom-config
+    },
+  },
+};
