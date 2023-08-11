@@ -10,7 +10,6 @@ import { GetStaticPaths, GetStaticProps } from "next";
 import { InferGetStaticPropsType } from "next";
 import { toast } from "react-hot-toast";
 import style from "../../../styles/Editorpage.module.css";
-import { type } from "node:os";
 
 const { container, editor, preview } = style;
 
@@ -170,6 +169,7 @@ const EditorPage = ({
           <ImageDropzone onFileUpload={handleFileUpload} />
           {imageUrl && (
             <img
+              className={preview}
               src={imageUrl}
               alt="Uploaded"
               // style={{ width: "300px", height: "300px" }}

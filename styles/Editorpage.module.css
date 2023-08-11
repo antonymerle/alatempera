@@ -26,4 +26,7 @@
 .preview {
   height: 350px;
   width: 100%;
+  object-fit: contain;
+  margin: 2rem 0rem;
+  object-position: left top;
 }
