@@ -11,7 +11,7 @@ import { InferGetStaticPropsType } from "next";
 import { toast } from "react-hot-toast";
 import style from "../../../styles/Editorpage.module.css";
 
-const { container, editor, preview } = style;
+const { container, editor, preview, uploadedImg } = style;
 
 type EditBlogPostFormProps = {
   title: string;
@@ -169,7 +169,7 @@ const EditorPage = ({
           <ImageDropzone onFileUpload={handleFileUpload} />
           {imageUrl && (
             <img
-              className={preview}
+              className={uploadedImg}
               src={imageUrl}
               alt="Uploaded"
               // style={{ width: "300px", height: "300px" }}
