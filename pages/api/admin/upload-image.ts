@@ -35,7 +35,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
 export const config = {
   api: {
     bodyParser: {
-      sizeLimit: "4mb", // https://nextjs.org/docs/pages/building-your-application/routing/api-routes#custom-config
+      sizeLimit: "6mb", // https://nextjs.org/docs/pages/building-your-application/routing/api-routes#custom-config
     },
   },
 };

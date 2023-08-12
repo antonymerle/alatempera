@@ -39,7 +39,7 @@ const ImageDropzone = ({ onFileUpload }: any) => {
       "image/jpeg": [],
       "image/png": [],
     },
-    maxSize: MB_IN_BYTES * 4, // 4MB max file size
+    maxSize: MB_IN_BYTES * 6, // 4MB max file size
     maxFiles: 1,
   });
 
