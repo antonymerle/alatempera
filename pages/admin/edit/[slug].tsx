@@ -79,7 +79,6 @@ const EditorPage = ({
   }, [imageUrl]);
 
   // ================= handles ====================
-  // demo
   const handleFileUpload = (url: any) => {
     setImageUrl(url);
   };
