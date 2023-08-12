@@ -5,11 +5,9 @@ const MB_IN_BYTES = 1000000;
 
 const ImageDropzone = ({ onFileUpload }: any) => {
   const onDrop = useCallback((acceptedFiles: any) => {
-    // Do something with the accepted files, e.g., copy them to the public folder
     acceptedFiles.forEach((file: any) => {
       const reader = new FileReader();
       reader.onload = () => {
-        // Assuming you have an API endpoint to handle file upload
         fetch("/api/admin/upload-image", {
           method: "POST",
           headers: {
@@ -39,7 +37,7 @@ const ImageDropzone = ({ onFileUpload }: any) => {
       "image/jpeg": [],
       "image/png": [],
     },
-    maxSize: MB_IN_BYTES * 6, // 4MB max file size
+    maxSize: MB_IN_BYTES * 6,
     maxFiles: 1,
   });
 
