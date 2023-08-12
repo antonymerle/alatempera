@@ -8,13 +8,24 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === "POST") {
     const { filename, dataUrl } = req.body;
     const publicFolderPath = path.join(process.cwd(), "public");
-    const imageFolderPath = path.join(publicFolderPath, "blogPictures", "tmp");
-    const imagePath = path.join(imageFolderPath, filename);
+    const tmpImageFolderPath = path.join(
+      publicFolderPath,
+      "blogPictures",
+      "tmp"
+    );
+    const imagePath = path.join(tmpImageFolderPath, filename);
 
-    // Create the 'blogPictures' folder if it doesn't exist
-    if (!fs.existsSync(imageFolderPath)) {
-      fs.mkdirSync(imageFolderPath);
+    // Create the tmp folder in 'blogPictures' if it doesn't exist
+    if (!fs.existsSync(tmpImageFolderPath)) {
+      fs.mkdirSync(tmpImageFolderPath);
     }
+
+    // clean all remaining tmp images before saving a new one
+    const tmpFiles = fs.readdirSync(tmpImageFolderPath);
+    tmpFiles.forEach((file) => {
+      const filePath = path.join(tmpImageFolderPath, file);
+      fs.unlinkSync(filePath);
+    });
 
     // Save the image file in the 'blogPictures' folder
     fs.writeFileSync(
