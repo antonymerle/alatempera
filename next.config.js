@@ -12,7 +12,7 @@ const nextConfig = {
     domains: ["source.unsplash.com", "images.unsplash.com"],
   },
   env: {
-    DB_CONNECTION_STRING_2: process.env.DB_CONNECTION_STRING_2,
+    DB_CONNECTION_STRING: process.env.DB_CONNECTION_STRING,
     STRIPE_PUBLISHABLE_KEY: process.env.STRIPE_PUBLISHABLE_KEY_TEST,
     STRIPE_SECRET_KEY: process.env.STRIPE_SECRET_KEY_TEST,
     STRIPE_WEBHOOK_SECRET: process.env.STRIPE_WEBHOOK_SECRET_TEST,
