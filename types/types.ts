@@ -42,3 +42,11 @@ export interface IPicture {
 export type PrivilegeLevel = "user" | "admin";
 
 export type WorkType = "original" | "print";
+
+export type EditBlogPostFormProps = {
+  title: string;
+  description: string;
+  previewImage: string;
+  timestamp: number;
+  content: string;
+};
