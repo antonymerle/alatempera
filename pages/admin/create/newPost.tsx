@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { EditBlogPostFormProps } from "@/types/types";
 import ImageDropzone from "@/components/ImageDropzone";
 import Router, { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
@@ -12,12 +13,21 @@ import style from "../../../styles/Editorpage.module.css";
 
 const { container, editor, uploadedImg } = style;
 
-type EditBlogPostFormProps = {
-  title: string;
-  description: string;
-  previewImage: string;
-  timestamp: number;
-  content: string;
+// TODO : redirect to post after saving it
+
+const compilePostStr = ({
+  title,
+  description,
+  previewImage,
+  timestamp,
+  content,
+}: EditBlogPostFormProps) => {
+  return matter.stringify(content, {
+    title,
+    description,
+    previewImage,
+    timestamp,
+  });
 };
 
 const CreateNewPost = () => {
@@ -31,7 +41,7 @@ const CreateNewPost = () => {
     previewImage: "",
     timestamp: -1,
     content:
-      '# Mes pinceaux\n\n<HeroImage\n  src=\n  alt={"main image"}\n  orientation={"landscape"}\n/>\n\nInsérer contenu principal ici',
+      '<HeroImage\n  src=\n  alt={"main image"}\n  orientation={"landscape"}\n/>\n\nInsérer contenu principal ici',
   });
 
   const { data: session } = useSession();
@@ -87,6 +97,7 @@ const CreateNewPost = () => {
     console.log("loading");
 
     try {
+      // const postStr = compilePostStr({ ...values, timestamp: Date.now() });
       const response = await fetch("/api/admin/create", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
