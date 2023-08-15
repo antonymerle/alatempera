@@ -106,6 +106,9 @@ const CreateNewPost = () => {
       const data = await response.json();
       console.log({ data });
       toast.success(data.msg);
+      setTimeout(() => {
+        Router.push(data.articlePath);
+      }, 2000);
     } catch (error) {
       console.log(error);
       toast.error(error as string);
@@ -142,7 +145,7 @@ const CreateNewPost = () => {
               required
             />
           </div>
-          <div>
+          {/* <div>
             <label htmlFor="previewImage">Image</label>
             <input
               type="text"
@@ -153,7 +156,7 @@ const CreateNewPost = () => {
               required
               disabled={true}
             />
-          </div>
+          </div> */}
           <label>Image</label>
           <div>
             <ImageDropzone onFileUpload={handleFileUpload} />
