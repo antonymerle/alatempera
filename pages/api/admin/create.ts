@@ -49,7 +49,8 @@ export default async function handler(
         });
         res.status(200).json({
           success: true,
-          msg: `${newPostTitle} successfully created.`,
+          articlePath: "/blog/" + newPostTitle.replace(".mdx", ""),
+          msg: `${newPostTitle} successfully created. Redirecting...`,
         });
       } catch (error) {
         console.log(error);
