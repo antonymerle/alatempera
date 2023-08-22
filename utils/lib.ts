@@ -1,4 +1,8 @@
 import confetti from "canvas-confetti";
+import fs from "fs";
+import path from "path";
+import { serialize } from "next-mdx-remote/serialize";
+import { PostPreview } from "@/types/types";
 
 export const runFireworks = () => {
   var duration = 3 * 1000;
@@ -31,4 +35,32 @@ export const runFireworks = () => {
       })
     );
   }, 250);
+};
+
+export const getBlogPostPreviews = async (): Promise<PostPreview[]> => {
+  // get all MDX files
+  const postFilePaths = fs
+    .readdirSync("_posts")
+    .filter(
+      (postFilePath) => path.extname(postFilePath).toLowerCase() === ".mdx"
+    );
+
+  let postPreviews: PostPreview[] = [];
+
+  // read frontmatter for each blog post
+  for (const postFilePath of postFilePaths) {
+    const postFile = fs.readFileSync(`_posts/${postFilePath}`, "utf-8");
+
+    // serialize the MDX content into JSX and parse the frontmatter
+    const serializedPost = await serialize(postFile, {
+      parseFrontmatter: true,
+    });
+
+    postPreviews.push({
+      ...serializedPost?.frontmatter,
+      // add the slug to the frontmatter data
+      slug: `/blog/${postFilePath.replace(".mdx", "")}`,
+    } as PostPreview);
+  }
+  return postPreviews;
 };

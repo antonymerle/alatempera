@@ -30,3 +30,23 @@ export type ResMailer = {
   data: ContactMessage | null;
   error: string | null;
 };
+
+export interface IPicture {
+  src: string;
+  width: number;
+  height: number;
+  alt_fr: string;
+  alt_en: string;
+}
+
+export type PrivilegeLevel = "user" | "admin";
+
+export type WorkType = "original" | "print";
+
+export type EditBlogPostFormProps = {
+  title: string;
+  description: string;
+  previewImage: string;
+  timestamp: number;
+  content: string;
+};

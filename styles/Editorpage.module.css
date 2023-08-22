@@ -1,0 +1,36 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  padding-top: 6rem;
+  margin-bottom: 2rem;
+}
+
+.editor {
+  width: 100%;
+}
+
+.editor > div {
+  margin-bottom: 2rem;
+}
+
+.editor label,
+.editor input {
+  width: 100%;
+  height: 40px;
+}
+
+.editor textarea {
+  width: 100%;
+  height: 50vh;
+}
+
+.uploadedImg {
+  height: 400px;
+  width: 100%;
+  object-fit: contain;
+  margin-top: 2rem;
+  object-position: left top;
+}

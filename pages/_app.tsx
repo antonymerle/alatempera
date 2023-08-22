@@ -1,16 +1,19 @@
-import "@/styles/globals.css";
 import type { AppProps } from "next/app";
 import Layout from "@/components/Layout";
 import { StateContext } from "@/context/StateContext";
 import { Toaster } from "react-hot-toast";
+import { SessionProvider } from "next-auth/react";
+import "@/styles/globals.css";
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <StateContext>
-      <Layout>
-        <Toaster />
-        <Component {...pageProps} />
-      </Layout>
-    </StateContext>
+    <SessionProvider session={pageProps.session}>
+      <StateContext>
+        <Layout>
+          <Toaster />
+          <Component {...pageProps} />
+        </Layout>
+      </StateContext>
+    </SessionProvider>
   );
 }
