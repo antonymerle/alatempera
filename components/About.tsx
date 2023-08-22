@@ -26,10 +26,10 @@ const About = () => {
       <div className={imgContainer}>
         <Image
           className={aboutImage}
-          src={"/art.jpg"}
+          src={"/manon.jpg"}
           width={936}
-          height={1436}
-          alt="art"
+          height={1407}
+          alt="Manon working at her desk"
         />
       </div>
       <div className={textContainer}>
