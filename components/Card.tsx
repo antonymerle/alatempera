@@ -15,6 +15,12 @@ const {
   soldOut,
 } = styles;
 
+enum Picture {
+  mini,
+  full,
+  print,
+}
+
 export const Card: React.FC<{ product: ICartItem }> = ({ product }) => {
   const { lang } = useTranslation();
   const title = lang === "fr" ? product.title_fr : product.title_en;
@@ -24,6 +30,8 @@ export const Card: React.FC<{ product: ICartItem }> = ({ product }) => {
   const height = product.pictures[0].height;
 
   const opus = product.format === "landscape" ? opusLandscape : opusPortrait;
+
+  const index = product.type === "original" ? Picture.mini : Picture.print;
 
   const imgContainer =
     product.format === "landscape"
@@ -48,7 +56,7 @@ export const Card: React.FC<{ product: ICartItem }> = ({ product }) => {
               ? true
               : false
           }
-          src={product.pictures[0].src}
+          src={product.pictures[index].src}
           className={imgStyle}
         />
       </div>
