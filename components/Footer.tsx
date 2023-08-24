@@ -27,6 +27,8 @@ const isLinkActive = (currentPath: string, navbarPath: string) => {
     return true;
   } else if (currentPathTokens[0] === "legal" && navbarPath === "/legal") {
     return true;
+  } else if (currentPathTokens[0] === "admin" && navbarPath === "/admin") {
+    return true;
   }
   return false;
 };
@@ -79,6 +81,9 @@ const Footer = () => {
           </li>
           <li className={isLinkActive(currentPathname, "/legal") ? active : ""}>
             <Link href={"/legal"}>{t("legal")}</Link>
+          </li>
+          <li className={isLinkActive(currentPathname, "/admin") ? active : ""}>
+            <Link href={"/signin"}>Admin</Link>
           </li>
         </ul>
       </div>
