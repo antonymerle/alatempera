@@ -1,8 +1,9 @@
 import React from "react";
+import Image from "next/image";
 import useTranslation from "next-translate/useTranslation";
 import style from "../styles/Shipping.module.css";
 
-const { container } = style;
+const { container, imgContainer, textContainer, shippingImage } = style;
 
 const shippingFeesEn = [
   "For France: €7",
@@ -30,12 +31,23 @@ const Shipping = () => {
 
   return (
     <div className={container}>
-      <h2>{t("title")}</h2>
-      <p>{t("details")}</p>
-      <h3>{t("subtitle")}</h3>
-      <ul>{feesMarkupList(lang)}</ul>
-      <p>{t("exclusions")}</p>
-      <p>{t("delays")}</p>
+      <div className={imgContainer}>
+        <Image
+          className={shippingImage}
+          src={"/shipping.jpg"}
+          width={525}
+          height={700}
+          alt="Manon working at her desk"
+        />
+      </div>
+      <div className={textContainer}>
+        <h2>{t("title")}</h2>
+        <p>{t("details")}</p>
+        <h3>{t("subtitle")}</h3>
+        <ul>{feesMarkupList(lang)}</ul>
+        <p>{t("exclusions")}</p>
+        <p>{t("delays")}</p>
+      </div>
     </div>
   );
 };
