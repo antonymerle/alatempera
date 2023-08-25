@@ -25,7 +25,7 @@ const Terms = () => {
         Les présentes Conditions Générales de Vente (CGV) visent à définir les
         relations contractuelles entre “A la tempera” et l’acheteur et les
         conditions applicables à tout achat effectué par le biais du site{" "}
-        internet www.alatempera.com
+        internet <Link href={"/"}>www.alatempera.com</Link>
       </p>
       <p>
         L’acquisition d’une oeuvre à travers le site{" "}
@@ -79,8 +79,9 @@ const Terms = () => {
       <p>
         Les frais de port sont facturés en supplément du prix des produits
         achetés suivant l’adresse de l’acheteur et son pays d’expédition. Les
-        tarifs applicables sont récapitulés en annexe et peuvent faire l’objet
-        de changement à tout moment par “A la tempera”.
+        tarifs applicables sont récapitulés sur{" "}
+        <Link href={"/shipping"}>page</Link> et peuvent faire l’objet de
+        changement à tout moment par “A la tempera”.
       </p>
       <p>
         Dans le cadre d’un achat à destination d’un pays hors Union Européenne,
