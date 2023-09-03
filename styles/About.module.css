@@ -26,6 +26,13 @@
   margin-bottom: 1rem;
 }
 
+.tab {
+  width: 100%;
+  margin-top: 2rem;
+  display: flex;
+  justify-content: flex-end;
+}
+
 @media screen and (max-width: 640px) {
   .aboutContainer {
     flex-wrap: wrap;
