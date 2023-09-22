@@ -25,7 +25,6 @@
 }
 
 .opusLandscape {
-  /* width: 33%; */
   min-width: 394px;
   height: 400px;
   background-color: white;
@@ -53,7 +52,7 @@
 .image {
   object-fit: scale-down;
   object-position: center bottom;
-  filter: brightness(70%); */
+  filter: brightness(70%);
 }
 .soldOutImage {
   object-fit: scale-down;
