@@ -8,15 +8,23 @@ const nextConfig = {
     return config;
   },
   reactStrictMode: true,
-  images: {
-    domains: ["source.unsplash.com", "images.unsplash.com"],
-  },
+  // images: {
+  //   domains: ["source.unsplash.com", "images.unsplash.com"],
+  // },
   env: {
     DB_CONNECTION_STRING: process.env.DB_CONNECTION_STRING,
-    STRIPE_PUBLISHABLE_KEY: process.env.STRIPE_PUBLISHABLE_KEY_TEST,
-    STRIPE_SECRET_KEY: process.env.STRIPE_SECRET_KEY_TEST,
-    STRIPE_WEBHOOK_SECRET: process.env.STRIPE_WEBHOOK_SECRET_TEST,
-    STRIPE_FREE_SHIPPING: process.env.STRIPE_FREE_SHIPPING_TEST,
+    STRIPE_PUBLISHABLE_KEY:
+      process.env.NODE_ENV === "production"
+        ? process.env.STRIPE_PUBLISHABLE_KEY_PROD
+        : process.env.STRIPE_PUBLISHABLE_KEY_TEST,
+    STRIPE_SECRET_KEY:
+      process.env.NODE_ENV === "production"
+        ? process.env.STRIPE_SECRET_KEY_PROD
+        : process.env.STRIPE_SECRET_KEY_TEST,
+    STRIPE_WEBHOOK_SECRET:
+      process.env.NODE_ENV === "production"
+        ? process.env.STRIPE_WEBHOOK_SECRET_PROD
+        : process.env.STRIPE_WEBHOOK_SECRET_TEST,
     DOMAIN_NAME: process.env.DOMAIN_NAME,
     BASE_DOMAIN_URL:
       process.env.NODE_ENV === "production"
