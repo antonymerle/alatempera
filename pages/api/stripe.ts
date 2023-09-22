@@ -9,7 +9,7 @@ import {
   north_america_shipping,
   countryISOCodes,
 } from "@/utils/getStripe";
-const geoip = require("geoip-lite");
+// const geoip = require("geoip-lite");
 const requestIp = require("request-ip");
 
 export default async function handler(
@@ -69,28 +69,28 @@ export default async function handler(
       const ip = requestIp.getClientIp(req);
       console.log(ip);
 
-      const geo = geoip.lookup(ip as string);
+      // const geo = geoip.lookup(ip as string);
 
       let shipping_options = fallback_shipping; // default
 
-      if (geo) {
-        const country = geo.country;
-        console.log("Country:", country);
+      // if (geo) {
+      //   const country = geo.country;
+      //   console.log("Country:", country);
 
-        if (geo.country === "FR") {
-          shipping_options = france_shipping;
-        } else if (countryISOCodes.europeNoFR.includes(geo.country)) {
-          shipping_options = europe_shipping;
-        } else if (countryISOCodes.northAmerica.includes(geo.country)) {
-          shipping_options = north_america_shipping;
-        } else if (geo.country === "GB") {
-          shipping_options = uk_shipping;
-        }
-      } else {
-        console.log(
-          "Country information not available, defaulting to fallback shipping"
-        );
-      }
+      //   if (geo.country === "FR") {
+      //     shipping_options = france_shipping;
+      //   } else if (countryISOCodes.europeNoFR.includes(geo.country)) {
+      //     shipping_options = europe_shipping;
+      //   } else if (countryISOCodes.northAmerica.includes(geo.country)) {
+      //     shipping_options = north_america_shipping;
+      //   } else if (geo.country === "GB") {
+      //     shipping_options = uk_shipping;
+      //   }
+      // } else {
+      //   console.log(
+      //     "Country information not available, defaulting to fallback shipping"
+      //   );
+      // }
 
       const allowed_countries = [
         "FR",
