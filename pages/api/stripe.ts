@@ -124,6 +124,6 @@ export default async function handler(
     }
   } else {
     res.setHeader("Allow", "POST");
-    res.status(405).end("Sorry, Method Not Allowed");
+    res.status(405).send("Sorry, Method Not Allowed");
   }
 }
