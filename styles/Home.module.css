@@ -14,7 +14,6 @@
 }
 
 .opusPortrait {
-  /* width: 33%; */
   min-width: 394px;
   height: 480px;
   background-color: white;
@@ -23,7 +22,6 @@
   align-items: center;
   justify-content: flex-end;
   margin-bottom: 2rem;
-  /* object-position: center bottom; */
 }
 
 .opusLandscape {
@@ -36,8 +34,6 @@
   align-items: center;
   justify-content: flex-end;
   margin-bottom: 2rem;
-
-  /* object-position: center bottom; */
 }
 
 .imgContainerLandscape {
@@ -57,7 +53,6 @@
 .image {
   object-fit: scale-down;
   object-position: center bottom;
-  /* -webkit-filter: brightness(70%);
   filter: brightness(70%); */
 }
 .soldOutImage {
