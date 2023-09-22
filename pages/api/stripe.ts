@@ -112,8 +112,12 @@ export default async function handler(
         shipping_options,
         line_items,
         metadata: { commandDetails: JSON.stringify(commandDetails) },
-        success_url: `${req.headers.origin}/success?session_id={CHECKOUT_SESSION_ID}`, // CHECKOUT_SESSION_ID to get customer details https://stripe.com/docs/payments/checkout/custom-success-page
-        cancel_url: `${req.headers.origin}/?canceled=true`,
+        success_url: `${process.env.BASE_DOMAIN_URL}/success?session_id={CHECKOUT_SESSION_ID}`, // CHECKOUT_SESSION_ID to get customer details https://stripe.com/docs/payments/checkout/custom-success-page
+
+        // success_url: `${req.headers.origin}/success?session_id={CHECKOUT_SESSION_ID}`, // CHECKOUT_SESSION_ID to get customer details https://stripe.com/docs/payments/checkout/custom-success-page
+        cancel_url: `${process.env.BASE_DOMAIN_URL}/success?session_id={CHECKOUT_SESSION_ID}/?canceled=true`, // CHECKOUT_SESSION_ID to get customer details https://stripe.com/docs/payments/checkout/custom-success-page
+
+        // cancel_url: `${req.headers.origin}/?canceled=true`,
       };
 
       const session = await stripe.checkout.sessions.create(params);
