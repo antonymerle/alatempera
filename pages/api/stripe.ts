@@ -8,6 +8,7 @@ import {
   uk_shipping,
   north_america_shipping,
   countryISOCodes,
+  free_shipping,
 } from "@/utils/getStripe";
 // const geoip = require("geoip-lite");
 const requestIp = require("request-ip");
@@ -71,7 +72,8 @@ export default async function handler(
 
       // const geo = geoip.lookup(ip as string);
 
-      let shipping_options = fallback_shipping; // default
+      // let shipping_options = fallback_shipping; // default
+      let shipping_options = free_shipping;
 
       // if (geo) {
       //   const country = geo.country;

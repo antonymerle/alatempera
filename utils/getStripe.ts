@@ -34,6 +34,29 @@ export const fallback_shipping = [
   },
 ];
 
+export const free_shipping = [
+  {
+    shipping_rate_data: {
+      type: "fixed_amount",
+      fixed_amount: {
+        amount: 0,
+        currency: "eur",
+      },
+      display_name: "Free shipping",
+      delivery_estimate: {
+        minimum: {
+          unit: "business_day",
+          value: 3,
+        },
+        maximum: {
+          unit: "business_day",
+          value: 7,
+        },
+      },
+    },
+  },
+];
+
 export const france_shipping = [
   {
     shipping_rate_data: {
