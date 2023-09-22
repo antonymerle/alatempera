@@ -21,12 +21,6 @@ enum Picture {
   print,
 }
 
-const getPictureFormat = (w: number, h: number): ImageOrientation => {
-  if (w > h) return "portrait";
-  if (w === h) return "square";
-  return "landscape";
-};
-
 export const Card: React.FC<{ product: ICartItem }> = ({ product }) => {
   const { lang } = useTranslation();
   const title = lang === "fr" ? product.title_fr : product.title_en;
@@ -37,17 +31,10 @@ export const Card: React.FC<{ product: ICartItem }> = ({ product }) => {
   const width = product.pictures[index].width;
   const height = product.pictures[index].height;
 
-  const opus =
-    getPictureFormat(width, height) === "landscape"
-      ? opusLandscape
-      : opusPortrait;
-  // const opus = getPictureFormat(width, height);
-
-  const imgContainer = imgContainerLandscape;
-  // const imgContainer =
-  //   product.format === "landscape"
-  //     ? imgContainerLandscape
-  //     : imgContainerPortrait;
+  const imgContainer =
+    product.format === "portrait"
+      ? imgContainerPortrait
+      : imgContainerLandscape;
 
   const containerStyle = `${imgContainer} ${
     product.inventory > 0 ? null : soldOut
@@ -55,7 +42,9 @@ export const Card: React.FC<{ product: ICartItem }> = ({ product }) => {
   const imgStyle = product.inventory > 0 ? image : `${soldOutImage}`;
 
   return (
-    <div className={opus}>
+    <div
+      className={product.format === "portrait" ? opusPortrait : opusLandscape}
+    >
       <div className={containerStyle}>
         <Image
           alt={product.format}
