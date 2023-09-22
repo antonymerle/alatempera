@@ -9,7 +9,7 @@ import {
   north_america_shipping,
   countryISOCodes,
 } from "@/utils/getStripe";
-import geoip from "geoip-lite";
+// import geoip from "geoip-lite";
 const requestIp = require("request-ip");
 
 export default async function handler(
