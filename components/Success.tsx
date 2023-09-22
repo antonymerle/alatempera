@@ -4,7 +4,7 @@ import { BsBagCheckFill } from "react-icons/bs";
 import { useStateContext } from "@/context/StateContext";
 import { runFireworks } from "@/utils/lib";
 import style from "../styles/Success.module.css";
-import useTranslation from "next-translate/useTranslation";
+// import useTranslation from "next-translate/useTranslation";
 import { SessionDetails } from "@/types/types";
 
 const { container, icon, emailMsg, description, email } = style;
@@ -14,7 +14,7 @@ const Success: React.FC<SessionDetails> = ({
   customerFirstName,
 }) => {
   const { setCartItems, setTotalPrice, setTotalQuantities } = useStateContext();
-  const { t } = useTranslation("success");
+  // const { t } = useTranslation("success");
 
   useEffect(() => {
     if (sessionStatus === "complete") {
@@ -27,28 +27,29 @@ const Success: React.FC<SessionDetails> = ({
     }
   }, []);
 
-  const successMarkup = (
-    <>
-      <BsBagCheckFill className={icon} color="#785e21" />
-      <h2>
-        {t("title")}, {customerFirstName}!
-      </h2>
-      <p className={emailMsg}>{t("confirmationEmail")}</p>
-      <p className={description}>
-        {t("question")}{" "}
-        <Link href="/contact" className={email}>
-          contact
-        </Link>
-      </p>
-      <Link href="/">
-        <button type="button">{t("btn")}</button>
-      </Link>
-    </>
-  );
-  const nothingMarkup = <p>{t("nothing")}</p>;
-  const markup = sessionStatus === "complete" ? successMarkup : nothingMarkup;
+  // const successMarkup = (
+  //   <>
+  //     <BsBagCheckFill className={icon} color="#785e21" />
+  //     <h2>
+  //       {t("title")}, {customerFirstName}!
+  //     </h2>
+  //     <p className={emailMsg}>{t("confirmationEmail")}</p>
+  //     <p className={description}>
+  //       {t("question")}{" "}
+  //       <Link href="/contact" className={email}>
+  //         contact
+  //       </Link>
+  //     </p>
+  //     <Link href="/">
+  //       <button type="button">{t("btn")}</button>
+  //     </Link>
+  //   </>
+  // );
+  // const nothingMarkup = <p>{t("nothing")}</p>;
+  // const markup = sessionStatus === "complete" ? successMarkup : nothingMarkup;
 
-  return <div className={container}>{markup}</div>;
+  // return <div className={container}>{markup}</div>;
+  return <div className={container}>Success {customerFirstName}</div>;
 };
 
 export default Success;
