@@ -3,10 +3,10 @@ const nextTranslate = require("next-translate-plugin");
 
 const nextConfig = {
   // webpack5: true,
-  // webpack: (config) => {
-  //   config.resolve.fallback = { fs: false };
-  //   return config;
-  // },
+  webpack: (config) => {
+    config.resolve.fallback = { fs: false };
+    return config;
+  },
   reactStrictMode: true,
   // images: {
   //   domains: ["source.unsplash.com", "images.unsplash.com"],
