@@ -6,6 +6,7 @@ import { runFireworks } from "@/utils/lib";
 import style from "../styles/Success.module.css";
 import useTranslation from "next-translate/useTranslation";
 import { SessionDetails } from "@/types/types";
+import { log } from "node:console";
 
 const { container, icon, emailMsg, description, email } = style;
 
@@ -13,6 +14,7 @@ const Success: React.FC<SessionDetails> = ({
   sessionStatus,
   customerFirstName,
 }) => {
+  console.log({ sessionStatus, customerFirstName });
   const { setCartItems, setTotalPrice, setTotalQuantities } = useStateContext();
   const { t } = useTranslation("success");
 
