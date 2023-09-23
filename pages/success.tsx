@@ -20,6 +20,7 @@ export const getServerSideProps: GetServerSideProps<{
     headers: {
       "Content-Type": "application/json",
       "Access-Control-Allow-Origin": "*",
+      "Content-length": "0",
     },
     body: JSON.stringify({ session_id: stripeSessionID }),
   });
