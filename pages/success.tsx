@@ -18,13 +18,18 @@ export const getServerSideProps: GetServerSideProps<{
     JSON.stringify({ session_id: stripeSessionID })
   ).toString();
 
+  console.log("*** api_checkout payloadLength ***");
+  console.log({ payloadLength });
+
+  console.log(JSON.stringify({ session_id: stripeSessionID }));
+
   try {
     const res = await fetch(`${process.env.BASE_DOMAIN_URL}/api/checkout`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         // "Access-Control-Allow-Origin": "*",
-        "Content-length": payloadLength,
+        // "Content-length": "0",
       },
       body: JSON.stringify({ session_id: stripeSessionID }),
     });

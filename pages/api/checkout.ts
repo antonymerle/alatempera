@@ -32,6 +32,7 @@ export default async function handler(
       console.log({ customerFirstName });
       console.log({ session });
 
+      res.setHeader("content-length", "100");
       res.status(200).json({ customerFirstName, sessionStatus });
     } catch (error: any) {
       console.error(error);
