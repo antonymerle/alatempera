@@ -1,6 +1,7 @@
 import Success from "@/components/Success";
 import { InferGetServerSidePropsType, GetServerSideProps } from "next";
 import { SessionDetails } from "@/types/types";
+const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 const success = ({
   sessionDetails,
@@ -11,6 +12,7 @@ const success = ({
 export const getServerSideProps: GetServerSideProps<{
   sessionDetails: SessionDetails;
 }> = async (context) => {
+  // const session = await await stripe.checkout.sessions.retrieve(req.query.session_id);
   const stripeSessionID = context.query.session_id;
 
   const res = await fetch(`${process.env.BASE_DOMAIN_URL}/api/checkout`, {
