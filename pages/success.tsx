@@ -5,7 +5,8 @@ import { SessionDetails } from "@/types/types";
 const success = ({
   sessionDetails,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-  return <Success {...sessionDetails} />;
+  return <Success />;
+  // return <Success {...sessionDetails} />;
 };
 
 export const getServerSideProps: GetServerSideProps<{
