@@ -30,7 +30,7 @@ const Success: React.FC = () => {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": "*",
+            // "Access-Control-Allow-Origin": "*",
             // "Content-length": "0",
           },
           body: JSON.stringify({ session_id: session_id }),

@@ -33,6 +33,11 @@ export default async function handler(
       console.log({ session });
 
       res.setHeader("content-length", "100");
+      // Enable CORS for specific origins
+      res.setHeader(
+        "Access-Control-Allow-Origin",
+        "https://www.alatempera.com"
+      );
       res.status(200).json({ customerFirstName, sessionStatus });
     } catch (error: any) {
       console.error(error);
