@@ -11,7 +11,7 @@ import {
   free_shipping,
 } from "@/utils/getStripe";
 // const geoip = require("geoip-lite");
-const requestIp = require("request-ip");
+// const requestIp = require("request-ip");
 
 export default async function handler(
   req: NextApiRequest,
@@ -37,7 +37,7 @@ export default async function handler(
               description: item.type,
               images: [
                 process.env.DOMAIN_NAME +
-                  "_next/" +
+                  "/_next/" +
                   "image?url=%2F" +
                   item.pictures[0].src +
                   "&w=1920&q=75",
@@ -64,11 +64,11 @@ export default async function handler(
 
       console.log({ commandDetails });
 
-      console.log("**** GEOLOCATION *****");
-      // geolocation to make dynamic shipping fees.
+      // console.log("**** GEOLOCATION *****");
+      // // geolocation to make dynamic shipping fees.
 
-      const ip = requestIp.getClientIp(req);
-      console.log(ip);
+      // const ip = requestIp.getClientIp(req);
+      // console.log(ip);
 
       // const geo = geoip.lookup(ip as string);
 
@@ -108,14 +108,14 @@ export default async function handler(
         mode: "payment",
         payment_method_types: ["card"],
         billing_address_collection: "auto",
-        shipping_address_collection: { allowed_countries },
+        // shipping_address_collection: { allowed_countries },
         shipping_options,
         line_items,
         metadata: { commandDetails: JSON.stringify(commandDetails) },
-        success_url: `${process.env.BASE_DOMAIN_URL}/success?session_id={CHECKOUT_SESSION_ID}`, // CHECKOUT_SESSION_ID to get customer details https://stripe.com/docs/payments/checkout/custom-success-page
+        // success_url: `${process.env.BASE_DOMAIN_URL}/success?session_id={CHECKOUT_SESSION_ID}`, // CHECKOUT_SESSION_ID to get customer details https://stripe.com/docs/payments/checkout/custom-success-page
 
-        // success_url: `${req.headers.origin}/success?session_id={CHECKOUT_SESSION_ID}`, // CHECKOUT_SESSION_ID to get customer details https://stripe.com/docs/payments/checkout/custom-success-page
-        cancel_url: `${process.env.BASE_DOMAIN_URL}/success?session_id={CHECKOUT_SESSION_ID}/?canceled=true`, // CHECKOUT_SESSION_ID to get customer details https://stripe.com/docs/payments/checkout/custom-success-page
+        success_url: `${req.headers.origin}/success?session_id={CHECKOUT_SESSION_ID}`, // CHECKOUT_SESSION_ID to get customer details https://stripe.com/docs/payments/checkout/custom-success-page
+        cancel_url: `${process.env.BASE_DOMAIN_URL}/?canceled=true`, // CHECKOUT_SESSION_ID to get customer details https://stripe.com/docs/payments/checkout/custom-success-page
 
         // cancel_url: `${req.headers.origin}/?canceled=true`,
       };
