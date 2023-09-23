@@ -9,6 +9,8 @@ export default async function handler(
   console.log(req.method);
   console.log(req.body.session_id);
 
+  res.setHeader("Access-Control-Allow-Origin", "https://www.alatempera.com");
+
   if (!req.body.session_id) {
     console.log("Bad request : session ID is missing");
 
@@ -32,12 +34,9 @@ export default async function handler(
       console.log({ customerFirstName });
       console.log({ session });
 
-      res.setHeader("content-length", "100");
+      // res.setHeader("content-length", "100");
       // Enable CORS for specific origins
-      res.setHeader(
-        "Access-Control-Allow-Origin",
-        "https://www.alatempera.com"
-      );
+
       res.status(200).json({ customerFirstName, sessionStatus });
     } catch (error: any) {
       console.error(error);
