@@ -23,31 +23,33 @@ export const getServerSideProps: GetServerSideProps<{
 
   console.log(JSON.stringify({ session_id: stripeSessionID }));
 
-  // try {
-  const res = await fetch(`${process.env.BASE_DOMAIN_URL}/api/checkout`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      // "Access-Control-Allow-Origin": "*",
-      // "Content-length": "0",
-    },
-    body: JSON.stringify({ session_id: stripeSessionID }),
-  });
+  let sessionDetails: any = {};
 
-  const sessionDetails = await res.json();
+  try {
+    const res = await fetch(`${process.env.BASE_DOMAIN_URL}/api/checkout`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        // "Access-Control-Allow-Origin": "*",
+        // "Content-length": "0",
+      },
+      body: JSON.stringify({ session_id: stripeSessionID }),
+    });
 
-  console.log("*** api_checkout response ***");
-  console.log({ sessionDetails });
+    sessionDetails = await res.json();
 
-  return {
-    props: { sessionDetails },
-  };
-  // } catch (error) {
-  //   console.log(error);
-  //   return {
-  //     props: { sessionDetails: {} },
-  //   };
-  // }
+    console.log("*** api_checkout response ***");
+    console.log({ sessionDetails });
+
+    return {
+      props: { sessionDetails },
+    };
+  } catch (error) {
+    console.log(error);
+    return {
+      props: { sessionDetails },
+    };
+  }
 };
 
 export default success;
