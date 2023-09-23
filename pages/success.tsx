@@ -5,8 +5,7 @@ import { SessionDetails } from "@/types/types";
 const success = ({
   sessionDetails,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-  return <Success />;
-  // return <Success {...sessionDetails} />;
+  return <Success {...sessionDetails} />;
 };
 
 export const getServerSideProps: GetServerSideProps<{
@@ -16,15 +15,14 @@ export const getServerSideProps: GetServerSideProps<{
   const stripeSessionID = context.query.session_id;
 
   const payloadLength = Buffer.byteLength(
-    JSON.stringify({ session_id: stripeSessionID })
+    JSON.stringify({ session_id: stripeSessionID }),
+    "utf8"
   ).toString();
 
   console.log("*** api_checkout payloadLength ***");
   console.log({ payloadLength });
 
   console.log(JSON.stringify({ session_id: stripeSessionID }));
-
-  let sessionDetails: any = {};
 
   try {
     const res = await fetch(`${process.env.BASE_DOMAIN_URL}/api/checkout`, {
@@ -37,7 +35,7 @@ export const getServerSideProps: GetServerSideProps<{
       body: JSON.stringify({ session_id: stripeSessionID }),
     });
 
-    sessionDetails = await res.json();
+    const sessionDetails = await res.json();
 
     console.log("*** api_checkout response ***");
     console.log({ sessionDetails });
@@ -48,7 +46,7 @@ export const getServerSideProps: GetServerSideProps<{
   } catch (error) {
     console.log(error);
     return {
-      props: { sessionDetails },
+      props: { sessionDetails: null },
     };
   }
 };
