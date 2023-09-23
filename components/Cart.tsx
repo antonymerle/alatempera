@@ -45,8 +45,8 @@ const Cart = () => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
-        "Accept-Language": lang,
+        // "Access-Control-Allow-Origin": "*",
+        // "Accept-Language": lang,
       },
       body: JSON.stringify({ cartItems }),
     });
