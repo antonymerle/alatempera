@@ -185,12 +185,12 @@ const fulfillOrder = async (
 
   lineItems.forEach(async (lineItem) => {
     try {
-      let item = null;
-
       switch (lineItem.productType) {
         case "original":
           console.log("Product is an original work");
-          item = await Work.findById(lineItem.item_id);
+          console.log("test");
+
+          let item = await Work.findById(lineItem.item_id);
 
           item.inventory -= lineItem.quantity;
           console.log("new item inventory", item.inventory);
