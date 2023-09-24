@@ -168,11 +168,11 @@ const fulfillOrder = async (
   // console.log({ completedCheckoutSessionTimestamp });
   // console.log({ lineItems });
 
-  await dbConnect();
+  // await dbConnect();
 
-  const data = await Work.find({});
+  // const data = await Work.find({});
 
-  data.forEach((work) => console.log(work.title_fr));
+  // data.forEach((work) => console.log(work.title_fr));
 
   try {
     //   // 1. record order in database
