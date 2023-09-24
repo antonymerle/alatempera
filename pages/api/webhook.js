@@ -164,21 +164,25 @@ const fulfillOrder = async (
   console.log({ completedCheckoutSessionTimestamp });
   console.log({ lineItems });
 
-  // 1. record order in database
-  const newOrder = new OrderModel({
-    customerName: customerNameFromCheckoutSession,
-    customerEmail: customerEmailFromCheckoutSession,
-    paymentIntentId,
-    timestamp: completedCheckoutSessionTimestamp,
-    items: lineItems,
-  });
+  // try {
+  //   // 1. record order in database
+  //   const newOrder = new OrderModel({
+  //     customerName: customerNameFromCheckoutSession,
+  //     customerEmail: customerEmailFromCheckoutSession,
+  //     paymentIntentId,
+  //     timestamp: completedCheckoutSessionTimestamp,
+  //     items: lineItems,
+  //   });
 
-  newOrder
-    .save()
-    .then(() => {
-      OrderModel.findOne({ paymentIntentId });
-    })
-    .then((data) => console.log(data));
+  //   newOrder
+  //     .save()
+  //     .then(() => {
+  //       OrderModel.findOne({ paymentIntentId });
+  //     })
+  //     .then((data) => console.log(data));
+  // } catch (error) {
+  //   console.log("Error recording order in database:", error);
+  // }
 
   // 2. decrement inventory
   console.log("decremeting inventory");
