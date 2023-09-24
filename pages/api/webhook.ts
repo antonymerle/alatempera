@@ -3,19 +3,23 @@ import dbConnect from "@/models/connection";
 import OrderModel from "@/models/orders";
 import Work from "@/models/works";
 import Print from "@/models/print";
+import type { NextApiRequest, NextApiResponse } from "next";
 
-const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
+const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET ?? "nope";
 
-export default async function handler(req, res) {
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
   // 1. retrieve email from user session to record the order later
   // The email is passed to fulfillOrder()
 
-  const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
+  const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
     apiVersion: "2022-11-15",
   });
 
   if (req.method === "POST") {
-    const sig = req.headers["stripe-signature"];
+    const sig: string | string[] = req.headers["stripe-signature"] ?? "nope";
 
     // console.log({ sig });
 
@@ -26,13 +30,14 @@ export default async function handler(req, res) {
 
     console.log("**** ENTERING WEBHOOK ****");
 
-    let event = Stripe.Event;
+    // let event = Stripe.Event;
+    let event: any = {};
 
     try {
-      const body = await buffer(req);
+      const body: any = await buffer(req);
 
       event = stripe.webhooks.constructEvent(body, sig, webhookSecret);
-    } catch (err) {
+    } catch (err: any) {
       console.log(`❌ Error message: ${err.message}`);
       res.status(400).send(`Webhook Error: ${err.message}`);
       return;
@@ -60,12 +65,10 @@ export default async function handler(req, res) {
           // console.log({ event });
           const completedCheckoutSessionTimestamp = event.created * 1000; // stripe timestamp is measured in seconds since the Unix epoch.
           // Retrieve the session. If you require line items in the response, you may include them by expanding line_items.
-          const sessionWithLineItems = await stripe.checkout.sessions.retrieve(
-            event.data.object.id,
-            {
+          const sessionWithLineItems: any =
+            await stripe.checkout.sessions.retrieve(event.data.object.id, {
               expand: ["line_items"],
-            }
-          );
+            });
 
           // console.log("*** checkout session object ***");
           // console.log(JSON.stringify(sessionWithLineItems, null, 3));
@@ -84,7 +87,7 @@ export default async function handler(req, res) {
           // console.log({ commandDetails });
 
           const lineItems = sessionWithLineItems.line_items.data.map(
-            (lineItem, i) => {
+            (lineItem: any, i: number) => {
               return {
                 // custom metadata passed in the line_items object in /api/stripe
                 item_id: commandDetails[i].id,
@@ -135,9 +138,9 @@ export default async function handler(req, res) {
   }
 }
 
-const buffer = (req) => {
+const buffer = (req: NextApiRequest) => {
   return new Promise((resolve, reject) => {
-    const chunks = [];
+    const chunks: any[] = [];
 
     req.on("data", (chunk) => {
       chunks.push(chunk);
@@ -152,11 +155,11 @@ const buffer = (req) => {
 };
 
 const fulfillOrder = async (
-  customerNameFromCheckoutSession,
-  customerEmailFromCheckoutSession,
-  paymentIntentId,
-  completedCheckoutSessionTimestamp,
-  lineItems
+  customerNameFromCheckoutSession: string,
+  customerEmailFromCheckoutSession: string,
+  paymentIntentId: string,
+  completedCheckoutSessionTimestamp: number,
+  lineItems: any
 ) => {
   console.log("entering fulfillOrder");
   console.log({ customerNameFromCheckoutSession });
@@ -182,7 +185,7 @@ const fulfillOrder = async (
       .then(() => {
         OrderModel.findOne({ paymentIntentId });
       })
-      .then((data) => console.log(data));
+      .then((data: any) => console.log(data));
   } catch (error) {
     console.log("Error recording order in database:", error);
   }
@@ -190,7 +193,7 @@ const fulfillOrder = async (
   // 2. decrement inventory
   console.log("decremeting inventory");
 
-  lineItems.forEach(async (lineItem) => {
+  lineItems.forEach(async (lineItem: any) => {
     try {
       switch (lineItem.productType) {
         case "original":
@@ -204,7 +207,7 @@ const fulfillOrder = async (
           item.inventory -= lineItem.quantity;
           console.log("new item inventory", item.inventory);
 
-          await item.save().then((data) => console.log(data));
+          await item.save().then((data: any) => console.log(data));
           // console.log(`Quantity updated for work with ID ${item._id}`);
           break;
 
@@ -236,55 +239,55 @@ const fulfillOrder = async (
 
 // Function to update the user document with new orders
 // TODO : rewire or not updateUserWithNewOrders
-const updateUserWithNewOrders = async (
-  completedCheckoutSessionId,
-  completedCheckoutSessionTimestamp,
-  userEmail,
-  newOrder
-) => {
-  try {
-    // Fetch the existing user document
-    const existingUser = await client.fetch(
-      `*[_type == "user" && email == $userEmail][0]`,
-      { userEmail }
-    );
+// const updateUserWithNewOrders = async (
+//   completedCheckoutSessionId,
+//   completedCheckoutSessionTimestamp,
+//   userEmail,
+//   newOrder
+// ) => {
+//   try {
+//     // Fetch the existing user document
+//     const existingUser = await client.fetch(
+//       `*[_type == "user" && email == $userEmail][0]`,
+//       { userEmail }
+//     );
 
-    const lines = newOrder.map((order) => {
-      return {
-        _key: order.id,
-        line_id: order.id,
-        object: order.object,
-        amount_discount: order.amount_discount,
-        amount_subtotal: order.amount_subtotal,
-        amount_tax: order.amount_tax,
-        amount_total: order.amount_total,
-        currency: order.currency,
-        description: order.description,
+//     const lines = newOrder.map((order) => {
+//       return {
+//         _key: order.id,
+//         line_id: order.id,
+//         object: order.object,
+//         amount_discount: order.amount_discount,
+//         amount_subtotal: order.amount_subtotal,
+//         amount_tax: order.amount_tax,
+//         amount_total: order.amount_total,
+//         currency: order.currency,
+//         description: order.description,
 
-        quantity: order.quantity,
-      };
-    });
+//         quantity: order.quantity,
+//       };
+//     });
 
-    let newOrderDocument = {
-      _type: "order",
-      customer: {
-        _ref: existingUser._id,
-      },
-      command_id: completedCheckoutSessionId,
-      timestamp: completedCheckoutSessionTimestamp,
-      items: lines,
-    };
+//     let newOrderDocument = {
+//       _type: "order",
+//       customer: {
+//         _ref: existingUser._id,
+//       },
+//       command_id: completedCheckoutSessionId,
+//       timestamp: completedCheckoutSessionTimestamp,
+//       items: lines,
+//     };
 
-    await client.create(newOrderDocument);
+//     await client.create(newOrderDocument);
 
-    console.log("User document updated with new orders successfully");
-  } catch (error) {
-    console.error("Error updating user document:", error);
-  }
-};
-
-// export const config = {
-//   api: {
-//     bodyParser: false,
-//   },
+//     console.log("User document updated with new orders successfully");
+//   } catch (error) {
+//     console.error("Error updating user document:", error);
+//   }
 // };
+
+export const config = {
+  api: {
+    bodyParser: false,
+  },
+};
