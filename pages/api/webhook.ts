@@ -1,6 +1,6 @@
 import Stripe from "stripe";
 import dbConnect from "@/models/connection";
-import OrderModel from "@/models/orders";
+import Order from "@/models/orders";
 import Work from "@/models/works";
 import Print from "@/models/print";
 import type { NextApiRequest, NextApiResponse } from "next";
@@ -170,9 +170,13 @@ const fulfillOrder = async (
 
   await dbConnect();
 
+  const data = await Work.find({});
+
+  data.forEach((work) => console.log(work.title));
+
   try {
     //   // 1. record order in database
-    const newOrder = new OrderModel({
+    const newOrder = new Order({
       customerName: customerNameFromCheckoutSession,
       customerEmail: customerEmailFromCheckoutSession,
       paymentIntentId,
@@ -183,7 +187,7 @@ const fulfillOrder = async (
     newOrder
       .save()
       .then(() => {
-        OrderModel.findOne({ paymentIntentId });
+        Order.findOne({ paymentIntentId });
       })
       .then((data: any) => console.log(data));
   } catch (error) {
