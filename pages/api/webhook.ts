@@ -184,7 +184,7 @@ const fulfillOrder = async (
       items: lineItems,
     });
 
-    newOrder
+    await newOrder
       .save()
       .then(() => {
         Order.findOne({ paymentIntentId });
