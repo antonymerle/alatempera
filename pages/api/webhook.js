@@ -16,7 +16,7 @@ export default async function handler(req, res) {
   if (req.method === "POST") {
     const sig = req.headers["stripe-signature"];
 
-    console.log({ sig });
+    // console.log({ sig });
 
     console.log({
       STRIPE_SECRET_KEY: process.env.STRIPE_SECRET_KEY,
@@ -39,7 +39,7 @@ export default async function handler(req, res) {
 
     // for reference, check the event object in Stripe documentation
     // https://stripe.com/docs/api/events/object
-    console.log("✅ Success:", event.id);
+    // console.log("✅ Success:", event.id);
 
     switch (event.type) {
       case "checkout.session.completed":
@@ -50,13 +50,13 @@ export default async function handler(req, res) {
             event.data.object.customer_details.name ?? "";
           const paymentIntentId = event.data.object.payment_intent ?? "";
 
-          console.log({ customerEmailFromCheckoutSession });
-          console.log({ customerNameFromCheckoutSession });
+          // console.log({ customerEmailFromCheckoutSession });
+          // console.log({ customerNameFromCheckoutSession });
           // TODO : stocker cet event en DB. les donnes sont dans event.data.
 
           // Then define and call a function to handle the event payment_intent.succeeded
-          console.log("Le client a payé sa commande.");
-          console.log({ event });
+          // console.log("Le client a payé sa commande.");
+          // console.log({ event });
           const completedCheckoutSessionTimestamp = event.created * 1000; // stripe timestamp is measured in seconds since the Unix epoch.
           // Retrieve the session. If you require line items in the response, you may include them by expanding line_items.
           const sessionWithLineItems = await stripe.checkout.sessions.retrieve(
@@ -66,21 +66,21 @@ export default async function handler(req, res) {
             }
           );
 
-          console.log("*** checkout session object ***");
-          console.log(JSON.stringify(sessionWithLineItems, null, 3));
+          // console.log("*** checkout session object ***");
+          // console.log(JSON.stringify(sessionWithLineItems, null, 3));
 
           // cf documentation : line_items : https://stripe.com/docs/api/checkout/sessions/object#checkout_session_object-line_items
-          console.log("*** line items ***");
-          console.log(
-            JSON.stringify(sessionWithLineItems.line_items.data, null, 2)
-          );
+          // console.log("*** line items ***");
+          // console.log(
+          //   JSON.stringify(sessionWithLineItems.line_items.data, null, 2)
+          // );
 
-          console.log("*** metadata : commandDetails ***");
+          // console.log("*** metadata : commandDetails ***");
 
-          const commandDetails = JSON.parse(
-            sessionWithLineItems.metadata.commandDetails
-          );
-          console.log({ commandDetails });
+          // const commandDetails = JSON.parse(
+          //   sessionWithLineItems.metadata.commandDetails
+          // );
+          // console.log({ commandDetails });
 
           const lineItems = sessionWithLineItems.line_items.data.map(
             (lineItem, i) => {
@@ -157,6 +157,13 @@ const fulfillOrder = async (
   completedCheckoutSessionTimestamp,
   lineItems
 ) => {
+  console.log("entering fulfillOrder");
+  console.log({ customerNameFromCheckoutSession });
+  console.log({ customerEmailFromCheckoutSession });
+  console.log({ paymentIntentId });
+  console.log({ completedCheckoutSessionTimestamp });
+  console.log({ lineItems });
+
   // 1. record order in database
   const newOrder = new OrderModel({
     customerName: customerNameFromCheckoutSession,
@@ -178,10 +185,11 @@ const fulfillOrder = async (
 
   lineItems.forEach(async (lineItem) => {
     try {
-      let item;
+      let item = null;
 
       switch (lineItem.productType) {
         case "original":
+          console.log("Product is an original work");
           item = await Work.findById(lineItem.item_id);
           break;
 
@@ -196,6 +204,7 @@ const fulfillOrder = async (
 
       if (item) {
         item.inventory -= lineItem.quantity;
+        console.log("new item inventory", item.inventory);
 
         await item.save();
         console.log(`Quantity updated for work with ID ${item._id}`);
