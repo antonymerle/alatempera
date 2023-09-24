@@ -195,6 +195,7 @@ const fulfillOrder = async (
           console.log("test");
 
           let item = await Work.findById(lineItem.item_id);
+          console.log({ item });
 
           item.inventory -= lineItem.quantity;
           console.log("new item inventory", item.inventory);
