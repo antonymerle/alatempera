@@ -191,10 +191,22 @@ const fulfillOrder = async (
         case "original":
           console.log("Product is an original work");
           item = await Work.findById(lineItem.item_id);
+
+          item.inventory -= lineItem.quantity;
+          console.log("new item inventory", item.inventory);
+
+          await item.save();
+          console.log(`Quantity updated for work with ID ${item._id}`);
           break;
 
         case "print":
           item = await Print.findById(lineItem.item_id);
+
+          item.inventory -= lineItem.quantity;
+          console.log("new item inventory", item.inventory);
+
+          await item.save();
+          console.log(`Quantity updated for work with ID ${item._id}`);
           break;
 
         default:
@@ -202,13 +214,9 @@ const fulfillOrder = async (
           break;
       }
 
-      if (item) {
-        item.inventory -= lineItem.quantity;
-        console.log("new item inventory", item.inventory);
+      // if (item) {
 
-        await item.save();
-        console.log(`Quantity updated for work with ID ${item._id}`);
-      }
+      // }
     } catch (error) {
       console.error(
         `Error updating quantity for work with title ${lineItem.description}: ${error}`
