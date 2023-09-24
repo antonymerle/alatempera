@@ -43,78 +43,84 @@ export default async function handler(req, res) {
 
     switch (event.type) {
       case "checkout.session.completed":
-        const customerEmailFromCheckoutSession =
-          event.data.object.customer_details.email ?? "";
-        const customerNameFromCheckoutSession =
-          event.data.object.customer_details.name ?? "";
-        const paymentIntentId = event.data.object.payment_intent ?? "";
+        try {
+          const customerEmailFromCheckoutSession =
+            event.data.object.customer_details.email ?? "";
+          const customerNameFromCheckoutSession =
+            event.data.object.customer_details.name ?? "";
+          const paymentIntentId = event.data.object.payment_intent ?? "";
 
-        console.log({ customerEmailFromCheckoutSession });
-        console.log({ customerNameFromCheckoutSession });
-        // TODO : stocker cet event en DB. les donnes sont dans event.data.
+          console.log({ customerEmailFromCheckoutSession });
+          console.log({ customerNameFromCheckoutSession });
+          // TODO : stocker cet event en DB. les donnes sont dans event.data.
 
-        // Then define and call a function to handle the event payment_intent.succeeded
-        console.log("Le client a payé sa commande.");
-        console.log({ event });
-        const completedCheckoutSessionTimestamp = event.created * 1000; // stripe timestamp is measured in seconds since the Unix epoch.
-        // Retrieve the session. If you require line items in the response, you may include them by expanding line_items.
-        const sessionWithLineItems = await stripe.checkout.sessions.retrieve(
-          event.data.object.id,
-          {
-            expand: ["line_items"],
-          }
-        );
+          // Then define and call a function to handle the event payment_intent.succeeded
+          console.log("Le client a payé sa commande.");
+          console.log({ event });
+          const completedCheckoutSessionTimestamp = event.created * 1000; // stripe timestamp is measured in seconds since the Unix epoch.
+          // Retrieve the session. If you require line items in the response, you may include them by expanding line_items.
+          const sessionWithLineItems = await stripe.checkout.sessions.retrieve(
+            event.data.object.id,
+            {
+              expand: ["line_items"],
+            }
+          );
 
-        console.log("*** checkout session object ***");
-        console.log(JSON.stringify(sessionWithLineItems, null, 3));
+          console.log("*** checkout session object ***");
+          console.log(JSON.stringify(sessionWithLineItems, null, 3));
 
-        // cf documentation : line_items : https://stripe.com/docs/api/checkout/sessions/object#checkout_session_object-line_items
-        console.log("*** line items ***");
-        console.log(
-          JSON.stringify(sessionWithLineItems.line_items.data, null, 2)
-        );
+          // cf documentation : line_items : https://stripe.com/docs/api/checkout/sessions/object#checkout_session_object-line_items
+          console.log("*** line items ***");
+          console.log(
+            JSON.stringify(sessionWithLineItems.line_items.data, null, 2)
+          );
 
-        console.log("*** metadata : commandDetails ***");
+          console.log("*** metadata : commandDetails ***");
 
-        const commandDetails = JSON.parse(
-          sessionWithLineItems.metadata.commandDetails
-        );
-        console.log({ commandDetails });
+          const commandDetails = JSON.parse(
+            sessionWithLineItems.metadata.commandDetails
+          );
+          console.log({ commandDetails });
 
-        const lineItems = sessionWithLineItems.line_items.data.map(
-          (lineItem, i) => {
-            return {
-              // custom metadata passed in the line_items object in /api/stripe
-              item_id: commandDetails[i].id,
-              productType: commandDetails[i].type,
-              productTitle: commandDetails[i].title,
-              quantity: commandDetails[i].quantity,
+          const lineItems = sessionWithLineItems.line_items.data.map(
+            (lineItem, i) => {
+              return {
+                // custom metadata passed in the line_items object in /api/stripe
+                item_id: commandDetails[i].id,
+                productType: commandDetails[i].type,
+                productTitle: commandDetails[i].title,
+                quantity: commandDetails[i].quantity,
 
-              // stripe regular data
-              line_id: lineItem.id,
-              amount_discount: lineItem.amount_discount,
-              amount_subtotal: lineItem.amount_subtotal,
-              amount_tax: lineItem.amount_tax,
-              amount_total: lineItem.amount_total,
-              currency: lineItem.currency,
-            };
-          }
-        );
+                // stripe regular data
+                line_id: lineItem.id,
+                amount_discount: lineItem.amount_discount,
+                amount_subtotal: lineItem.amount_subtotal,
+                amount_tax: lineItem.amount_tax,
+                amount_total: lineItem.amount_total,
+                currency: lineItem.currency,
+              };
+            }
+          );
 
-        console.log("*** lineItems ***");
-        console.log({ lineItems });
+          console.log("*** lineItems ***");
+          console.log({ lineItems });
 
-        // Fulfill the purchase && decrement inventory...
-        const response = await fulfillOrder(
-          customerNameFromCheckoutSession,
-          customerEmailFromCheckoutSession,
-          paymentIntentId,
-          completedCheckoutSessionTimestamp,
-          lineItems
-        );
-        console.log({ fulfillOrder: response });
+          // Fulfill the purchase && decrement inventory...
+          const response = await fulfillOrder(
+            customerNameFromCheckoutSession,
+            customerEmailFromCheckoutSession,
+            paymentIntentId,
+            completedCheckoutSessionTimestamp,
+            lineItems
+          );
+          console.log({ fulfillOrder: response });
 
-        break;
+          break;
+        } catch (error) {
+          console.error("Error fulfilling order:", error);
+          return res.status(500).send(`Error fulfilling order: ${error}`);
+        }
+
       // ... handle other event types
       default:
         console.log(`Unhandled event type ${event.type}`);
