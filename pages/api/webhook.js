@@ -167,25 +167,25 @@ const fulfillOrder = async (
 
   await dbConnect();
 
-  // try {
-  //   // 1. record order in database
-  //   const newOrder = new OrderModel({
-  //     customerName: customerNameFromCheckoutSession,
-  //     customerEmail: customerEmailFromCheckoutSession,
-  //     paymentIntentId,
-  //     timestamp: completedCheckoutSessionTimestamp,
-  //     items: lineItems,
-  //   });
+  try {
+    //   // 1. record order in database
+    const newOrder = new OrderModel({
+      customerName: customerNameFromCheckoutSession,
+      customerEmail: customerEmailFromCheckoutSession,
+      paymentIntentId,
+      timestamp: completedCheckoutSessionTimestamp,
+      items: lineItems,
+    });
 
-  //   newOrder
-  //     .save()
-  //     .then(() => {
-  //       OrderModel.findOne({ paymentIntentId });
-  //     })
-  //     .then((data) => console.log(data));
-  // } catch (error) {
-  //   console.log("Error recording order in database:", error);
-  // }
+    newOrder
+      .save()
+      .then(() => {
+        OrderModel.findOne({ paymentIntentId });
+      })
+      .then((data) => console.log(data));
+  } catch (error) {
+    console.log("Error recording order in database:", error);
+  }
 
   // 2. decrement inventory
   console.log("decremeting inventory");
@@ -197,14 +197,15 @@ const fulfillOrder = async (
           console.log("Product is an original work");
           console.log("test");
 
-          let item = await Work.findById(lineItem.item_id);
+          // let item = await Work.findById(lineItem.item_id);
+          let item = await Work.findOne({ _id: lineItem.item_id });
           console.log({ item });
 
           item.inventory -= lineItem.quantity;
           console.log("new item inventory", item.inventory);
 
-          await item.save();
-          console.log(`Quantity updated for work with ID ${item._id}`);
+          await item.save().then((data) => console.log(data));
+          // console.log(`Quantity updated for work with ID ${item._id}`);
           break;
 
         case "print":
