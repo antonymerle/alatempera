@@ -283,8 +283,8 @@ const updateUserWithNewOrders = async (
   }
 };
 
-export const config = {
-  api: {
-    bodyParser: false,
-  },
-};
+// export const config = {
+//   api: {
+//     bodyParser: false,
+//   },
+// };
