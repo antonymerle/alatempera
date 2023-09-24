@@ -1,4 +1,5 @@
 import Stripe from "stripe";
+import dbConnect from "@/models/connection";
 import OrderModel from "@/models/orders";
 import Work from "@/models/works";
 import Print from "@/models/print";
@@ -163,6 +164,8 @@ const fulfillOrder = async (
   console.log({ paymentIntentId });
   console.log({ completedCheckoutSessionTimestamp });
   console.log({ lineItems });
+
+  await dbConnect();
 
   // try {
   //   // 1. record order in database
