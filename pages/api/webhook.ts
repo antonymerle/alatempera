@@ -197,50 +197,62 @@ const fulfillOrder = async (
   // 2. decrement inventory
   console.log("decremeting inventory");
 
-  lineItems.forEach(async (lineItem: any) => {
-    try {
-      switch (lineItem.productType) {
-        case "original":
-          console.log("Product is an original work");
-          console.log("test");
-
-          // let item = await Work.findById(lineItem.item_id);
-          const workData = await Work.findOne({ _id: lineItem.item_id });
-          let work = JSON.parse(JSON.stringify(workData));
-          console.log({ work });
-
-          work.inventory -= lineItem.quantity;
-          console.log("new item inventory", work.inventory);
-
-          await work.save().then((data: any) => console.log(data));
-          // console.log(`Quantity updated for work with ID ${item._id}`);
-          break;
-
-        case "print":
-          const printData = await Print.findById(lineItem.item_id);
-
-          let print = JSON.parse(JSON.stringify(printData));
-          print.inventory -= lineItem.quantity;
-          console.log("new item inventory", print.inventory);
-
-          await print.save().then((data: any) => console.log(data));
-          console.log(`Quantity updated for work with ID ${print._id}`);
-          break;
-
-        default:
-          console.log("Unknown product type : " + lineItem.productType);
-          break;
-      }
-
-      // if (item) {
-
-      // }
-    } catch (error) {
-      console.error(
-        `Error updating quantity for work with title ${lineItem.description}: ${error}`
-      );
+  for await (const lineItem of lineItems) {
+    if (lineItem.productType === "original") {
+      let work = await Work.findById(lineItem.item_id);
+      work.inventory -= lineItem.quantity;
+      await work.save().then((data: any) => console.log(data));
+    } else if (lineItem.productType === "print") {
+      let print = await Print.findById(lineItem.item_id);
+      print.inventory -= lineItem.quantity;
+      await print.save().then((data: any) => console.log(data));
     }
-  });
+  }
+
+  // lineItems.forEach(async (lineItem: any) => {
+  //   try {
+  //     switch (lineItem.productType) {
+  //       case "original":
+  //         console.log("Product is an original work");
+  //         console.log("test");
+
+  //         // let item = await Work.findById(lineItem.item_id);
+  //         const workData = await Work.findOne({ _id: lineItem.item_id });
+  //         let work = JSON.parse(JSON.stringify(workData));
+  //         console.log({ work });
+
+  //         work.inventory -= lineItem.quantity;
+  //         console.log("new item inventory", work.inventory);
+
+  //         await work.save().then((data: any) => console.log(data));
+  //         // console.log(`Quantity updated for work with ID ${item._id}`);
+  //         break;
+
+  //       case "print":
+  //         const printData = await Print.findById(lineItem.item_id);
+
+  //         let print = JSON.parse(JSON.stringify(printData));
+  //         print.inventory -= lineItem.quantity;
+  //         console.log("new item inventory", print.inventory);
+
+  //         await print.save().then((data: any) => console.log(data));
+  //         console.log(`Quantity updated for work with ID ${print._id}`);
+  //         break;
+
+  //       default:
+  //         console.log("Unknown product type : " + lineItem.productType);
+  //         break;
+  //     }
+
+  // if (item) {
+
+  // }
+  // } catch (error) {
+  //   console.error(
+  //     `Error updating quantity for work with title ${lineItem.description}: ${error}`
+  //   );
+  // }
+  // });
 };
 
 // Function to update the user document with new orders
