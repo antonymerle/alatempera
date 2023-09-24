@@ -98,7 +98,8 @@ Sold out overlay
 */
 
 .soldOut:before {
-  content: "Vendu";
+  /* content: "sold out"; */
+  content: attr(data-text)
   font-weight: bolder;
   color: #fff;
   font-size: 2em;

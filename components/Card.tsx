@@ -45,7 +45,10 @@ export const Card: React.FC<{ product: ICartItem }> = ({ product }) => {
     <div
       className={product.format === "portrait" ? opusPortrait : opusLandscape}
     >
-      <div className={containerStyle}>
+      <div
+        className={containerStyle}
+        data-text={lang === "fr" ? "Vendu" : "Sold Out"}
+      >
         <Image
           alt={product.format}
           fill={true}
