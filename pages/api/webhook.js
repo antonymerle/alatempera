@@ -18,10 +18,10 @@ export default async function handler(req, res) {
 
     // console.log({ sig });
 
-    console.log({
-      STRIPE_SECRET_KEY: process.env.STRIPE_SECRET_KEY,
-      STRIPE_WEBHOOK_SECRET: process.env.STRIPE_WEBHOOK_SECRET,
-    });
+    // console.log({
+    //   STRIPE_SECRET_KEY: process.env.STRIPE_SECRET_KEY,
+    //   STRIPE_WEBHOOK_SECRET: process.env.STRIPE_WEBHOOK_SECRET,
+    // });
 
     console.log("**** ENTERING WEBHOOK ****");
 
@@ -77,9 +77,9 @@ export default async function handler(req, res) {
 
           // console.log("*** metadata : commandDetails ***");
 
-          // const commandDetails = JSON.parse(
-          //   sessionWithLineItems.metadata.commandDetails
-          // );
+          const commandDetails = JSON.parse(
+            sessionWithLineItems.metadata.commandDetails
+          );
           // console.log({ commandDetails });
 
           const lineItems = sessionWithLineItems.line_items.data.map(
