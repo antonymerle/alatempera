@@ -162,17 +162,17 @@ const fulfillOrder = async (
   lineItems: any
 ) => {
   console.log("entering fulfillOrder");
-  console.log({ customerNameFromCheckoutSession });
-  console.log({ customerEmailFromCheckoutSession });
-  console.log({ paymentIntentId });
-  console.log({ completedCheckoutSessionTimestamp });
-  console.log({ lineItems });
+  // console.log({ customerNameFromCheckoutSession });
+  // console.log({ customerEmailFromCheckoutSession });
+  // console.log({ paymentIntentId });
+  // console.log({ completedCheckoutSessionTimestamp });
+  // console.log({ lineItems });
 
   await dbConnect();
 
   const data = await Work.find({});
 
-  data.forEach((work) => console.log(work.title));
+  data.forEach((work) => console.log(work.title_fr));
 
   try {
     //   // 1. record order in database
@@ -205,24 +205,26 @@ const fulfillOrder = async (
           console.log("test");
 
           // let item = await Work.findById(lineItem.item_id);
-          let item = await Work.findOne({ _id: lineItem.item_id });
-          console.log({ item });
+          const workData = await Work.findOne({ _id: lineItem.item_id });
+          let work = JSON.parse(JSON.stringify(workData));
+          console.log({ work });
 
-          item.inventory -= lineItem.quantity;
-          console.log("new item inventory", item.inventory);
+          work.inventory -= lineItem.quantity;
+          console.log("new item inventory", work.inventory);
 
-          await item.save().then((data: any) => console.log(data));
+          await work.save().then((data: any) => console.log(data));
           // console.log(`Quantity updated for work with ID ${item._id}`);
           break;
 
         case "print":
-          item = await Print.findById(lineItem.item_id);
+          const printData = await Print.findById(lineItem.item_id);
 
-          item.inventory -= lineItem.quantity;
-          console.log("new item inventory", item.inventory);
+          let print = JSON.parse(JSON.stringify(printData));
+          print.inventory -= lineItem.quantity;
+          console.log("new item inventory", print.inventory);
 
-          await item.save();
-          console.log(`Quantity updated for work with ID ${item._id}`);
+          await print.save().then((data: any) => console.log(data));
+          console.log(`Quantity updated for work with ID ${print._id}`);
           break;
 
         default:
