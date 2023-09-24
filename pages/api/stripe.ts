@@ -115,7 +115,7 @@ export default async function handler(
         // success_url: `${process.env.BASE_DOMAIN_URL}/success?session_id={CHECKOUT_SESSION_ID}`, // CHECKOUT_SESSION_ID to get customer details https://stripe.com/docs/payments/checkout/custom-success-page
 
         // success_url: `${req.headers.origin}/success?session_id={CHECKOUT_SESSION_ID}`, // CHECKOUT_SESSION_ID to get customer details https://stripe.com/docs/payments/checkout/custom-success-page
-        success_url: `${process.env.BASE_DOMAIN_URL}/success2?session_id={CHECKOUT_SESSION_ID}`, // CHECKOUT_SESSION_ID to get customer details https://stripe.com/docs/payments/checkout/custom-success-page
+        success_url: `${process.env.BASE_DOMAIN_URL}/success?session_id={CHECKOUT_SESSION_ID}`, // CHECKOUT_SESSION_ID to get customer details https://stripe.com/docs/payments/checkout/custom-success-page
         cancel_url: `${process.env.BASE_DOMAIN_URL}/?canceled=true`, // CHECKOUT_SESSION_ID to get customer details https://stripe.com/docs/payments/checkout/custom-success-page
 
         // cancel_url: `${req.headers.origin}/?canceled=true`,

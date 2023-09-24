@@ -23,11 +23,11 @@
 
 //   res.status(200).json(session);
 // }
-import Success2 from "@/components/Success2";
+import Success from "@/components/Success";
 import { InferGetServerSidePropsType, GetServerSideProps } from "next";
 
 const success = ({ session }: any) => {
-  return <Success2 {...session} />;
+  return <Success {...session} />;
 };
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
