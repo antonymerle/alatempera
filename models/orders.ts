@@ -43,7 +43,9 @@ const OrderSchema = new Schema<IOrder>({
 
 // Prevent error "Cannot overwrite model once compile" from Mongoose
 // const OrderModel = mongoose.model<IOrder>("Order", OrderSchema);
-const OrderModel =
+// const OrderModel =
+//   mongoose.models.Order || mongoose.model<IOrder>("Order", OrderSchema);
+const Order =
   mongoose.models.Order || mongoose.model<IOrder>("Order", OrderSchema);
 
-export default OrderModel;
+export default Order;
