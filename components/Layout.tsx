@@ -19,7 +19,7 @@ const Layout = ({ children }: LayoutProps) => {
           <title>A la tempera : vente de peinture sur bois pour enfants</title>
           <meta
             name="description"
-            content="Exposition et vente de peintures sur bois pour enfants réalisées à la tempera. Idéal pour un cadeaux ou décorer une chambre."
+            content="Exposition et vente de peintures sur bois pour enfants réalisées à la tempera. Idéal pour un cadeau ou décorer une chambre."
           />
         </Head>
         <Navbar />
